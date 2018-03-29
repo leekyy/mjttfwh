@@ -9,30 +9,13 @@
 namespace App\Http\Controllers\API;
 
 
-use App\Components\DateTool;
-use App\Components\GoodsInfoManager;
-use App\Components\MemberManager;
-use App\Components\OrderManager;
-use App\Components\SubOrderManager;
-use App\Components\UserManager;
-use App\Components\Utils;
 use App\Http\Controllers\Controller;
-use App\Models\GiftCard;
-use App\Models\GoodsInfo;
-use App\Models\Member;
-use App\Models\MemberOrder;
-use App\Models\Order;
-use App\Models\SubOrder;
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\ApiResponse;
-use App\Components\RequestValidator;
 use Illuminate\Support\Facades\Log;
-use Yansongda\Pay\Pay;
 
 
 class WechatController extends Controller
 {
+
     /**
      * 处理微信的请求消息
      *
