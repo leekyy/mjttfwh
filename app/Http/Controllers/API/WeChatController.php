@@ -43,8 +43,8 @@ class WechatController extends Controller
                     break;
                 case 'text':
 
-                    $text = "hey，又多了一个粉！\r\n接下来的旅行时光里，美景听听会为你带来最优质的景点讲解服务哦~\r\n\r\n&lt;a href=''&gt;点击此处&lt;/a&gt;，可以申请美景听听幸运用户\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游\r\n\r\n有任何疑问，欢迎随时骚扰Tommy微信：3011740452";
-
+                    $text = "hey，又多了一个粉！\r\n接下来的旅行时光里，美景听听会为你带来最优质的景点讲解服务哦~\r\n\r\n点击此处，可以申请美景听听幸运用户\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游\r\n\r\n有任何疑问，欢迎随时骚扰Tommy微信：3011740452";
+                    $text = '<a href="http://www.baidu.com">又多了一个粉</a>';
                     return $text;
                     break;
                 case 'image':
