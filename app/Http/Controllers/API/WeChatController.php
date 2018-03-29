@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 class WechatController extends Controller
 {
 
+
     /**
      * 处理微信的请求消息
      *
@@ -39,10 +40,12 @@ class WechatController extends Controller
                                 return "微信：3011740452";
                         }
                     }
-                    return '收到事件消息';
                     break;
                 case 'text':
-                    return '收到文字消息';
+
+                    $text = "1111\r\n2222\r\n<a href=''>333</a>";
+
+                    return '$text';
                     break;
                 case 'image':
                     return '收到图片消息';
