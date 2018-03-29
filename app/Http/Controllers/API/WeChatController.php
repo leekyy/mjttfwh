@@ -45,7 +45,7 @@ class WechatController extends Controller
 
                     $text = "1111\r\n2222\r\n<a href=''>333</a>";
 
-                    return '$text';
+                    return $text;
                     break;
                 case 'image':
                     return '收到图片消息';
