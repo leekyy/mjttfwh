@@ -14,7 +14,7 @@
     <script type="text/javascript" src="{{ URL::asset('dist/lib/respond.min.js') }}"></script>
     <![endif]-->
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ URL::asset('bower_components/iconfont/iconfont.css') }}">
+    {{--<link rel="stylesheet" href="{{ URL::asset('bower_components/iconfont/iconfont.css') }}">--}}
 
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('dist/static/h-ui/css/H-ui.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('dist/static/h-ui.admin/css/H-ui.admin.css') }}"/>

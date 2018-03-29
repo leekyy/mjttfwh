@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
     <header class="navbar-wrapper">
         <div class="navbar navbar-fixed-top">
             <div class="container-fluid cl"><a class="logo navbar-logo f-l mr-10 hidden-xs"
@@ -52,8 +51,8 @@
     </header>
     <aside class="Hui-aside">
         <div class="menu_dropdown bk_2">
-            <dl id="menu-article">
-                <dt><i class="icon iconfont">&#xe656;</i>管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+            <dl id="menu-product">
+                <dt><i class="Hui-iconfont">&#xe62d;</i>管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
                     <ul>
@@ -62,8 +61,9 @@
                     </ul>
                 </dd>
             </dl>
-            <dl id="menu-picture">
-                <dt><i class="icon iconfont">&#xe681;</i> 菜单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+            <dl>
+                <dt><i class="Hui-iconfont">&#xe681;</i>菜单管理<i class="Hui-iconfont menu_dropdown-arrow">
+                        &#xe6d5;</i>
                 </dt>
                 <dd>
                     <ul>

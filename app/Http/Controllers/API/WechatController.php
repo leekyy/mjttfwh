@@ -78,4 +78,5 @@ class WechatController extends Controller
         return $response;
     }
 
+
 }

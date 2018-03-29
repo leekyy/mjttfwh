@@ -23,9 +23,9 @@ Route::group(['prefix' => '', 'middleware' => ['BeforeRequest']], function () {
     // 示例接口
     Route::get('test', 'API\TestController@test');
 
-    //微信相关
-    Route::any('/wechat', 'API\WeChatController@serve');        //服务号校验token
-
 
 });
+
+//微信相关
+Route::any('/wechat', 'API\WeChatController@serve');        //服务号校验token
 
