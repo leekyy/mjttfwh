@@ -40,11 +40,11 @@ class WechatController extends Controller
      */
     public function setMenu(Request $request)
     {
-        $button = [
+        $buttons = [
             [
                 "name" => "美景",
                 "type" => "view",
-                "url" => "http=>//mp.weixin.qq.com/mp/homepage?__biz=MzI3NTExNDc4NQ==&hid=1&sn=d1ec8e05d887e0d09b7dbb216750417b&scene=18#wechat_redirect"
+                "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MzI3NTExNDc4NQ==&hid=1&sn=d1ec8e05d887e0d09b7dbb216750417b&scene=18#wechat_redirect"
             ],
             [
                 "name" => "听听",
@@ -52,12 +52,12 @@ class WechatController extends Controller
                     [
                         "name" => "喜马拉雅",
                         "type" => "view",
-                        "url" => "http=>//www.ximalaya.com/zhubo/25616166/"
+                        "url" => "http://www.ximalaya.com/zhubo/25616166/"
                     ],
                     [
                         "name" => "美景小程序",
-                        "type" => "media_id",
-                        "media_id" => "Ym2MVoS36cImkadjaZrPIAggY8p7k4CisaSpUPodJwQ"
+                        "type" => "view",
+                        "url" => "http://mp.weixin.qq.com/s/KRW8l2wZ3jsVc74muI9FUA"
                     ]
                 ]
             ],
@@ -67,22 +67,24 @@ class WechatController extends Controller
                     [
                         "name" => "联系我们",
                         "type" => "click",
-                        "key" => "text_微信=>3011740452"
+                        "key" => "V0301_CONTACT_US"
                     ],
                     [
                         "name" => "幸运用户",
                         "type" => "view",
-                        "url" => "http=>//wechat.gowithtommy.com/activityAuth/"
+                        "url" => "http://wechat.gowithtommy.com/activityAuth/"
                     ],
                     [
-                        "name" => "APP",
+                        "name" => "下载美景",
                         "type" => "view",
-                        "url" => "http=>//app.gowithtommy.com/"
+                        "url" => "http://app.gowithtommy.com/"
                     ]
                 ]
             ]
         ];
-
+        $app = app('wechat.official_account');
+        $app->menu->delete(); // 全部
+        $app->menu->create($buttons);       //创建搜索项目
         return ApiResponse::makeResponse(true, "设置成功", ApiResponse::SUCCESS_CODE);
     }
 }
