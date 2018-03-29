@@ -33,6 +33,12 @@ class WechatController extends Controller
 
             switch ($message['MsgType']) {
                 case 'event':
+                    if ($message['Event'] == 'CLICK') {     //点击事件
+                        switch ($message['EventKey']) {
+                            case 'V0301_CONTACT_US':
+                                return "微信：3011740452";
+                        }
+                    }
                     return '收到事件消息';
                     break;
                 case 'text':
