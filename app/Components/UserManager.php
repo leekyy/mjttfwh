@@ -11,6 +11,7 @@ namespace App\Components;
 
 use App\Models\User;
 use App\Models\Vertify;
+use Illuminate\Support\Facades\Log;
 
 class UserManager
 {
@@ -214,6 +215,7 @@ class UserManager
 */
     public static function registerFWH($data)
     {
+        Log::info("registerFWH data:" + json_encode($data));
         $user = null;
         //如果存在unionid，需要协查一下
         if (array_key_exists('unionid', $data)) {
