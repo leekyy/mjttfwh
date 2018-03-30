@@ -16,15 +16,15 @@ class UserManager
 {
 
     /*
-     * 根据id获取用户信息，带token
-     *
-     * By TerryQi
-     *
-     * 2017-09-28
-     */
-    public static function getUserInfoByIdWithToken($id)
+   * 根据id获取用户信息，带token
+   *
+   * By TerryQi
+   *
+   * 2017-09-28
+   */
+    public static function getByIdWithToken($user_id)
     {
-        $user = User::where('id', '=', $id)->first();
+        $user = User::find($user_id);
         return $user;
     }
 
@@ -35,11 +35,12 @@ class UserManager
      *
      * 2017-09-28
      */
-    public static function getUserInfoById($id)
+    public static function getById($id)
     {
-        $user = self::getUserInfoByIdWithToken($id);
+        $user = User::where('id', '=', $id)->first();
         if ($user) {
             $user->token = null;
+            $user->xcx_openid = null;
         }
         return $user;
     }
@@ -78,7 +79,7 @@ class UserManager
         $account_type = $data['account_type'];
         // 判断小程序，按照类型查询
         if ($account_type === 'xcx') {
-            $user = self::getUserByXCXOpenId($data['xcx_openid']);
+            $user = self::getByXCXOpenId($data['xcx_openid']);
             //存在用户即返回用户信息
             if ($user != null) {
                 return $user;
@@ -88,6 +89,7 @@ class UserManager
         return self::register($data);
     }
 
+
     /*
      * 配置用户信息，用于更新用户信息和新建用户信息
      *
@@ -96,51 +98,48 @@ class UserManager
      * 2017-09-28
      *
      */
-    public static function setUser($user, $data)
+    public static function setInfo($info, $data)
     {
         if (array_key_exists('nick_name', $data)) {
-            $user->nick_name = array_get($data, 'nick_name');
+            $info->nick_name = array_get($data, 'nick_name');
+        }
+        if (array_key_exists('real_name', $data)) {
+            $info->real_name = array_get($data, 'real_name');
         }
         if (array_key_exists('avatar', $data)) {
-            $user->avatar = array_get($data, 'avatar');
+            $info->avatar = array_get($data, 'avatar');
         }
         if (array_key_exists('phonenum', $data)) {
-            $user->phonenum = array_get($data, 'phonenum');
-        }
-        if (array_key_exists('email', $data)) {
-            $user->email = array_get($data, 'email');
-        }
-        if (array_key_exists('score', $data)) {
-            $user->score = array_get($data, 'score');
+            $info->phonenum = array_get($data, 'phonenum');
         }
         if (array_key_exists('xcx_openid', $data)) {
-            $user->xcx_openid = array_get($data, 'xcx_openid');
+            $info->xcx_openid = array_get($data, 'xcx_openid');
         }
-        if (array_key_exists('gzh_openid', $data)) {
-            $user->gzh_openid = array_get($data, 'gzh_openid');
+        if (array_key_exists('fwh_openid', $data)) {
+            $info->fwh_openid = array_get($data, 'fwh_openid');
+        }
+        if (array_key_exists('app_openid', $data)) {
+            $info->app_openid = array_get($data, 'app_openid');
         }
         if (array_key_exists('unionid', $data)) {
-            $user->unionid = array_get($data, 'unionid');
+            $info->unionid = array_get($data, 'unionid');
         }
         if (array_key_exists('gender', $data)) {
-            $user->gender = array_get($data, 'gender');
+            $info->gender = array_get($data, 'gender');
         }
         if (array_key_exists('status', $data)) {
-            $user->status = array_get($data, 'status');
+            $info->status = array_get($data, 'status');
         }
         if (array_key_exists('token', $data)) {
-            $user->token = array_get($data, 'token');
-        }
-        if (array_key_exists('type', $data)) {
-            $user->type = array_get($data, 'type');
+            $info->token = array_get($data, 'token');
         }
         if (array_key_exists('province', $data)) {
-            $user->province = array_get($data, 'province');
+            $info->province = array_get($data, 'province');
         }
         if (array_key_exists('city', $data)) {
-            $user->city = array_get($data, 'city');
+            $info->city = array_get($data, 'city');
         }
-        return $user;
+        return $info;
     }
 
     /*
