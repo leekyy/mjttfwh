@@ -154,7 +154,7 @@ class UserManager
     {
         //创建用户信息
         $user = new User();
-        $user = self::setUser($user, $data);
+        $user = self::setInfo($user, $data);
         $user->token = self::getGUID();
         $user->save();
         $user = self::getUserInfoByIdWithToken($user->id);
@@ -173,7 +173,7 @@ class UserManager
     {
         //配置用户信息
         $user = self::getUserInfoByIdWithToken($data['user_id']);
-        $user = self::setUser($user, $data);
+        $user = self::setInfo($user, $data);
         $user->save();
         return $user;
     }
@@ -226,14 +226,14 @@ class UserManager
             } else {
                 //创建用户信息
                 $user = new User();
-                $user = self::setUser($user, $data);
+                $user = self::setInfo($user, $data);
                 $user->token = self::getGUID();
                 $user->save();
             }
         } else {        //不存在unionid，就直接新建用户
             //创建用户信息
             $user = new User();
-            $user = self::setUser($user, $data);
+            $user = self::setInfo($user, $data);
             $user->token = self::getGUID();
             $user->save();
         }
