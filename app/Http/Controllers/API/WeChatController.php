@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\API;
 
 
+use App\Components\UserManager;
+use App\Components\WeChatManager;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 
@@ -29,8 +31,13 @@ class WechatController extends Controller
         $app->server->push(function ($message) {
             Log::info(\GuzzleHttp\json_encode($message));
             //获取基本信息
-            $user_openid = $message['FromUserName'];
-
+            $from_user = $message['FromUserName'];  //消息来自于哪个用户
+            $user = UserManager::getByFWHOpenId($from_user);
+            if ($user == null) {  //若不存在用户，则应该走注册流程
+                $user = WeChatManager::getUserInfoByFWHOpenId($from_user);
+                Log::info("WechatManager getUserInfoByFWHOpenId:" . json_encode($user));
+                UserManager::registerFWH($user);
+            }
 
             switch ($message['MsgType']) {
                 case 'event':

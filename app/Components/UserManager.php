@@ -193,6 +193,55 @@ class UserManager
         return $user;
     }
 
+    /*
+     * 根据服务号openid获取用户信息
+     *
+     * By TerryQi
+     *
+     * 2018-02-22
+     */
+    public static function getByFWHOpenid($openid)
+    {
+        $user = User::where('fwh_openid', '=', $openid)->first();
+        return $user;
+    }
+
+    /*
+* 服务号注册用户流程
+*
+* By TerryQi
+*
+* 2018-01-17
+*/
+    public static function registerFWH($data)
+    {
+        $user = null;
+        //如果存在unionid，需要协查一下
+        if (array_key_exists('unionid', $data)) {
+            $unionid = $data['unionid'];
+            $user = self::getByUnionid($unionid);
+            //如果存在用户，则说明已经关注服务号，只需赋值xcx_openid即可
+            if ($user) {
+                $user->fwh_openid = $data['openid'];
+                $user->save();
+            } else {
+                //创建用户信息
+                $user = new User();
+                $user = self::setUser($user, $data);
+                $user->token = self::getGUID();
+                $user->save();
+            }
+        } else {        //不存在unionid，就直接新建用户
+            //创建用户信息
+            $user = new User();
+            $user = self::setUser($user, $data);
+            $user->token = self::getGUID();
+            $user->save();
+        }
+        $user = self::getByIdWithToken($user->id);
+        return $user;
+    }
+
 
     // 生成guid
     /*
