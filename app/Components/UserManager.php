@@ -158,7 +158,7 @@ class UserManager
         $user = self::setInfo($user, $data);
         $user->token = self::getGUID();
         $user->save();
-        $user = self::getUserInfoByIdWithToken($user->id);
+        $user = self::getByIdWithToken($user->id);
         return $user;
     }
 
@@ -173,7 +173,7 @@ class UserManager
     public static function updateUser($data)
     {
         //配置用户信息
-        $user = self::getUserInfoByIdWithToken($data['user_id']);
+        $user = self::getByIdWithToken($data['user_id']);
         $user = self::setInfo($user, $data);
         $user->save();
         return $user;
@@ -181,15 +181,29 @@ class UserManager
 
 
     /*
-     * 根据用户openid获取用户信息
+     * 根据用户xcx_openid获取用户信息
      *
      * By TerryQi
      *
      * 2017-09-28
      */
-    public static function getUserByXCXOpenId($openid)
+    public static function getByXCXOpenid($openid)
     {
         $user = User::where('xcx_openid', '=', $openid)->first();
+        return $user;
+    }
+
+
+    /*
+     * 根据用户unionid获取用户信息
+     *
+     * By TerryQi
+     *
+     * 2017-09-28
+     */
+    public static function getByUnionid($unoinid)
+    {
+        $user = User::where('unionid', '=', $unoinid)->first();
         return $user;
     }
 
@@ -215,6 +229,7 @@ class UserManager
 */
     public static function registerFWH($data)
     {
+        Log::info("registerFWH");
         Log::info("registerFWH data:" + json_encode($data));
         $user = null;
         //如果存在unionid，需要协查一下
