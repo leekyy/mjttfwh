@@ -10,6 +10,7 @@ namespace App\Http\Controllers\API;
 
 
 use App\Components\UserManager;
+use App\Components\Utils;
 use App\Components\WeChatManager;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -34,9 +35,22 @@ class WechatController extends Controller
             $from_user = $message['FromUserName'];  //消息来自于哪个用户
             $user = UserManager::getByFWHOpenId($from_user);
             if ($user == null) {  //若不存在用户，则应该走注册流程
-                $user = WeChatManager::getUserInfoByFWHOpenId($from_user);
-                Log::info("WechatManager getUserInfoByFWHOpenId:" . json_encode($user));
-                UserManager::registerFWH($user);
+                $wechat_user = WeChatManager::getUserInfoByFWHOpenId($from_user);
+                Log::info("WechatManager getUserInfoByFWHOpenId:" . json_encode($wechat_user));
+                //封装数据
+                $data = array(
+                    "fwh_openid" => $wechat_user['openid'],
+                    "avatar" => $wechat_user['headimgurl'],
+                    "nick_name" => $wechat_user['nickname'],
+                    "gender" => $wechat_user['sex'],
+                    "province" => $wechat_user['province'],
+                    "city" => $wechat_user['city'],
+                );
+                //如果unionid不为空
+                if (array_key_exists('unionid', $wechat_user) && !Utils::isObjNull($wechat_user['unionid'])) {
+                    array_push($data, ["unionid" => $wechat_user['unionid']]);
+                }
+                UserManager::registerFWH($data);
             }
 
             switch ($message['MsgType']) {
