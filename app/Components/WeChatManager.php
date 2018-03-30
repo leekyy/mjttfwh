@@ -15,7 +15,7 @@ use Qiniu\Auth;
 class WeChatManager
 {
     //服务号，根据openid获取用户信息
-    public static function getUserInfoByFWHOpenId($fwh_openid)
+    public static function getByFWHOpenId($fwh_openid)
     {
         Log::info("getUserInfoByFWHOpenId fwh_openid:" . $fwh_openid);
         $app = app('wechat.official_account');
