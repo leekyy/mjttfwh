@@ -62,13 +62,13 @@ class WechatController extends Controller
                         }
                     }
                     if ($message['Event'] == 'subscribe') {     //关注事件
-                        $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://www.baidu.com\">点击此处</a>可以获得免费邀请码\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
+                        $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://www.baidu.com\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
                         return $text;
                     }
                     break;
                 case 'text':
                     //邀请码测试
-                    if ($message['content'] == '邀请码') {
+                    if ($message['Content'] == '邀请码') {
                         $filename = 'user' . $user->id . '_yq_code.jpg';
                         //判断是否已经生成邀请码
                         if (file_exists(public_path('img/') . $filename)) {
