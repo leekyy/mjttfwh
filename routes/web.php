@@ -12,7 +12,10 @@
 */
 
 
-//登录
+/*
+ * 管理后台部分
+ *
+ */
 
 Route::get('/admin/login', 'Admin\LoginController@login');        //登录
 Route::post('/admin/login', 'Admin\LoginController@loginPost');   //post登录请求
@@ -46,6 +49,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
     Route::get('/menu/set', 'Admin\WechatController@setMenu');  //设置菜单
 
 });
+
+
+/*
+ * H5页面部分
+ *
+ * By TerryQi
+ *
+ */
+Route::get('/user/luck_user', 'Html5\LuckUserController@index');        //登录
 
 
 

@@ -65,11 +65,6 @@ class WechatController extends Controller
                 "name" => "APP",
                 "sub_button" => [
                     [
-                        "name" => "联系我们",
-                        "type" => "click",
-                        "key" => "V0301_CONTACT_US"
-                    ],
-                    [
                         "name" => "幸运用户",
                         "type" => "view",
                         "url" => "http://wechat.gowithtommy.com/activityAuth/"

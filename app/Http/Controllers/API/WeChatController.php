@@ -46,44 +46,60 @@ class WechatController extends Controller
                     "province" => $wechat_user['province'],
                     "city" => $wechat_user['city'],
                 );
-                //如果unionid不为空
+                //如果unionid不为空，则也需要将unionid放入data信息，以便进行注册
                 if (array_key_exists('unionid', $wechat_user) && !Utils::isObjNull($wechat_user['unionid'])) {
                     array_push($data, ["unionid" => $wechat_user['unionid']]);
                 }
                 Log::info("WechatManager data:" . json_encode($data));
-                UserManager::registerFWH($data);
+                $user = UserManager::registerFWH($data);
             }
 
             switch ($message['MsgType']) {
                 case 'event':
                     if ($message['Event'] == 'CLICK') {     //点击事件
                         switch ($message['EventKey']) {
-                            case 'V0301_CONTACT_US':
-                                return "微信：3011740452";
+
                         }
                     }
                     if ($message['Event'] == 'subscribe') {     //关注事件
-                        $text = "hey，又多了一个粉！\r\n接下来的旅行时光里，美景听听会为你带来最优质的景点讲解服务哦~\r\n\r\n<a href=\"http://www.baidu.com\">点击此处</a>，可以申请美景听听幸运用户\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游\r\n\r\n有任何疑问，欢迎随时骚扰Tommy微信：3011740452";
+                        $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://www.baidu.com\">点击此处</a>可以获得免费邀请码\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
                         return $text;
                     }
                     break;
                 case 'text':
-
+                    //邀请码测试
+                    if ($message['content'] == '邀请码') {
+                        $filename = 'user' . $user->id . '_yq_code.jpg';
+                        //判断是否已经生成邀请码
+                        if (file_exists(public_path('img/') . $filename)) {
+                            Log::info($filename . " file exists");
+                        } else {
+                            $app = app('wechat.official_account');
+                            $result = $app->qrcode->forever($user->fwh_openid);
+                            Log::info("app->qrcode->forever result:" . json_encode($result));
+                            $url = $app->qrcode->url($result['ticket']);
+                            $content = file_get_contents($url); // 得到二进制图片内容
+                            file_put_contents(public_path('img/') . $filename, $content); // 写入文件
+                            //建立素材
+                            $result = $app->material->uploadImage(public_path('img/') . $filename);
+                            Log::info("app->material->uploadImage file exists result:" . json_encode($result));
+                        }
+                    }
                     break;
                 case 'image':
-                    return '';
+
                     break;
                 case 'voice':
-                    return '';
+
                     break;
                 case 'video':
-                    return '';
+
                     break;
                 case 'location':
-                    return '';
+
                     break;
                 case 'link':
-                    return '';
+
                     break;
                 // ... 其它消息
                 default:
