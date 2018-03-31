@@ -13,6 +13,7 @@ use App\Components\UserManager;
 use App\Components\Utils;
 use App\Components\WeChatManager;
 use App\Http\Controllers\Controller;
+use EasyWeChat\Kernel\Messages\Image;
 use Illuminate\Support\Facades\Log;
 
 
@@ -84,6 +85,9 @@ class WechatController extends Controller
                             $result = $app->material->uploadImage(public_path('img/') . $filename);
                             Log::info("app->material->uploadImage file exists result:" . json_encode($result));
                         }
+                        //测试用返回邀请码
+                        $image = new Image("t1_eSR0GMrQ2jLJyE64qYvdOwQm_fuVJqLjpROEQuL4");
+                        return $image;
                     }
                     break;
                 case 'image':
