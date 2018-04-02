@@ -40,14 +40,18 @@ class WechatController extends Controller
                 $wechat_user = WeChatManager::getByFWHOpenId($from_user);
                 Log::info("WechatManager getByFWHOpenId:" . json_encode($wechat_user));
                 //封装数据
-                $data = array(
-                    "fwh_openid" => $wechat_user['openid'],
-                    "avatar" => $wechat_user['headimgurl'],
-                    "nick_name" => $wechat_user['nickname'],
-                    "gender" => $wechat_user['sex'],
-                    "province" => $wechat_user['province'],
-                    "city" => $wechat_user['city'],
-                );
+                $data = array();
+                if (array_key_exists('openid', $wechat_user)) {
+                    array_push($data, ["fwh_openid" => $wechat_user['openid']]);
+                }
+//                $data = array(
+//                    "fwh_openid" => $wechat_user['openid'],
+//                    "avatar" => $wechat_user['headimgurl'],
+//                    "nick_name" => $wechat_user['nickname'],
+//                    "gender" => $wechat_user['sex'],
+//                    "province" => $wechat_user['province'],
+//                    "city" => $wechat_user['city'],
+//                );
                 //如果unionid不为空，则也需要将unionid放入data信息，以便进行注册
                 if (array_key_exists('unionid', $wechat_user) && !Utils::isObjNull($wechat_user['unionid'])) {
                     array_push($data, ["unionid" => $wechat_user['unionid']]);
