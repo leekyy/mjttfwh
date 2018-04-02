@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Log;
 class WechatController extends Controller
 {
 
-
     /**
      * 处理微信的请求消息
      *
