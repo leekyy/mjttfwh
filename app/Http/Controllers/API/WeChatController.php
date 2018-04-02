@@ -77,6 +77,9 @@ class WechatController extends Controller
                                 $userTJ->save();
                                 //增加用户的推荐数
                                 UserManager::addYQNum($tj_user->id);
+                                //同时发送群发消息
+                                $app = app('wechat.official_account');
+                                $app->broadcasting->sendText("你的好友" . $user->nick_name . "帮你扫码了，还差个" . (3 - $tj_user->yq_num) . "好友助力，即可获得邀请码", [$user->fwh_openid, $tj_user->fwh_openid]);
                             }
                         }
                         $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://www.baidu.com\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
