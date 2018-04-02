@@ -42,12 +42,14 @@ class OrderManager
      * 2018-02-05
      *
      */
-    public static function getInfoByLevel($subOrder,$level){
+    public static function getInfoByLevel($subOrder, $level)
+    {
         $subOrder->user = UserManager::getUserInfoById($subOrder->user_id);
 //        $subOrder->address = AddressManager::getAddsById($subOrder->address_id);
-        $subOrder -> goods = GoodsInfoManager::getGoodsById($subOrder->goods_id);
+        $subOrder->goods = GoodsInfoManager::getGoodsById($subOrder->goods_id);
         return $subOrder;
     }
+
 
     /*
      * 根据trade_no获取总订单信息
@@ -101,24 +103,6 @@ class OrderManager
         }
         return $order;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

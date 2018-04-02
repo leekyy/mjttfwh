@@ -54,7 +54,7 @@ class WechatController extends Controller
                 Log::info("WechatManager data:" . json_encode($data));
                 $user = UserManager::registerFWH($data);
             }
-
+            //根据消息类型分别进行处理
             switch ($message['MsgType']) {
                 case 'event':
                     if ($message['Event'] == 'CLICK') {     //点击事件
@@ -76,7 +76,8 @@ class WechatController extends Controller
                             Log::info($filename . " file exists");
                         } else {
                             $app = app('wechat.official_account');
-                            $result = $app->qrcode->forever($user->fwh_openid);
+//                            $result = $app->qrcode->forever($user->fwh_openid);
+                            $result = $app->qrcode->forever("oJpZ11IIT0fKncFdoNj89oxXIUss");        //测试用
                             Log::info("app->qrcode->forever result:" . json_encode($result));
                             $url = $app->qrcode->url($result['ticket']);
                             $content = file_get_contents($url); // 得到二进制图片内容
@@ -84,9 +85,12 @@ class WechatController extends Controller
                             //建立素材
                             $result = $app->material->uploadImage(public_path('img/') . $filename);
                             Log::info("app->material->uploadImage file exists result:" . json_encode($result));
+                            $user = UserManager::getByIdWithToken($user->id);
+                            $user->yq_code_media_id = $result['media_id'];
+                            $user->save();
                         }
                         //测试用返回邀请码
-                        $image = new Image("t1_eSR0GMrQ2jLJyE64qYvdOwQm_fuVJqLjpROEQuL4");
+                        $image = new Image($user->yq_code_media_id);
                         return $image;
                     }
                     break;
