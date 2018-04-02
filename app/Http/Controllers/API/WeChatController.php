@@ -119,6 +119,7 @@ class WechatController extends Controller
                     //邀请码测试
                     if ($message['Content'] == '群发消息') {
                         $app = app('wechat.official_account');
+                        $app->broadcasting->delete("3147483651");
                         $app->broadcasting->sendText("你的好友TerryQi帮你扫码了，还差6个好友助力，即可获得邀请码", ['oJpZ11DU7GZpoW9W_NB5HwXrlYd8', 'oJpZ11Kp7haPT4p0aLXVrF2LgCHY']);
                     }
 
