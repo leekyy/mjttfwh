@@ -92,6 +92,20 @@ class UserManager
 
 
     /*
+     * 增加邀请数
+     *
+     * By TerryQi
+     *
+     * 2018-04-02
+     */
+    public static function addYQNum($user_id)
+    {
+        $user = UserManager::getByIdWithToken($user_id);
+        $user->yq_num = $user->yq_num + 1;
+        $user->save();
+    }
+
+    /*
      * 配置用户信息，用于更新用户信息和新建用户信息
      *
      * By TerryQi
@@ -142,6 +156,9 @@ class UserManager
         }
         if (array_key_exists('yq_code_media_id', $data)) {
             $info->yq_code_media_id = array_get($data, 'yq_code_media_id');
+        }
+        if (array_key_exists('yq_num', $data)) {
+            $info->yq_num = array_get($data, 'yq_num');
         }
         return $info;
     }
@@ -224,12 +241,12 @@ class UserManager
     }
 
     /*
-* 服务号注册用户流程
-*
-* By TerryQi
-*
-* 2018-01-17
-*/
+    * 服务号注册用户流程
+    *
+    * By TerryQi
+    *
+    * 2018-01-17
+    */
     public static function registerFWH($data)
     {
         Log::info("registerFWH data:" . json_encode($data));

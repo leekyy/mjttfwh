@@ -17,6 +17,28 @@ use Qiniu\Auth;
 class UserTJManager
 {
 
+    /*
+     * 用户是否已经被推荐
+     *
+     * By TerryQi
+     *
+     * 2018-04-02
+     */
+    public static function isUserHasBennTJ($tj_user_id, $user_id)
+    {
+        $con_arr = [
+            'user_id' => $user_id,
+            'tj_user_id' => $tj_user_id
+        ];
+        //如果推荐列表不为0
+        if (self::getListByCon($con_arr, false)->count() != 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 
     /*
      * 用户推荐信息

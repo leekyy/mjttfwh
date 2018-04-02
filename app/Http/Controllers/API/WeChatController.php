@@ -10,9 +10,11 @@ namespace App\Http\Controllers\API;
 
 
 use App\Components\UserManager;
+use App\Components\UserTJManager;
 use App\Components\Utils;
 use App\Components\WeChatManager;
 use App\Http\Controllers\Controller;
+use App\Models\UserTJ;
 use EasyWeChat\Kernel\Messages\Image;
 use Illuminate\Support\Facades\Log;
 
@@ -63,6 +65,21 @@ class WechatController extends Controller
                         }
                     }
                     if ($message['Event'] == 'subscribe') {     //关注事件
+                        //如果有EventKey-代表，扫描分享的二维码过来的消息
+                        if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey'])) {
+                            $key_val = explode('_', $message['EventKey'])[1];
+                            $tj_user = UserManager::getByFWHOpenid($key_val);    //找到推荐用户
+                            //判断推荐关系是否存在
+                            if (!UserTJManager::isUserHasBennTJ($tj_user->id, $user->id)) {
+                                //新建推荐关系
+                                $userTJ = new UserTJ();
+                                $userTJ->user_id = $user->id;
+                                $userTJ->tj_user_id = $tj_user->id;
+                                $userTJ->save();
+                                //增加用户的推荐数
+                                UserManager::addYQNum($tj_user->id);
+                            }
+                        }
                         $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://www.baidu.com\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
                         return $text;
                     }
