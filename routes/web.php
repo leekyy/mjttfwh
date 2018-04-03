@@ -64,7 +64,16 @@ Route::middleware('wechat.oauth:snsapi_base')->group(function () {
     Route::get('/user/luck_user', 'Html5\LuckUserController@index');        //登录
 });
 
+Route::get('/login',
+    function () {
 
+        $user = session('wechat.oauth_user');
+        // 拿到授权用户资料
+
+        return redirect()->to('/user/luck_user');
+        //這時候已經拿到用戶資料了，跳轉到想要的路由
+
+    });
 
 
 
