@@ -28,11 +28,11 @@ class LuckUserController
     {
         //从session获取用户信息
         $user = $request->session()->get('user');
+        dd($user);
         //获取app信息
         $app = app('wechat.official_account');
         $response = $app->oauth->scopes(['snsapi_userinfo'])
             ->redirect();
-
 
 
 //        if (!$user) {
