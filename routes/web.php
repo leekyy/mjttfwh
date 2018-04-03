@@ -57,9 +57,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
  * By TerryQi
  *
  */
-Route::get('/user/luck_user', 'Html5\LuckUserController@index');        //登录
 
 
+Route::middleware('wechat.oauth:snsapi_base')->group(function () {
+
+    Route::get('/user/luck_user', 'Html5\LuckUserController@index');        //登录
+});
 
 
 

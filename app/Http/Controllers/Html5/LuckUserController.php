@@ -30,15 +30,17 @@ class LuckUserController
         $user = $request->session()->get('user');
         //获取app信息
         $app = app('wechat.official_account');
-        if (!$user) {
-            $response = $app->oauth->scopes(['snsapi_userinfo'])
-                ->redirect('/user/luck_user');
-            return $response;
-        }
+        $response = $app->oauth->scopes(['snsapi_userinfo'])
+            ->redirect();
 
-//        $response = $app->oauth->scopes(['snsapi_userinfo'])
-//            ->redirect('/user/luck_user');
-////        dd($response);
+
+
+//        if (!$user) {
+//            $response = $app->oauth->scopes(['snsapi_userinfo'])
+//                ->redirect('/user/luck_user');
+//            return $response;
+//        }
+
         return view('html5.luck_user.index', ['msg' => '']);
     }
 
