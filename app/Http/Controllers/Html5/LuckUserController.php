@@ -28,7 +28,7 @@ class LuckUserController
     {
         $user = session('wechat.oauth_user'); // 拿到授权用户资料
 
-        return view('html5.luck_user.index', ['user' => '$user']);
+        return view('html5.activity.luckUser', ['user' => '$user']);
     }
 
 }
