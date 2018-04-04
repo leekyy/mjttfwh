@@ -57,7 +57,7 @@
     <!--遮罩层-->
     <div class="mask_div"></div>
     <!--邀请码部分-->
-    <div style="margin-top: 100px;position: absolute;width: 100%;">
+    <div style="position: absolute;top: 80px;width: 100%;">
         <div class="">
             <img src="{{$user->avatar}}"
                  style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
