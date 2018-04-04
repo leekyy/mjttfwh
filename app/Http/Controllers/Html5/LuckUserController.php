@@ -26,8 +26,9 @@ class LuckUserController
      */
     public function index(Request $request)
     {
-        $user = session('wechat.oauth_user'); // 拿到授权用户资料
-        dd($user['default']);
+        $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
+        $user = $session_val;
+        dd($user->getId());
 
         return view('html5.activity.luckUser', ['user' => $user]);
     }
