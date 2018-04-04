@@ -23,6 +23,34 @@ class WeChatManager
         return $userInfo;
     }
 
+    //根据服务号获取的用户信息进行用户注册
+    /*
+     * By TerryQi
+     *
+     * 2018-04-05
+     */
+    public static function register($fwh_openid)
+    {
+        $wechat_user = self::getByFWHOpenId($fwh_openid);
+        Log::info("WechatManager getByFWHOpenId:" . json_encode($wechat_user));
+        //封装数据
+        $data = array(
+            "avatar" => $wechat_user['headimgurl'],
+            "nick_name" => $wechat_user['nickname'],
+            "gender" => $wechat_user['sex'],
+            "province" => $wechat_user['province'],
+            "city" => $wechat_user['city'],
+            "fwh_openid" => $wechat_user['openid']
+        );
+        //如果unionid不为空，则也需要将unionid放入data信息，以便进行注册
+        if (array_key_exists('unionid', $wechat_user) && !Utils::isObjNull($wechat_user['unionid'])) {
+            $data['unionid'] = $wechat_user['unionid'];
+        }
+        Log::info("WechatManager data:" . json_encode($data));
+        $user = UserManager::registerFWH($data);
+        return $user;
+    }
+
 
     //发送模板消息
     /*
