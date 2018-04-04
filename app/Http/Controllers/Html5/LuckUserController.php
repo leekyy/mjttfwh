@@ -27,7 +27,7 @@ class LuckUserController
     public function index(Request $request)
     {
         //从session获取用户信息
-        $user = $request->session()->get('user');
+        $user = session('wechat.oauth_user.default');
         dd($user);
         //获取app信息
         $app = app('wechat.official_account');
