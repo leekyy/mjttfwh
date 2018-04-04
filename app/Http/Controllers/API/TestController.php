@@ -38,7 +38,6 @@ class TestController extends Controller
         $param = array();
         $result = Utils::curl('http://testapi.gowithtommy.com/rest/user/public_number/invi_code/', $param, false);   //访问接口
         $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
-
         return ApiResponse::makeResponse(true, $result, ApiResponse::SUCCESS_CODE);
     }
 

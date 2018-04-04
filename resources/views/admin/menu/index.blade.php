@@ -37,12 +37,12 @@
                 "name" => "APP",
                 "sub_button" => [
                     [
-                        "name" => "幸运用户",
+                        "name" => "免费邀请码",
                         "type" => "view",
-                        "url" => "http://wechat.gowithtommy.com/activityAuth/"
+                        "url" => "http://mjttfwh.isart.me/luckUser"
                     ],
                     [
-                        "name" => "下载美景",
+                        "name" => "下载APP",
                         "type" => "view",
                         "url" => "http://app.gowithtommy.com/"
                     ]

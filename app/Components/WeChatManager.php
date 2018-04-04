@@ -75,4 +75,22 @@ class WeChatManager
         $response = $app->server->serve();
         return $response;
     }
+
+    /*
+     * 自动回复匹配
+     *
+     * By TerryQi
+     *
+     * 2018-04-05
+     */
+    public static function matchKeyWords($key_word)
+    {
+        //基本关键字组
+        $group1 = ['邀请码', '幸运用户', '申请幸运用户', '免费'];
+        //如果在组1里面
+        if (in_array($key_word, $group1)) {
+            return "group1";
+        }
+        return null;
+    }
 }
