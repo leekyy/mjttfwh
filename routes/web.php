@@ -61,7 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
 
 Route::get('/user/luck_user', 'Html5\LuckUserController@index');        //登录
 
-Route::group(['middleware' => ['wechat.oauth']], function () {
+Route::group(['middleware' => ['wechat.oauth:default,snsapi_userinfo']], function () {
     Route::get('/user', function () {
         $user = session('wechat.oauth_user'); // 拿到授权用户资料
 
