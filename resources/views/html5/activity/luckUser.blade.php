@@ -64,7 +64,7 @@
         </div>
         <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
             <div>
-                <img src="{{ URL::asset('/img/') }}user{{$user->id}}_yq_code.jpg"
+                <img src="{{ URL::asset('/img') }}/user{{$user->id}}_yq_code.jpg"
                      style="width: 90%;margin: auto;padding-top: 30px;">
             </div>
             <div class="aui-text-center" style="color: #666666;">我的邀请码</div>
