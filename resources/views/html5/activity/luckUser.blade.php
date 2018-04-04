@@ -81,6 +81,7 @@
 
     //点击申请成为0元幸运用户-展示邀请码
     function click_show_yqm() {
+        console.log("click_show_yqm");
         $("#yq_code_div").removeClass('aui-hide');
 
     }
@@ -88,6 +89,7 @@
 
     //关闭展示邀请码页面
     function click_hide_yqm() {
+        console.log("click_hide_yqm");
         $("#yq_code_div").addClass('aui-hide');
     }
 
