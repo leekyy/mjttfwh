@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>美景听听幸运用户</title>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/common.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/aui.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/style.css') }}"/>
@@ -13,14 +14,6 @@
     </style>
 </head>
 <body>
-<header class="aui-bar aui-bar-nav" style="padding-top:25px;background-color: black;position: fixed;top: 0px">
-    <a class="aui-pull-left">
-        <span class="aui-iconfont aui-icon-left"><span class="aui-font-size-14 aui-padded-l-5 aui-padded-b-10">返回</span></span>
-    </a>
-
-    <div class="aui-title">美景听听幸运用户</div>
-</header>
-<div style="height: 70px;"></div>
 <div class="aui-row">
     <img src="{{ URL::asset('/img/page_img1.png') }}">
 </div>
