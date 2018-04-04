@@ -44,7 +44,7 @@ class LuckUserController
         //以上已经完成用户注册
 
 
-        return view('html5.activity.luckUser', ['user' => $user_val]);
+        return view('html5.activity.luckUser', ['user' => $user]);
     }
 
 }
