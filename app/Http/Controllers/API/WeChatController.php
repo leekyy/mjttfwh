@@ -113,11 +113,10 @@ class WechatController extends Controller
                     }
                     switch (WeChatManager::matchKeyWords($message['Content'])) {
                         case 'group1':
-                            $text = "上述为您的邀请码，自使用之日起有效期1个月\r\n\r\n使用流程如下：\r\n1、下载并登录美景听听\r\n2、在【我的】页面，点击【邀请码】，输入我方提供的【邀请码】后，您的会员等级即可变成【高级会员】。（*如遇到未能解锁的情况，请重新登录）\r\n4、【高级会员】可以解锁美景听听全部付费音频，畅听100多个国家5万多个景点。\r\n5、会员有效期一个月，如有问题，请联系客服";
+                            $text = "只需完成以下2步，即可获得邀请码，免费解锁全部景点！\r\n\r\n1.长按保存以下图片分享给好友/朋友圈\r\n2.邀请3位好友扫码并关注美景听听旅行\r\n\r\n（请24小时内完成此任务，逾期活动作废）\r\n\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">土豪请戳此购买</a>";
                             $app->customer_service->message($text)
                                 ->to($user->fwh_openid)
                                 ->send();
-                            return
                             break;
                     }
                     break;
