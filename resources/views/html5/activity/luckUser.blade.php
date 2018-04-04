@@ -1,1 +1,1 @@
-{{$user->id}}
+{{$user['openid']}}
