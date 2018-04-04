@@ -48,13 +48,11 @@ class WechatController extends Controller
                     "gender" => $wechat_user['sex'],
                     "province" => $wechat_user['province'],
                     "city" => $wechat_user['city'],
+                    "fwh_openid" => $wechat_user['openid']
                 );
-                if (array_key_exists('openid', $wechat_user)) {
-                    array_push($data, ["fwh_openid" => $wechat_user['openid']]);
-                }
                 //如果unionid不为空，则也需要将unionid放入data信息，以便进行注册
                 if (array_key_exists('unionid', $wechat_user) && !Utils::isObjNull($wechat_user['unionid'])) {
-                    array_push($data, ["unionid" => $wechat_user['unionid']]);
+                    $data['unionid'] = $wechat_user['unionid'];
                 }
                 Log::info("WechatManager data:" . json_encode($data));
                 $user = UserManager::registerFWH($data);
