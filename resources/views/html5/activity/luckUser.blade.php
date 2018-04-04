@@ -47,7 +47,7 @@
 </div>
 <div style="height: 80px;"></div>
 <div class="aui-row aui-margin-t-20" style="position: fixed;bottom: 0px;width: 100%">
-    <div class="aui-col-xs-6" onclick="click_applyFor_luckuser();"><img src="{{ URL::asset('/img/left_btn.png') }}">
+    <div class="aui-col-xs-6" onclick="click_show_yqm();"><img src="{{ URL::asset('/img/left_btn.png') }}">
     </div>
     <div class="aui-col-xs-6" onclick="click_buy_now();"><img src="{{ URL::asset('/img/right_btn.png') }}"></div>
 </div>
