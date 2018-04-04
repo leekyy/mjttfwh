@@ -41,8 +41,25 @@ class LuckUserController
             );
             $user = UserManager::registerFWH($data);
         }
-        //以上已经完成用户注册
-
+        //以上已经完成用户注册，为每个用户申请小程序邀请码
+        $filename = 'user' . $user->id . '_yq_code.jpg';
+        //判断是否已经生成邀请码
+        if (file_exists(public_path('img/') . $filename)) {
+            Log::info($filename . " file exists");
+        } else {
+            $app = app('wechat.official_account');
+            $result = $app->qrcode->forever($user->fwh_openid);
+            Log::info("app->qrcode->forever result:" . json_encode($result));
+            $url = $app->qrcode->url($result['ticket']);
+            $content = file_get_contents($url); // 得到二进制图片内容
+            file_put_contents(public_path('img/') . $filename, $content); // 写入文件
+            //建立素材，暂不实现
+//            $result = $app->material->uploadImage(public_path('img/') . $filename);
+//            Log::info("app->material->uploadImage file exists result:" . json_encode($result));
+//            $user = UserManager::getByIdWithToken($user->id);
+//            $user->yq_code_media_id = $result['media_id'];
+//            $user->save();
+        }
 
         return view('html5.activity.luckUser', ['user' => $user]);
     }

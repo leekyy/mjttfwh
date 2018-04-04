@@ -36,9 +36,6 @@
 <script type="text/javascript" src="{{ URL::asset('dist/lib/jquery/1.9.1/jquery.min.js') }}"></script>
 <script type="text/javascript">
 
-    var openid = "{!! $user->fwh_openid !!}";
-    alert(openid);
-
     //点击申请成为0元幸运用户
     function click_applyFor_luckuser() {
 
