@@ -10,6 +10,7 @@
 namespace App\Http\Controllers\Html5;
 
 use App\Components\AdminManager;
+use App\Components\UserManager;
 use App\Libs\CommonUtils;
 use Illuminate\Http\Request;
 use App\Components\RequestValidator;
@@ -28,10 +29,22 @@ class LuckUserController
     {
         $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
         //获取用户相关信息
-        $user = $session_val['default']->toArray();
-        dd($user);
+        $user_val = $session_val['default']->toArray();
+        //在数据库中检索用户信息
+        $user = UserManager::getByFWHOpenid($user_val['id']);
+        //如果无值，则需要注册
+        if (!$user) {
+            $data = array(
+                'fwh_openid' => $user_val['id'],
+                'nick_name' => $user_val['nickname'],
+                'avatar' => $user_val['avatar']
+            );
+            $user = UserManager::registerFWH($data);
+        }
+        //以上已经完成用户注册
 
-        return view('html5.activity.luckUser', ['user' => $user]);
+
+        return view('html5.activity.luckUser', ['user' => $user_val]);
     }
 
 }
