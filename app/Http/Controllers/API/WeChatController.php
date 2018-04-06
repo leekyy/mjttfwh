@@ -59,6 +59,7 @@ class WechatController extends Controller
                         if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && $new_user_flag) {
                             $key_val = explode('_', $message['EventKey'])[1];       //key_val为键值信息，这里为用户openid
                             $tj_user = UserManager::getByFWHOpenid($key_val);    //找到推荐用户
+                            Log::info("user->id:" . $user->id . "  tj_user->id:" . $tj_user->id);
                             //不存在推荐关系
                             if (!UserTJManager::isUserHasBennTJ($tj_user->id, $user->id)) {
                                 //新建推荐关系
@@ -117,6 +118,8 @@ class WechatController extends Controller
                             $app->customer_service->message($text)
                                 ->to($user->fwh_openid)
                                 ->send();
+                            //生成图片
+
                             break;
                     }
                     break;
