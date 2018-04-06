@@ -56,6 +56,10 @@ class WechatController extends Controller
                         }
                     }
                     if ($message['Event'] == 'subscribe') {     //关注事件
+                        Log::info("message event == subscribe");
+                        Log::info("array_key_exists EventKey in message:" . array_key_exists('EventKey', $message));
+                        Log::info("EventKey in message is not null:" . Utils::isObjNull($message['EventKey']));
+                        Log::info("new_user_flag:" . $new_user_flag);
                         //如果有EventKey-代表，扫描分享的二维码过来的消息，并且为新注册的用户
                         if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && $new_user_flag) {
                             $key_val = explode('_', $message['EventKey'])[1];       //key_val为键值信息，这里为用户openid
