@@ -161,7 +161,7 @@ class WeChatManager
             imagefill($image_3, 0, 0, $color);
             imageColorTransparent($image_3, $color);
             imagecopyresampled($image_3, $image_1, 0, 0, 0, 0, imagesx($image_1), imagesy($image_1), imagesx($image_1), imagesy($image_1));
-            imagecopymerge($image_3, $image_2_resize, 45, 1100, 0, 0, imagesx($image_2_resize), imagesy($image_2_resize), 100);
+            imagecopymerge($image_3, $image_2_resize, 47, 1100, 0, 0, imagesx($image_2_resize), imagesy($image_2_resize), 100);
             imagejpeg($image_3, public_path('img/') . $filename);
         }
         return $filename;
