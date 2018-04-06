@@ -82,7 +82,10 @@
 <!--TerryQi-->
 <!--增加服务号分享功能-->
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8">
+
+    //微信配置文件
+    wx.config({!! $wx_config !!});
 
     //点击申请成为0元幸运用户-展示邀请码
     function click_show_yqm() {
