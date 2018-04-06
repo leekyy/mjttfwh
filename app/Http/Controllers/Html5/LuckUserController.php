@@ -42,13 +42,14 @@ class LuckUserController
             );
             $user = UserManager::registerFWH($data);
         }
+        //生成app信息
+        $app = app('wechat.official_account');
         //以上已经完成用户注册，为每个用户申请小程序邀请码
         $filename = 'user' . $user->id . '_yq_code.jpg';
         //判断是否已经生成邀请码
         if (file_exists(public_path('img/') . $filename)) {
             Log::info($filename . " file exists");
         } else {
-            $app = app('wechat.official_account');
             $result = $app->qrcode->forever($user->fwh_openid);
             Log::info("app->qrcode->forever result:" . json_encode($result));
             $url = $app->qrcode->url($result['ticket']);
