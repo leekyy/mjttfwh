@@ -87,6 +87,43 @@
     //微信配置文件
     wx.config({!! $wx_config !!});
 
+    //微信配置成功后
+    wx.ready(function () {
+        /*
+         * 进行页面分享-朋友圈
+         *
+         * By TerryQi
+         *
+         */
+        wx.onMenuShareTimeline({
+            title: "美景听听幸运用户", // 分享标题
+            link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: 'http://dsyy.isart.me/app.png', // 分享图标
+            success: function (ret) {
+                // 用户确认分享后执行的回调函数
+                console.log("success ret:" + JSON.stringify(ret))
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title: "美景听听幸运用户", // 分享标题
+            desc: '美景听听中文语音导游，让旅行更有内涵', // 分享描述
+            link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: 'http://dsyy.isart.me/app.png', // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+
     //点击申请成为0元幸运用户-展示邀请码
     function click_show_yqm() {
         console.log("click_show_yqm");
