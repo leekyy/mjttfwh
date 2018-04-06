@@ -64,7 +64,7 @@ class LuckUserController
         }
 
         //生成分享配置
-        $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), true);
+        $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
 
         return view('html5.activity.luckUser', ['user' => $user, 'wx_config' => $wx_config]);
     }
