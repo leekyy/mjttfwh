@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Html5;
 
 use App\Components\AdminManager;
 use App\Components\UserManager;
+use App\Components\WeChatManager;
 use App\Libs\CommonUtils;
 use Illuminate\Http\Request;
 use App\Components\RequestValidator;
@@ -45,24 +46,7 @@ class LuckUserController
         //生成app信息
         $app = app('wechat.official_account');
         //以上已经完成用户注册，为每个用户申请小程序邀请码
-        $filename = 'user' . $user->id . '_yq_code.jpg';
-        //判断是否已经生成邀请码
-        if (file_exists(public_path('img/') . $filename)) {
-            Log::info($filename . " file exists");
-        } else {
-            $result = $app->qrcode->forever($user->fwh_openid);
-            Log::info("app->qrcode->forever result:" . json_encode($result));
-            $url = $app->qrcode->url($result['ticket']);
-            $content = file_get_contents($url); // 得到二进制图片内容
-            file_put_contents(public_path('img/') . $filename, $content); // 写入文件
-            //建立素材，暂不实现
-//            $result = $app->material->uploadImage(public_path('img/') . $filename);
-//            Log::info("app->material->uploadImage file exists result:" . json_encode($result));
-//            $user = UserManager::getByIdWithToken($user->id);
-//            $user->yq_code_media_id = $result['media_id'];
-//            $user->save();
-        }
-
+        $filename = WeChatManager::createUserYQCode($user->id);
         //生成分享配置
         $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
 

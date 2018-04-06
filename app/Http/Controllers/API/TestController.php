@@ -41,6 +41,31 @@ class TestController extends Controller
         return ApiResponse::makeResponse(true, $result, ApiResponse::SUCCESS_CODE);
     }
 
+    //图片合并
+    public function testMergePic(Request $request)
+    {
+        $path_1 = public_path('img/') . 'fxhb_bg.jpg';
+        $path_2 = public_path('img/') . 'user18_yq_code.jpg';
+        $image_1 = imagecreatefromjpeg($path_1);
+        $image_2 = imagecreatefromjpeg($path_2);
+        list($width, $height) = getimagesize($path_2);
+        //生成缩略图 二维码 200*200
+        $ewm_width = 200;
+        $ewm_height = 200;
+        $image_2_resize = imagecreatetruecolor($ewm_width, $ewm_height);
+        imagecopyresized($image_2_resize, $image_2, 0, 0, 0, 0, $ewm_width, $ewm_height, $width, $height);
+
+        $image_3 = imageCreatetruecolor(imagesx($image_1), imagesy($image_1));
+        $color = imagecolorallocate($image_3, 255, 255, 255);
+        imagefill($image_3, 0, 0, $color);
+        imageColorTransparent($image_3, $color);
+        imagecopyresampled($image_3, $image_1, 0, 0, 0, 0, imagesx($image_1), imagesy($image_1), imagesx($image_1), imagesy($image_1));
+        imagecopymerge($image_3, $image_2_resize, 45, 1100, 0, 0, imagesx($image_2_resize), imagesy($image_2_resize), 100);
+        imagejpeg($image_3, public_path('img/') . 'merge.jpg');
+
+        return ApiResponse::makeResponse(true, public_path('img/') . 'merge.jpg', ApiResponse::SUCCESS_CODE);
+    }
+
     /*
      * 根据经纬度获取地址信息
      *

@@ -23,6 +23,7 @@ Route::group(['prefix' => '', 'middleware' => ['BeforeRequest']], function () {
     // 示例接口
     Route::get('test', 'API\TestController@test');
     Route::get('testYQM', 'API\TestController@testYQM');
+    Route::get('testMergePic', 'API\TestController@testMergePic');
 
 
 });

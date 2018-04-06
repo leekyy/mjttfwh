@@ -93,4 +93,92 @@ class WeChatManager
         }
         return null;
     }
+
+
+    /*
+     * 生成用户的邀请二维码，并返回邀请码图片名称
+     *
+     * By TerryQi
+     *
+     * 2018-04-06
+     *
+     */
+    public static function createUserYQCode($user_id)
+    {
+        $app = app('wechat.official_account');
+        //邀请二维码图片名称
+        $filename = 'user' . $user_id . '_yq_code.jpg';
+        if (file_exists(public_path('img/') . $filename)) {
+            Log::info($filename . " file exists");
+        } else {
+            //获取用户
+            $user = UserManager::getById($user_id);
+            $result = $app->qrcode->forever($user->fwh_openid);
+            Log::info("app->qrcode->forever result:" . json_encode($result));
+            $url = $app->qrcode->url($result['ticket']);
+            $content = file_get_contents($url); // 得到二进制图片内容
+            file_put_contents(public_path('img/') . $filename, $content); // 写入文件
+            //建立素材，暂不实现
+//            $result = $app->material->uploadImage(public_path('img/') . $filename);
+//            Log::info("app->material->uploadImage file exists result:" . json_encode($result));
+//            $user = UserManager::getByIdWithToken($user->id);
+//            $user->yq_code_media_id = $result['media_id'];
+//            $user->save();
+        }
+        return $filename;
+    }
+
+
+    /*
+     * 生成二维码海报图片，并返回海报名称
+     *
+     * By TerryQi
+     *
+     * 2018-04-06
+     */
+    public static function createUserYQHB($user_id)
+    {
+        //邀请海报图片名称
+        $filename = 'user' . $user_id . '_yq_hb.jpg';
+        if (file_exists(public_path('img/') . $filename)) {
+            Log::info($filename . " file exists");
+        } else {
+            //二维码图片名称
+            $user_yq_code_filename = self::createUserYQCode($user_id);
+            $path_1 = public_path('img/') . 'fxhb_bg.jpg';
+            $path_2 = public_path('img/') . $user_yq_code_filename;
+            $image_1 = imagecreatefromjpeg($path_1);
+            $image_2 = imagecreatefromjpeg($path_2);
+            list($width, $height) = getimagesize($path_2);
+            //生成缩略图 二维码 200*200
+            $ewm_width = 200;
+            $ewm_height = 200;
+            $image_2_resize = imagecreatetruecolor($ewm_width, $ewm_height);
+            imagecopyresized($image_2_resize, $image_2, 0, 0, 0, 0, $ewm_width, $ewm_height, $width, $height);
+
+            $image_3 = imageCreatetruecolor(imagesx($image_1), imagesy($image_1));
+            $color = imagecolorallocate($image_3, 255, 255, 255);
+            imagefill($image_3, 0, 0, $color);
+            imageColorTransparent($image_3, $color);
+            imagecopyresampled($image_3, $image_1, 0, 0, 0, 0, imagesx($image_1), imagesy($image_1), imagesx($image_1), imagesy($image_1));
+            imagecopymerge($image_3, $image_2_resize, 45, 1100, 0, 0, imagesx($image_2_resize), imagesy($image_2_resize), 100);
+            imagejpeg($image_3, public_path('img/') . $filename);
+        }
+        return $filename;
+    }
+
+    /*
+     * 建立图片素材
+     *
+     * By TerryQi
+     *
+     * 2018-04-06
+     */
+    public static function createMediaId($filename)
+    {
+        $app = app('wechat.official_account');
+        $result = $app->material->uploadImage(public_path('img/') . $filename);
+        Log::info("app->material->uploadImage file exists result:" . json_encode($result));
+        return $result['media_id'];
+    }
 }
