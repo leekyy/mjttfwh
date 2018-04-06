@@ -46,6 +46,7 @@ class WechatController extends Controller
                 $user = WeChatManager::register($fwh_openid);
                 $new_user_flag = true;
             }
+            Log::info("new_user_flag:" . $new_user_flag);
             //根据消息类型分别进行处理
             switch ($message['MsgType']) {
                 case 'event':
