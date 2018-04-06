@@ -82,7 +82,7 @@ class WechatController extends Controller
                                         ->to($tj_user->fwh_openid)
                                         ->send();
                                 } elseif ($tj_user->yq_num == 3) {    //等于3个
-                                    //获取邀请码
+                                    //获取邀请码并发送 三条文字信息 text0、text1、text2
                                     $param = array();
                                     $result = Utils::curl('http://testapi.gowithtommy.com/rest/user/public_number/invi_code/', $param, false);   //访问接口
                                     $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
@@ -118,12 +118,23 @@ class WechatController extends Controller
                     }
                     switch (WeChatManager::matchKeyWords($message['Content'])) {
                         case 'group1':
+                            //发送文字，生成图片素材
                             $text = "只需完成以下2步，即可获得邀请码，免费解锁全部景点！\r\n\r\n1.长按保存以下图片分享给好友/朋友圈\r\n2.邀请3位好友扫码并关注美景听听旅行\r\n\r\n（请24小时内完成此任务，逾期活动作废）\r\n\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">土豪请戳此购买</a>";
                             $app->customer_service->message($text)
                                 ->to($user->fwh_openid)
                                 ->send();
-                            //生成图片
-
+                            //生成微信图片素材并发送
+                            if (Utils::isObjNull($user->yq_hb_media_id)) {
+                                $filename = WeChatManager::createUserYQHB($user->id);
+                                $media_id = WeChatManager::createMediaId($filename);
+                                $user = UserManager::getByIdWithToken($user->id);
+                                $user->yq_hb_media_id = $media_id;
+                                $user->save();
+                            }
+                            $image = new Image($user->yq_hb_media_id);
+                            $app->customer_service->message($image)
+                                ->to($user->fwh_openid)
+                                ->send();
                             break;
                     }
                     break;

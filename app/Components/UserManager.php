@@ -157,6 +157,9 @@ class UserManager
         if (array_key_exists('yq_code_media_id', $data)) {
             $info->yq_code_media_id = array_get($data, 'yq_code_media_id');
         }
+        if (array_key_exists('yq_hb_media_id', $data)) {
+            $info->yq_hb_media_id = array_get($data, 'yq_hb_media_id');
+        }
         if (array_key_exists('yq_num', $data)) {
             $info->yq_num = array_get($data, 'yq_num');
         }
