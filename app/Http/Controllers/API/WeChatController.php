@@ -56,14 +56,11 @@ class WechatController extends Controller
                         }
                     }
                     if ($message['Event'] == 'subscribe') {     //关注事件
-                        Log::info("message event == subscribe");
-                        Log::info("array_key_exists EventKey in message:" . array_key_exists('EventKey', $message));
-                        Log::info("EventKey in message is not null:" . Utils::isObjNull($message['EventKey']));
                         Log::info("new_user_flag:" . $new_user_flag);
                         //如果有EventKey-代表，扫描分享的二维码过来的消息，并且为新注册的用户
                         if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && $new_user_flag) {
                             Log::info("message EventKey:" . $message['EventKey']);
-                            $key_val = str_replace_array('qrscene_', '', $message['EventKey']);       //key_val为键值信息，这里为用户openid
+                            $key_val = str_replace('qrscene_', '', $message['EventKey']);       //key_val为键值信息，这里为用户openid
                             Log::info("key_val:" . $key_val);
                             $tj_user = UserManager::getByFWHOpenid($key_val);    //找到推荐用户
                             Log::info("user->id:" . $user->id . "  tj_user->id:" . $tj_user->id);
