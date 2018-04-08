@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Components\UserManager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiResponse;
@@ -82,4 +83,5 @@ class WechatController extends Controller
         $app->menu->create($buttons);       //创建搜索项目
         return ApiResponse::makeResponse(true, "设置成功", ApiResponse::SUCCESS_CODE);
     }
+
 }

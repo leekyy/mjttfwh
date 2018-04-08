@@ -33,6 +33,12 @@ function setMenu(url, param, callBack) {
     ajaxRequest(url + "admin/menu/set", param, "GET", callBack);
 }
 
+
+//生成海报
+function createHaibao(url, param, callBack) {
+    ajaxRequest(url + "createHaibao", param, "GET", callBack);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 

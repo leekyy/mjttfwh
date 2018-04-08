@@ -53,4 +53,43 @@ class LuckUserController
         return view('html5.activity.luckUser', ['user' => $user, 'wx_config' => $wx_config]);
     }
 
+
+    /*
+    * 生成海报
+    *
+    * By TerryQI
+    *
+    * 2018-04-08
+    */
+    public function createHaiBao(Request $request)
+    {
+        $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
+        //获取用户相关信息
+        $user_val = $session_val['default']->toArray();
+        //在数据库中检索用户信息
+        $user = UserManager::getByFWHOpenid($user_val['id']);
+        //如果不存在用户信息
+        if (!$user) {
+            return ApiResponse::makeResponse(false, "用户不存在", ApiResponse::NO_USER);
+        }
+        //发送文字，生成图片素材
+        $text = "只需完成以下2步，即可获得邀请码，免费解锁全部景点！\r\n\r\n1.长按保存以下图片分享给好友/朋友圈\r\n2.邀请3位好友扫码并关注美景听听旅行\r\n\r\n（请24小时内完成此任务，逾期活动作废）\r\n\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">土豪请戳此购买</a>";
+        $app = app('wechat.official_account');
+        $app->customer_service->message($text)
+            ->to($user->fwh_openid)
+            ->send();
+        //生成微信图片素材并发送
+        if (Utils::isObjNull($user->yq_hb_media_id)) {
+            $filename = WeChatManager::createUserYQHB($user->id);
+            $media_id = WeChatManager::createMediaId($filename);
+            $user = UserManager::getByIdWithToken($user->id);
+            $user->yq_hb_media_id = $media_id;
+            $user->save();
+        }
+        $image = new Image($user->yq_hb_media_id);
+        $app->customer_service->message($image)
+            ->to($user->fwh_openid)
+            ->send();
+        return ApiResponse::makeResponse(true, "生成海报成功", ApiResponse::SUCCESS_CODE);
+    }
 }

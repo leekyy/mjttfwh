@@ -62,7 +62,11 @@ Route::group(['middleware' => ['wechat.oauth']], function () {
 
     Route::get('/luckUser', 'Html5\LuckUserController@index');        //幸运用户部分
 
+    Route::get('/createHaibao', 'Html5\LuckUserController@createHaibao');        //幸运用户部分
+
 });
+
+
 
 
 

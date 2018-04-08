@@ -47,7 +47,7 @@
 </div>
 <div style="height: 80px;"></div>
 <div class="aui-row aui-margin-t-20" style="position: fixed;bottom: 0px;width: 100%">
-    <div class="aui-col-xs-6" onclick="click_show_yqm();"><img src="{{ URL::asset('/img/left_btn.png') }}">
+    <div class="aui-col-xs-6" onclick="click_create_haibao();"><img src="{{ URL::asset('/img/left_btn.png') }}">
     </div>
     <div class="aui-col-xs-6" onclick="click_buy_now();"><img src="{{ URL::asset('/img/right_btn.png') }}"></div>
 </div>
@@ -78,6 +78,8 @@
 </div>
 </body>
 <script type="text/javascript" src="{{ URL::asset('dist/lib/jquery/1.9.1/jquery.min.js') }}"></script>
+{{--common.js--}}
+<script type="text/javascript" src="{{ URL::asset('/js/common.js') }}"></script>
 <!--2018-02-12-->
 <!--TerryQi-->
 <!--增加服务号分享功能-->
@@ -128,6 +130,19 @@
     function click_show_yqm() {
         console.log("click_show_yqm");
         $("#yq_code_div").removeClass('aui-hide');
+    }
+
+    //点击生成海报
+    function click_create_haibao() {
+        console.log("click_create_haibao");
+        var param = {};
+        createHaibao('{{URL::asset('')}}', param, function (ret) {
+            if (ret.result == true) {
+                alert("已经生成推广海报，请在服务号中查看");
+            } else {
+                alert("报错了");
+            }
+        })
 
     }
 
