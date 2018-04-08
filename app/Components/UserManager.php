@@ -154,6 +154,9 @@ class UserManager
         if (array_key_exists('city', $data)) {
             $info->city = array_get($data, 'city');
         }
+        if (array_key_exists('is_subscribe', $data)) {
+            $info->is_subscribe = array_get($data, 'is_subscribe');
+        }
         if (array_key_exists('yq_code_media_id', $data)) {
             $info->yq_code_media_id = array_get($data, 'yq_code_media_id');
         }

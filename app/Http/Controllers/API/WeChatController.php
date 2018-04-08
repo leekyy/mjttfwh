@@ -57,6 +57,9 @@ class WechatController extends Controller
                     }
                     if ($message['Event'] == 'subscribe') {     //关注事件
                         Log::info("new_user_flag:" . $new_user_flag);
+                        //关注事件，需要将关注标识设置为1
+                        $user->is_subscribe = '1';
+                        $user->save();
                         //如果有EventKey-代表，扫描分享的二维码过来的消息，并且为新注册的用户
                         if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && $new_user_flag) {
                             Log::info("message EventKey:" . $message['EventKey']);
@@ -102,9 +105,16 @@ class WechatController extends Controller
                                 }
                             }
                         }
+                        $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
+                        return $text;
                     }
-                    $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
-                    return $text;
+
+                    if ($message['Event'] == 'unsubscribe') {     //取消关注事件
+                        //关注事件，需要将关注标识设置为1
+                        $user->is_subscribe = '0';
+                        $user->save();
+                    }
+
                     break;
                 case 'text':
                     $fwh_openid = $message['FromUserName'];  //服务号openid
