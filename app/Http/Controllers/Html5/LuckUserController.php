@@ -19,6 +19,7 @@ use App\Models\Admin;
 use EasyWeChat\Kernel\Messages\Image;
 use Illuminate\Support\Facades\Log;
 use App\Components\Utils;
+use App\Http\Controllers\ApiResponse;
 
 class LuckUserController
 {
