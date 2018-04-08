@@ -36,6 +36,8 @@ class ApiResponse
     const VERTIFY_ERROR = 106;
     //手机号重复
     const PHONENUM_DUP = 107;
+    //未关注公众号
+    const NOT_SUBSCRIBE = 108;
 
     //统一下单失败
     const UITIFY_ORDER_FAILED = 110;

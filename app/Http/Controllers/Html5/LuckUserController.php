@@ -75,6 +75,10 @@ class LuckUserController
         if (!$user) {
             return ApiResponse::makeResponse(false, "用户不存在", ApiResponse::NO_USER);
         }
+        //如果用户没有关注公众号
+        if ($user->is_subscribe == "0") {
+            return ApiResponse::makeResponse(false, "用户未关注公众号", ApiResponse::NOT_SUBSCRIBE);
+        }
         //发送文字，生成图片素材
         $text = "只需完成以下2步，即可获得邀请码，免费解锁全部景点！\r\n\r\n1.长按保存以下图片分享给好友/朋友圈\r\n2.邀请3位好友扫码并关注美景听听旅行\r\n\r\n（请24小时内完成此任务，逾期活动作废）\r\n\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">土豪请戳此购买</a>";
         $app = app('wechat.official_account');
