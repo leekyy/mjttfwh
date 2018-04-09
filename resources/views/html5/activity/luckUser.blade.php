@@ -100,7 +100,7 @@
             </div>
         </div>
         <div style="margin-top: 20px;" onclick="click_hide_yqm();">
-            <img src="./image/close_btn.png"
+            <img src="{{ URL::asset('/img/close_btn.png') }}"
                  style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
         </div>
     </div>
@@ -119,7 +119,7 @@
         </div>
         <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
             <div style="height: 260px;">
-                <img src="./image/fwh_ewm.jpg" style="width: 90%;margin: auto;padding-top: 30px;">
+                <img src="{{ URL::asset('/img/fwh_ewm.png') }}" style="width: 90%;margin: auto;padding-top: 30px;">
             </div>
             <div class="aui-text-center" style="color: #666666;">
                 <a class="aui-text-info"
@@ -127,7 +127,7 @@
             </div>
         </div>
         <div style="margin-top: 20px;" onclick="click_hide_yqm();">
-            <img src="./image/close_btn.png"
+            <img src="{{ URL::asset('/img/close_btn.png') }}"
                  style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
         </div>
     </div>
