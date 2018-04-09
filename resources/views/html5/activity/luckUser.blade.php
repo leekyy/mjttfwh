@@ -47,7 +47,8 @@
 </div>
 <div style="height: 80px;"></div>
 <div class="aui-row aui-margin-t-20" style="position: fixed;bottom: 0px;width: 100%">
-    <div class="aui-col-xs-6" onclick="click_create_haibao();"><img src="{{ URL::asset('/img/left_btn.png') }}">
+    <div class="aui-col-xs-6" onclick="click_create_haibao({{$user->is_is_subscribe}});"><img
+                src="{{ URL::asset('/img/left_btn.png') }}">
     </div>
     <div class="aui-col-xs-6" onclick="click_buy_now();"><img src="{{ URL::asset('/img/right_btn.png') }}"></div>
 </div>
@@ -74,8 +75,65 @@
                  style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
         </div>
     </div>
-
 </div>
+
+<!--已经关注情况下，展示邀请海报说明-->
+<div id="hb_ex_div" class="yq_div">
+    <!--遮罩层-->
+    <div class="mask_div"></div>
+    <!--邀请码部分-->
+    <div style="position: absolute;top: 80px;width: 100%;">
+        <div class="" style="z-index: 999;">
+            <img src="{{$user->avatar}}"
+                 style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
+        </div>
+        <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
+            <div style="height: 260px;">
+                <div style="height: 70px;"></div>
+                <div class="aui-text-center"><span class="aui-font-size-20">已经生成您的专属邀请海报</span></div>
+                <div class="aui-text-center aui-margin-t-10"><span class="aui-font-size-20">请进入美景听听服务号</span></div>
+                <div class="aui-text-center aui-margin-t-10"><span class="aui-font-size-20">尽快查收分享给好友吧！</span></div>
+            </div>
+            <div class="aui-text-center">
+                <a class="aui-text-info"
+                   href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">点击进入美景听听</a>
+            </div>
+        </div>
+        <div style="margin-top: 20px;" onclick="click_hide_yqm();">
+            <img src="./image/close_btn.png"
+                 style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
+        </div>
+    </div>
+</div>
+
+
+<!--未关注情况下，展示美景听听服务号二维码说明-->
+<div id="gz_ex_div" class="yq_div aui-hide">
+    <!--遮罩层-->
+    <div class="mask_div"></div>
+    <!--邀请码部分-->
+    <div style="position: absolute;top: 80px;width: 100%;">
+        <div class="">
+            <img src="{{$user->avatar}}"
+                 style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
+        </div>
+        <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
+            <div style="height: 260px;">
+                <img src="./image/fwh_ewm.jpg" style="width: 90%;margin: auto;padding-top: 30px;">
+            </div>
+            <div class="aui-text-center" style="color: #666666;">
+                <a class="aui-text-info"
+                   href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">请关注美景听听</a>
+            </div>
+        </div>
+        <div style="margin-top: 20px;" onclick="click_hide_yqm();">
+            <img src="./image/close_btn.png"
+                 style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
+        </div>
+    </div>
+</div>
+
+
 </body>
 <script type="text/javascript" src="{{ URL::asset('dist/lib/jquery/1.9.1/jquery.min.js') }}"></script>
 {{--common.js--}}
@@ -133,17 +191,21 @@
     }
 
     //点击生成海报
-    function click_create_haibao() {
-        console.log("click_create_haibao");
-        var param = {};
-        createHaibao('{{URL::asset('')}}', param, function (ret) {
-            if (ret.result == true) {
-                alert("已经生成推广海报，请在服务号中查看");
-            } else {
-                alert("报错了");
-            }
-        })
-
+    function click_create_haibao(is_subscribe) {
+        console.log("click_create_haibao is_subscribe:" + is_subscribe);
+        //如果已经关注
+        if (is_subscribe == 1) {
+            var param = {};
+            createHaibao('{{URL::asset('')}}', param, function (ret) {
+                if (ret.result == true) {
+                    $("#hb_ex_div").removeClass('aui-hide');
+                } else {
+                    alert("服务报错，美景听听正在抢修");
+                }
+            })
+        } else {      //如果未关注
+            $("#gz_ex_div").removeClass('aui-hide');
+        }
     }
 
 
