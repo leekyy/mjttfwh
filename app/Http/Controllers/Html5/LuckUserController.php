@@ -54,11 +54,11 @@ class LuckUserController
         $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
 
         //获取支付配置
-        $param = array(
-            'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
-        );
-        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
-        dd($result);
+//        $param = array(
+//            'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
+//        );
+//        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
+//        dd($result);
 
         return view('html5.activity.luckUser', ['user' => $user, 'wx_config' => $wx_config]);
     }
