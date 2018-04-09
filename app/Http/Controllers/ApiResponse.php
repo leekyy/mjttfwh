@@ -38,6 +38,8 @@ class ApiResponse
     const PHONENUM_DUP = 107;
     //未关注公众号
     const NOT_SUBSCRIBE = 108;
+    //已经生成邀请码
+    const ALREADY_CREATE_INVITECODE = 109;
 
     //统一下单失败
     const UITIFY_ORDER_FAILED = 110;

@@ -22,6 +22,10 @@ class Utils
 
     const SERVER_URL = (true == true) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
 
+    //关注+扫描进入回复内容
+    const TEXT_SCAN_SUB = "hey，欢迎关注美景听听：全球景点语音讲解\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听App";
+    //邀请码话术
+    const TEXT_INVITE_CODE = "上述为您的邀请码，自使用之日起有效期1年\r\n\r\n使用流程如下：\r\n1、下载并登录美景听听\r\n2、在【我的】页面，点击【邀请码】，输入上方的【邀请码】后，您的会员等级即可变成【高级会员】。（*如遇到未能解锁的情况，请下拉刷新或重新登录）\r\n4、【高级会员】可以解锁美景听听全部付费音频，畅听100多个国家5万多个景点。\r\n5、会员有效期一个月，如有问题，请联系客服";
 
     /*
      * 判断一个对象是不是空

@@ -98,7 +98,7 @@ class WechatController extends Controller
                                     $app->customer_service->message($text1)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
-                                    $text2 = "上述为您的邀请码，自使用之日起有效期1个月\r\n\r\n使用流程如下：\r\n1、下载并登录美景听听\r\n2、在【我的】页面，点击【邀请码】，输入我方提供的【邀请码】后，您的会员等级即可变成【高级会员】。（*如遇到未能解锁的情况，请重新登录）\r\n4、【高级会员】可以解锁美景听听全部付费音频，畅听100多个国家5万多个景点。\r\n5、会员有效期一个月，如有问题，请联系客服";
+                                    $text2 = Utils::TEXT_INVITE_CODE;
                                     $app->customer_service->message($text2)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
@@ -110,7 +110,7 @@ class WechatController extends Controller
                                     ->send();
                             }
                         }
-                        $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
+                        $text = Utils::TEXT_SCAN_SUB;
                         return $text;
                     }
                     //取消关注事件
@@ -121,7 +121,7 @@ class WechatController extends Controller
                     }
                     //扫描进入事件
                     if ($message['Event'] == 'SCAN') {
-                        $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
+                        $text = Utils::TEXT_SCAN_SUB;
                         return $text;
                     }
 

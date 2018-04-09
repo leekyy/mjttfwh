@@ -106,6 +106,40 @@
     </div>
 </div>
 
+<!--已经发送邀请码，提示已经获取了邀请码-->
+<div id="already_has_inviteCode_div" class="yq_div aui-hide">
+    <!--遮罩层-->
+    <div class="mask_div"></div>
+    <!--邀请码部分-->
+    <div style="position: absolute;top: 80px;width: 100%;">
+        <div class="" style="z-index: 999;">
+            <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIOfH9TOY69xZ1hu9PHiaASH0ny2pgliaKiaiaHlTBwW4Md9xTBYlK7dzA4IguJYRQ9zE1ibppuVzssmuQ/132"
+                 style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
+        </div>
+        <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
+            <div style="height: 260px;">
+                <div style="height: 60px;"></div>
+                <div class="aui-text-center aui-padded-l-10 aui-padded-r-10 aui-font-size-18"
+                     style="line-height: 30px;">
+                    很遗憾，你已经申请过一次幸运用户啦~程序猿GG辣么辛苦地为你打江山，赏点银子呗~
+                </div>
+                <div class="aui-text-center aui-padded-l-10 aui-padded-r-10 aui-font-size-18 aui-margin-t-10"
+                     style="line-height: 30px;">
+                    现在到淘宝上搜索“美景听听”，下单购买有优惠哦！
+                </div>
+            </div>
+            <div class="aui-text-center">
+                <a class="aui-text-info"
+                   href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">点击进入美景听听</a>
+            </div>
+        </div>
+        <div style="margin-top: 20px;" onclick="click_hide_yqm();">
+            <img src="./image/close_btn.png"
+                 style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
+        </div>
+    </div>
+</div>
+
 
 <!--未关注情况下，展示美景听听服务号二维码说明-->
 <div id="gz_ex_div" class="yq_div aui-hide">
@@ -117,9 +151,9 @@
             <img src="{{$user->avatar}}"
                  style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
         </div>
-        <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
+        <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -20px;">
             <div style="height: 260px;">
-                <img src="{{ URL::asset('/img/fwh_ewm.jpg') }}" style="width: 90%;margin: auto;padding-top: 30px;">
+                <img src="./image/fwh_ewm.jpg" style="width: 80%;margin: auto;padding-top: 30px;">
             </div>
             <div class="aui-text-center" style="color: #666666;">
                 <a class="aui-text-info"
@@ -200,7 +234,13 @@
                 if (ret.result == true) {
                     $("#hb_ex_div").removeClass('aui-hide');
                 } else {
-                    alert("服务报错，美景听听正在抢修");
+                    switch (ret.code) {
+                        case "109":
+                            $("#already_has_inviteCode_div").removeClass('aui-hide');
+                            break;
+                        default:
+                            alert("服务报错，美景听听正在抢修");
+                    }
                 }
             })
         } else {      //如果未关注
