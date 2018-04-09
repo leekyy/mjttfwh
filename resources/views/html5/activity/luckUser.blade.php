@@ -232,6 +232,7 @@
             var param = {};
             createHaibao('{{URL::asset('')}}', param, function (ret) {
                 if (ret.result == true) {
+                    //关闭当前窗口
                     wx.closeWindow();
                 } else {
                     switch (ret.code) {

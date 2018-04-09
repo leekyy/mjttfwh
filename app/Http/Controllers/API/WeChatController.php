@@ -121,10 +121,24 @@ class WechatController extends Controller
                     }
                     //扫描进入事件
                     if ($message['Event'] == 'SCAN') {
+                        //老用户扫码助力
+                        if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && !$new_user_flag) {
+                            Log::info("message EventKey:" . $message['EventKey']);
+                            $key_val = str_replace('qrscene_', '', $message['EventKey']);       //key_val为键值信息，这里为用户openid
+                            Log::info("key_val:" . $key_val);
+                            $tj_user = UserManager::getByFWHOpenid($key_val);    //找到推荐用户
+                            Log::info("user->id:" . $user->id . "  tj_user->id:" . $tj_user->id);
+                            //存在推荐关系
+                            if (UserTJManager::isUserHasBennTJ($tj_user->id, $user->id)) {
+                                $text = Utils::TEXT_ALREADY_ZHULI;
+                                $app->customer_service->message($text)
+                                    ->to($user->fwh_openid)
+                                    ->send();
+                            }
+                        }
                         $text = Utils::TEXT_SCAN_SUB;
                         return $text;
                     }
-
                     break;
                 case 'text':
                     $fwh_openid = $message['FromUserName'];  //服务号openid
