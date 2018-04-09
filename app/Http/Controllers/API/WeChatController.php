@@ -76,7 +76,7 @@ class WechatController extends Controller
                                 $userTJ->save();
                                 //增加用户的推荐数
                                 UserManager::addYQNum($tj_user->id);
-                                //同时发送群发消息
+                                //同时发送邀请者消息
                                 $tj_user = UserManager::getById($tj_user->id);
                                 if ($tj_user->yq_num < 3) {     //小于3个
                                     //发送消息
@@ -103,6 +103,11 @@ class WechatController extends Controller
                                         ->to($tj_user->fwh_openid)
                                         ->send();
                                 }
+                                //发送被邀请者消息
+                                $text = "您已帮好友" . $tj_user->nick_name . "助力";
+                                $app->customer_service->message($text)
+                                    ->to($user->fwh_openid)
+                                    ->send();
                             }
                         }
                         $text = "hey，欢迎关注美景听听：全球景点中文语音讲解\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听中文语音导游";
