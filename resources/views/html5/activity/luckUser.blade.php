@@ -113,7 +113,7 @@
     <!--邀请码部分-->
     <div style="position: absolute;top: 80px;width: 100%;">
         <div class="" style="z-index: 999;">
-            <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIOfH9TOY69xZ1hu9PHiaASH0ny2pgliaKiaiaHlTBwW4Md9xTBYlK7dzA4IguJYRQ9zE1ibppuVzssmuQ/132"
+            <img src="{{$user->avatar}}"
                  style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
         </div>
         <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
@@ -134,7 +134,7 @@
             </div>
         </div>
         <div style="margin-top: 20px;" onclick="click_hide_yqm();">
-            <img src="./image/close_btn.png"
+            <img src="{{ URL::asset('/img/close_btn.png') }}"
                  style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
         </div>
     </div>
@@ -153,7 +153,7 @@
         </div>
         <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -20px;">
             <div style="height: 260px;">
-                <img src="./image/fwh_ewm.jpg" style="width: 80%;margin: auto;padding-top: 30px;">
+                <img src="{{ URL::asset('/img/fwh_ewm.jpg') }}" style="width: 80%;margin: auto;padding-top: 30px;">
             </div>
             <div class="aui-text-center" style="color: #666666;">
                 <a class="aui-text-info"
@@ -235,7 +235,7 @@
                     $("#hb_ex_div").removeClass('aui-hide');
                 } else {
                     switch (ret.code) {
-                        case "109":
+                        case 109:
                             $("#already_has_inviteCode_div").removeClass('aui-hide');
                             break;
                         default:
