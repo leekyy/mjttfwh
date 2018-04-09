@@ -77,8 +77,15 @@ class LuckUserController
         $param = array(
             'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
         );
-        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true, true);   //访问接口，生产环境https
-        dd($result);
+        $postUrl = 'https://api.gowithtommy.com/rest/pay/js_pre_order/';
+        $postData = array(
+            'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
+        );
+
+        $result = Utils::curl($postUrl, $param, true);   //访问接口
+        $result = json_decode($result, true);
+        dd(json_encode($result['data']));
+
     }
 
     /*

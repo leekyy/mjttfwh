@@ -232,7 +232,7 @@
             var param = {};
             createHaibao('{{URL::asset('')}}', param, function (ret) {
                 if (ret.result == true) {
-                    $("#hb_ex_div").removeClass('aui-hide');
+                    wx.closeWindow();
                 } else {
                     switch (ret.code) {
                         case 109:
