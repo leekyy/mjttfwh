@@ -47,7 +47,7 @@
 </div>
 <div style="height: 80px;"></div>
 <div class="aui-row aui-margin-t-20" style="position: fixed;bottom: 0px;width: 100%">
-    <div class="aui-col-xs-6" onclick="click_create_haibao({{$user->is_is_subscribe}});"><img
+    <div class="aui-col-xs-6" onclick="click_create_haibao({{$user->is_subscribe}});"><img
                 src="{{ URL::asset('/img/left_btn.png') }}">
     </div>
     <div class="aui-col-xs-6" onclick="click_buy_now();"><img src="{{ URL::asset('/img/right_btn.png') }}"></div>
@@ -119,7 +119,7 @@
         </div>
         <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
             <div style="height: 260px;">
-                <img src="{{ URL::asset('/img/fwh_ewm.png') }}" style="width: 90%;margin: auto;padding-top: 30px;">
+                <img src="{{ URL::asset('/img/fwh_ewm.jpg') }}" style="width: 90%;margin: auto;padding-top: 30px;">
             </div>
             <div class="aui-text-center" style="color: #666666;">
                 <a class="aui-text-info"
