@@ -53,9 +53,33 @@ class LuckUserController
         //生成分享配置
         $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
 
+        //获取支付配置
+        $param = array(
+            'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
+        );
+        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
+        dd($result);
+
         return view('html5.activity.luckUser', ['user' => $user, 'wx_config' => $wx_config]);
     }
 
+
+    /*
+   * 测试支付
+   *
+   * By TerryQi
+   *
+   * 2018-03-30
+   */
+    public function testPay(Request $request)
+    {
+        //获取支付配置
+        $param = array(
+            'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
+        );
+        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
+        dd($result);
+    }
 
     /*
     * 生成海报

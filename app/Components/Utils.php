@@ -20,6 +20,8 @@ class Utils
     const ORDER_REFUNDSUCCESS = "4";    //退款成功
     const ORDER_REFUNDFAILED = "5";    //退款失败
 
+    const SERVER_URL = (false == true) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
+
 
     /*
      * 判断一个对象是不是空

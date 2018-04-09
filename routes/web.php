@@ -66,6 +66,8 @@ Route::group(['middleware' => ['wechat.oauth']], function () {
 
 });
 
+Route::get('/testPay', 'Html5\LuckUserController@testPay');        //测试支付
+
 
 
 

@@ -78,7 +78,7 @@
 </div>
 
 <!--已经关注情况下，展示邀请海报说明-->
-<div id="hb_ex_div" class="yq_div">
+<div id="hb_ex_div" class="yq_div aui-hide">
     <!--遮罩层-->
     <div class="mask_div"></div>
     <!--邀请码部分-->
