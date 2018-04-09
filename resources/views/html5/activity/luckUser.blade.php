@@ -208,11 +208,9 @@
         }
     }
 
-
     //关闭展示邀请码页面
     function click_hide_yqm() {
-        console.log("click_hide_yqm");
-        $("#yq_code_div").addClass('aui-hide');
+        $(".yq_div").addClass('aui-hide');
     }
 
     //点击78元立柯购买
