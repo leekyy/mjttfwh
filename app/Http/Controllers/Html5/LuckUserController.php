@@ -77,9 +77,9 @@ class LuckUserController
         $param = array(
             'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
         );
-        $postUrl = 'https://api.gowithtommy.com/rest/pay/js_pre_order/';
+        $postUrl = 'https://testapi.gowithtommy.com/rest/pay/js_pre_order/';
         $postData = array(
-            'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
+            'openid' => 'oIUk2wwZMTe0FggPf_cp0yV1Y6W8',       //测试账号openid
         );
         $wxPay_result = Utils::curl($postUrl, $param, true);   //访问接口
         $wxPay_result = json_decode($wxPay_result, true);
