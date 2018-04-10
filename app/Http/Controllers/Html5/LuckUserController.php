@@ -92,7 +92,7 @@ class LuckUserController
 
         $wxConfig_result = Utils::curl($postUrl, $param, true);   //访问接口
         $wxConfig_result = json_decode($wxConfig_result, true);
-        $wxConfig_result['data']['jsApiList'] = "chooseWXPay";
+        $wxConfig_result['data']['jsApiList'] = ['chooseWXPay'];
 //        dd($wxConfig_result['data']);
 
         return view('html5.activity.testPay', ['wxPay' => $wxPay_result['data'], 'wxConfig' => json_encode($wxConfig_result['data'])]);
