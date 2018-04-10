@@ -86,7 +86,7 @@ class LuckUserController
 //        dd($wxPay_result['data']);
 
         $param = array(
-            'url' => 'http://mjttfwh.isart.me'
+            'url' => 'http://mjttfwh.isart.me/testPay'
         );
         $postUrl = 'http://testapi.gowithtommy.com/rest/wechat/config/';
 
