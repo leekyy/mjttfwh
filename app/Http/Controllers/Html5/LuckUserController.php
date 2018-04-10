@@ -81,11 +81,21 @@ class LuckUserController
         $postData = array(
             'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
         );
+        $wxPay_result = Utils::curl($postUrl, $param, true);   //访问接口
+        $wxPay_result = json_decode($wxPay_result, true);
+//        dd($wxPay_result['data']);
 
-        $result = Utils::curl($postUrl, $param, true);   //访问接口
-        $result = json_decode($result, true);
-        dd(json_encode($result['data']));
+        $param = array(
+            'url' => 'http://mjttfwh.isart.me'
+        );
+        $postUrl = 'http://testapi.gowithtommy.com/rest/wechat/config/';
 
+        $wxConfig_result = Utils::curl($postUrl, $param, true);   //访问接口
+        $wxConfig_result = json_decode($wxConfig_result, true);
+        $wxConfig_result['data']['jsApiList'] = "chooseWXPay";
+//        dd($wxConfig_result['data']);
+
+        return view('html5.activity.testPay', ['wxPay' => $wxPay_result['data'], 'wxConfig' => json_encode($wxConfig_result['data'])]);
     }
 
     /*
