@@ -95,7 +95,7 @@ class LuckUserController
         $wxConfig_result['data']['jsApiList'] = ['chooseWXPay'];
 //        dd($wxConfig_result['data']);
 
-        return view('html5.activity.testPay', ['wxPay' => $wxPay_result['data'], 'wxConfig' => json_encode($wxConfig_result['data'])]);
+        return view('html5.activity.testPay', ['wxPay' => $wxPay_result['data'], 'wxConfig' => $wxConfig_result['data']]);
     }
 
     /*
