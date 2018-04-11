@@ -77,24 +77,6 @@
     </div>
 </div>
 
-<!--已经关注情况下，展示邀请海报说明-->
-<div id="already_has_inviteCode_div" class="yq_div aui-hide">
-    <!--遮罩层-->
-    <div class="mask_div"></div>
-    <!--邀请码部分-->
-    <div style="position: absolute;top: 140px;width: 100%;">
-        <div class="aui-text-center">
-            <a class="aui-text-info"
-               href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
-                <img src="{{ URL::asset('/img/tip1.png') }}" style="width: 80%;margin: auto;">
-            </a>
-        </div>
-        <div style="margin-top: 20px;" onclick="click_hide_yqm();">
-            <img src="{{ URL::asset('/img/close_btn.png') }}"
-                 style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
-        </div>
-    </div>
-</div>
 
 <!--已经发送邀请码，提示已经获取了邀请码-->
 <div id="already_has_inviteCode_div" class="yq_div aui-hide">
@@ -121,19 +103,12 @@
     <!--遮罩层-->
     <div class="mask_div"></div>
     <!--邀请码部分-->
-    <div style="position: absolute;top: 80px;width: 100%;">
-        <div class="">
-            <img src="{{$user->avatar}}"
-                 style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
-        </div>
-        <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -20px;">
-            <div style="height: 260px;">
-                <img src="{{ URL::asset('/img/fwh_ewm.jpg') }}" style="width: 80%;margin: auto;padding-top: 30px;">
-            </div>
-            <div class="aui-text-center" style="color: #666666;">
-                <a class="aui-text-info"
-                   href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">请关注美景听听</a>
-            </div>
+    <div style="position: absolute;top: 60px;width: 100%;">
+        <div class="aui-text-center">
+            <a class="aui-text-info"
+               href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
+                <img src="{{ URL::asset('/img/tip2.png') }}" style="width: 70%;margin: auto;">
+            </a>
         </div>
         <div style="margin-top: 20px;" onclick="click_hide_yqm();">
             <img src="{{ URL::asset('/img/close_btn.png') }}"
