@@ -158,7 +158,7 @@ class LuckUserController
      *
      * 2018-04-11
      */
-    public function buy78(Request $request)
+    public function send78EventCode()
     {
         $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
         //获取用户相关信息
@@ -180,7 +180,5 @@ class LuckUserController
         $postUrl = Utils::SERVER_URL . '/rest/pay/js_pre_order/';
         $wxPay_result = Utils::curl($postUrl, $param, true);   //访问接口
         $wxPay_result = json_decode($wxPay_result, true);
-
-        return ApiResponse::makeResponse(true, $wxPay_result['data'], ApiResponse::SUCCESS_CODE);
     }
 }

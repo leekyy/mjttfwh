@@ -39,6 +39,11 @@ function createHaibao(url, param, callBack) {
     ajaxRequest(url + "createHaibao", param, "GET", callBack);
 }
 
+//点击购买78元套餐
+function buy78(url, param, callBack) {
+    ajaxRequest(url + "buy78", param, "GET", callBack);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
