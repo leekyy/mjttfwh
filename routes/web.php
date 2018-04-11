@@ -61,12 +61,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
 Route::group(['middleware' => ['wechat.oauth']], function () {
 
     Route::get('/luckUser', 'Html5\LuckUserController@index');        //幸运用户部分
-//    Route::get('/testPay', 'Html5\LuckUserController@index');        //幸运用户部分
+    Route::get('/testPay', 'Html5\LuckUserController@index');        //幸运用户部分
     Route::get('/createHaibao', 'Html5\LuckUserController@createHaibao');        //幸运用户部分，提供海报
     Route::get('/buy78', 'Html5\LuckUserController@buy78');        //点击购买78元
 });
 
-Route::get('/testPay', 'Html5\LuckUserController@testPay');        //测试支付
+//Route::get('/testPay', 'Html5\LuckUserController@testPay');        //测试支付
 
 Route::get('/MP_verify_2sDZDXfjL7dyX57v.txt', function () {
     return response()->download(realpath(base_path('app')) . '/files/MP_verify_2sDZDXfjL7dyX57v.txt', 'MP_verify_2sDZDXfjL7dyX57v.txt');
