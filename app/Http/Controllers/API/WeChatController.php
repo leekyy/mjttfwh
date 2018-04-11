@@ -139,8 +139,8 @@ class WechatController extends Controller
                                     ->send();
                             }
                         }
-                        $text = Utils::TEXT_SCAN_SUB;
-                        return $text;
+//                        $text = Utils::TEXT_SCAN_SUB;
+                        return "";
                     }
                     break;
                 case 'text':
