@@ -203,7 +203,7 @@ class LuckUserController
             return ApiResponse::makeResponse(false, "用户不存在", ApiResponse::NO_USER);
         }
         $param = array();
-        $result = Utils::curl(Utils::SERVER_URL . 'rest/user/public_number_pay/invi_code/', $param, false);   //访问接口
+        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number_pay/invi_code/', $param, false);   //访问接口
         Log::info("resut:" . json_encode($result));
         $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
         $inviCode = $result['data']['inviCode'];    //邀请码

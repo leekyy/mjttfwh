@@ -84,4 +84,19 @@ class TestController extends Controller
         $result = MapManager::getLocationByLatLon($data['lat'], $data['lon']);
         return ApiResponse::makeResponse(true, $result, ApiResponse::SUCCESS_CODE);
     }
+
+    /*
+     * 78元邀请码代码
+     *
+     * By TerryQi
+     *
+     * 2018-04-11
+     */
+    public function test78InviteCode(Request $request)
+    {
+        $param = array();
+//        $result = Utils::curl(Utils::SERVER_URL.'/rest/user/public_number/invi_code/', $param, false);   //访问接口
+        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number_pay/invi_code/', $param, false);   //访问接口
+        dd($result);
+    }
 }

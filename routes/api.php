@@ -31,3 +31,4 @@ Route::group(['prefix' => '', 'middleware' => ['BeforeRequest']], function () {
 //微信相关
 Route::any('/wechat', 'API\WeChatController@serve');        //服务号校验token
 
+Route::get('/test78InviteCode', 'API\TestController@test78InviteCode');
