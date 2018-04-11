@@ -219,9 +219,9 @@
         //如果已经关注
         var param = {};
         buy78('{{URL::asset('')}}', param, function (ret) {
+            console.log("buy78 ret:" + JSON.stringify(ret));
             if (ret.result == true) {
-                //关闭当前窗口
-                wx.closeWindow();
+
             } else {
                 switch (ret.code) {
                     case 108:
