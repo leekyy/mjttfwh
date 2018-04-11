@@ -48,11 +48,11 @@
 <div style="height: 80px;"></div>
 <div class="aui-row" style="position: fixed;bottom: 0px;width: 100%">
     <div class="aui-col-xs-6 aui-text-center" onclick="click_create_haibao();" style="background: #FB7571;">
-        <div class="aui-text-white aui-font-size-16 aui-margin-t-10 aui-margin-b-10">0元获取邀请码</div>
+        <div class="aui-text-white aui-font-size-16 aui-margin-t-15 aui-margin-b-15">0元获取邀请码</div>
     </div>
     <div class="aui-col-xs-6 aui-text-center" onclick="click_buy_now({{$user->is_subscribe}});"
          style="background: #E31C17;">
-        <div class="aui-text-white aui-font-size-16 aui-margin-t-10 aui-margin-b-10">78元立即购买</div>
+        <div class="aui-text-white aui-font-size-16 aui-margin-t-15 aui-margin-b-15">78元立即购买</div>
     </div>
 </div>
 
@@ -221,7 +221,18 @@
         buy78('{{URL::asset('')}}', param, function (ret) {
             console.log("buy78 ret:" + JSON.stringify(ret));
             if (ret.result == true) {
+                var msgObj = ret.ret;
+                wx.chooseWXPay({
+                    timestamp: msgObj.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                    nonceStr: msgObj.nonceStr, // 支付签名随机串，不长于 32 位
+                    package: msgObj.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                    signType: msgObj.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                    paySign: msgObj.paySign, // 支付签名// 支付成功后的回调函数
+                    success: function (res) {
+//                        alert(JSON.stringify(res));
 
+                    }
+                });
             } else {
                 switch (ret.code) {
                     case 108:
