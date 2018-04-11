@@ -46,7 +46,7 @@
     <img src="{{ URL::asset('/img/page_img4.png') }}">
 </div>
 <div style="height: 80px;"></div>
-<div class="aui-row" style="position: fixed;bottom: 0px;width: 100%">
+<div class="aui-row" style="position: fixed;bottom: 0px;width: 100%;background: #0065B5;">
     <div class="aui-col-xs-12 aui-text-center" onclick="click_buy_now();">
         <div class="aui-text-white aui-font-size-18 aui-margin-t-15 aui-margin-b-15">78元立即购买</div>
     </div>
