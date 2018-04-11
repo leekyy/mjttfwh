@@ -70,6 +70,40 @@ class LuckUserController
 
 
     /*
+     * 土豪购买
+     *
+     * By TerryQi
+     *
+     * 2018-03-30
+     */
+    public function richBuy(Request $request)
+    {
+        $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
+        //获取用户相关信息
+        $user_val = $session_val['default']->toArray();
+        //在数据库中检索用户信息
+        $user = UserManager::getByFWHOpenid($user_val['id']);
+        //如果无值，则需要注册
+        if (!$user) {
+            $data = array(
+                'fwh_openid' => $user_val['id'],
+                'nick_name' => $user_val['nickname'],
+                'avatar' => $user_val['avatar']
+            );
+            $user = UserManager::registerFWH($data);
+        }
+        //生成app信息
+        $app = app('wechat.official_account');
+        //以上已经完成用户注册，为每个用户申请小程序邀请码
+        $filename = WeChatManager::createUserYQCode($user->id);
+        //生成分享配置
+        $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
+
+        return view('html5.activity.richbuy', ['user' => $user, 'wx_config' => $wx_config]);
+    }
+
+
+    /*
    * 测试支付
    *
    * By TerryQi

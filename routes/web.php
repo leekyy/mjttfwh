@@ -61,6 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
 Route::group(['middleware' => ['wechat.oauth']], function () {
 
     Route::get('/luckUser', 'Html5\LuckUserController@index');        //幸运用户部分
+    Route::get('/richBuy', 'Html5\LuckUserController@richBuy');        //点击购买78元
     Route::get('/testPay', 'Html5\LuckUserController@index');        //幸运用户部分-暂时用于测试
     Route::get('/createHaibao', 'Html5\LuckUserController@createHaibao');        //幸运用户部分，提供海报
     Route::get('/buy78', 'Html5\LuckUserController@buy78');        //点击购买78元
