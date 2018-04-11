@@ -65,7 +65,7 @@ class LuckUserController
 
         //////////////////////////////////////////////////////
 
-        return view('html5.activity.luckUser', ['user' => $user, 'wxConfig' => $wxConfig_result['data'], 'wxPay' => $wxPay_result['data']]);
+        return view('html5.activity.luckUser', ['user' => $user, 'wxConfig' => $wxConfig_result['data']]);
     }
 
 
