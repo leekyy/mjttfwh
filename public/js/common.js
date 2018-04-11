@@ -44,6 +44,11 @@ function buy78(url, param, callBack) {
     ajaxRequest(url + "buy78", param, "GET", callBack);
 }
 
+//点击发送78元邀请码
+function send78InviteCode(url, param, callBack) {
+    ajaxRequest(url + "send78InviteCode", param, "GET", callBack);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 

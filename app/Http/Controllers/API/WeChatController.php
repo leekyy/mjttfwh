@@ -87,7 +87,7 @@ class WechatController extends Controller
                                 } elseif ($tj_user->yq_num == 3) {    //等于3个
                                     //获取邀请码并发送 三条文字信息 text0、text1、text2
                                     $param = array();
-                                    $result = Utils::curl('http://testapi.gowithtommy.com/rest/user/public_number/invi_code/', $param, false);   //访问接口
+                                    $result = Utils::curl(Utils::SERVER_URL.'/rest/user/public_number/invi_code/', $param, false);   //访问接口
                                     $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
                                     $inviCode = $result['data']['inviCode'];    //邀请码
                                     $text0 = "你的好友" . $user->nick_name . "帮你扫码啦，恭喜您获得价值78元的邀请码";

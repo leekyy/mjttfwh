@@ -183,4 +183,43 @@ class LuckUserController
 
         return ApiResponse::makeResponse(true, $wxPay_result['data'], ApiResponse::SUCCESS_CODE);
     }
+
+    /*
+     * 支付成功，发送78元邀请码
+     *
+     * By TerryQi
+     *
+     * 2018-04-11
+     */
+    public function send78InviteCode(Request $request)
+    {
+        $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
+        //获取用户相关信息
+        $user_val = $session_val['default']->toArray();
+        //在数据库中检索用户信息
+        $user = UserManager::getByFWHOpenid($user_val['id']);
+        //如果不存在用户信息
+        if (!$user) {
+            return ApiResponse::makeResponse(false, "用户不存在", ApiResponse::NO_USER);
+        }
+        $param = array();
+        $result = Utils::curl(Utils::SERVER_URL . 'rest/user/public_number_pay/invi_code/', $param, false);   //访问接口
+        $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
+        $inviCode = $result['data']['inviCode'];    //邀请码
+        //发送邀请码
+        $app = app('wechat.official_account');
+        $text0 = "您已经购买价值78元的邀请码";
+        $app->customer_service->message($text0)
+            ->to($user->fwh_openid)
+            ->send();
+        $text1 = $inviCode;
+        $app->customer_service->message($text1)
+            ->to($user->fwh_openid)
+            ->send();
+        $text2 = Utils::TEXT_BUY78_CODE;
+        $app->customer_service->message($text2)
+            ->to($user->fwh_openid)
+            ->send();
+        return ApiResponse::makeResponse(true, $inviCode, ApiResponse::SUCCESS_CODE);
+    }
 }

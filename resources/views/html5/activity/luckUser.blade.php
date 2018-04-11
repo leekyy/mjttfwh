@@ -229,8 +229,19 @@
                     signType: msgObj.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                     paySign: msgObj.paySign, // 支付签名// 支付成功后的回调函数
                     success: function (res) {
-                        alert(JSON.stringify(res));
+                        if (res.errMsg == "chooseWXPay:ok") {
+                            var param = {};
+                            send78InviteCode('{{URL::asset('')}}', param, function (ret) {
+                                if (ret.result == true) {
+                                    //关闭当前窗口
+                                    wx.closeWindow();
+                                } else {
+                                    alert("服务报错，美景听听正在抢修");
+                                }
+                            })
+                        } else {
 
+                        }
                     }
                 });
             } else {
