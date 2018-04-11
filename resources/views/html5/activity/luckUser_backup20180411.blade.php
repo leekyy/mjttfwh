@@ -129,14 +129,7 @@
 <script type="text/javascript" charset="utf-8">
 
     //微信配置文件
-    wx.config({
-        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-        appId: '{{$wxConfig['app_id']}}', // 必填，公众号的唯一标识
-        timestamp: '{{$wxConfig['timestamp']}}', // 必填，生成签名的时间戳
-        nonceStr: '{{$wxConfig['nonceStr']}}', // 必填，生成签名的随机串
-        signature: '{{$wxConfig['signature']}}',// 必填，签名
-        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表
-    });
+    wx.config({!! $wx_config !!});
 
     //微信配置成功后
     wx.ready(function () {

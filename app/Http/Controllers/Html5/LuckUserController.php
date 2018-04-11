@@ -47,11 +47,30 @@ class LuckUserController
             $user = UserManager::registerFWH($data);
         }
         //生成app信息
-        $app = app('wechat.official_account');
+//        $app = app('wechat.official_account');
         //以上已经完成用户注册，为每个用户申请小程序邀请码
         $filename = WeChatManager::createUserYQCode($user->id);
         //生成分享配置
-        $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
+//        $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
+
+
+        ///////此处用于调测微信支付//////////////////////////
+        $param = array(
+            'url' => 'http://mjttfwh.isart.me/testPay'
+        );
+        $postUrl = Utils::SERVER_URL . '/rest/wechat/config/';
+        $wxConfig_result = Utils::curl($postUrl, $param, true);   //访问接口
+        $wxConfig_result = json_decode($wxConfig_result, true);
+        $wxConfig_result['data']['jsApiList'] = ['chooseWXPay'];
+
+        $param = array(
+            'openid' => Utils::convertOpenid($user->fwh_openid),       //测试账号openid转生产的openid
+        );
+        $postUrl = Utils::SERVER_URL . '/rest/pay/js_pre_order/';
+        $wxPay_result = Utils::curl($postUrl, $param, true);   //访问接口
+        $wxPay_result = json_decode($wxPay_result, true);
+
+        //////////////////////////////////////////////////////
 
         //获取支付配置
 //        $param = array(
@@ -60,7 +79,7 @@ class LuckUserController
 //        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
 //        dd($result);
 
-        return view('html5.activity.luckUser', ['user' => $user, 'wx_config' => $wx_config]);
+        return view('html5.activity.luckUser', ['user' => $user, 'wxConfig' => $wxConfig_result['data'], 'wxPay' => $wxPay_result['data']]);
     }
 
 
@@ -95,7 +114,6 @@ class LuckUserController
         $wxPay_result = Utils::curl($postUrl, $param, true);   //访问接口
         $wxPay_result = json_decode($wxPay_result, true);
 //        dd($wxPay_result['data']);
-
 
         return view('html5.activity.testPay', ['wxPay' => $wxPay_result['data'], 'wxConfig' => $wxConfig_result['data']]);
     }
