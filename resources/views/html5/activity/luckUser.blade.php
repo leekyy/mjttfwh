@@ -78,26 +78,16 @@
 </div>
 
 <!--已经关注情况下，展示邀请海报说明-->
-<div id="hb_ex_div" class="yq_div aui-hide">
+<div id="already_has_inviteCode_div" class="yq_div aui-hide">
     <!--遮罩层-->
     <div class="mask_div"></div>
     <!--邀请码部分-->
-    <div style="position: absolute;top: 80px;width: 100%;">
-        <div class="" style="z-index: 999;">
-            <img src="{{$user->avatar}}"
-                 style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
-        </div>
-        <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
-            <div style="height: 260px;">
-                <div style="height: 70px;"></div>
-                <div class="aui-text-center"><span class="aui-font-size-20">已经生成您的专属邀请海报</span></div>
-                <div class="aui-text-center aui-margin-t-10"><span class="aui-font-size-20">请进入美景听听服务号</span></div>
-                <div class="aui-text-center aui-margin-t-10"><span class="aui-font-size-20">尽快查收分享给好友吧！</span></div>
-            </div>
-            <div class="aui-text-center">
-                <a class="aui-text-info"
-                   href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">点击进入美景听听</a>
-            </div>
+    <div style="position: absolute;top: 140px;width: 100%;">
+        <div class="aui-text-center">
+            <a class="aui-text-info"
+               href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
+                <img src="{{ URL::asset('/img/tip1.png') }}" style="width: 80%;margin: auto;">
+            </a>
         </div>
         <div style="margin-top: 20px;" onclick="click_hide_yqm();">
             <img src="{{ URL::asset('/img/close_btn.png') }}"
@@ -112,26 +102,11 @@
     <div class="mask_div"></div>
     <!--邀请码部分-->
     <div style="position: absolute;top: 80px;width: 100%;">
-        <div class="" style="z-index: 999;">
-            <img src="{{$user->avatar}}"
-                 style="width: 60px;height: 60px;border-radius: 50%;margin: auto;">
-        </div>
-        <div style="width: 70%;margin: auto;height: 300px;background: white;border-radius: 10px;margin-top: -30px;">
-            <div style="height: 260px;">
-                <div style="height: 60px;"></div>
-                <div class="aui-text-center aui-padded-l-10 aui-padded-r-10 aui-font-size-18"
-                     style="line-height: 30px;">
-                    很遗憾，你已经申请过一次幸运用户啦~程序猿GG辣么辛苦地为你打江山，赏点银子呗~
-                </div>
-                <div class="aui-text-center aui-padded-l-10 aui-padded-r-10 aui-font-size-18 aui-margin-t-10"
-                     style="line-height: 30px;">
-                    现在到淘宝上搜索“美景听听”，下单购买有优惠哦！
-                </div>
-            </div>
-            <div class="aui-text-center">
-                <a class="aui-text-info"
-                   href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">点击进入美景听听</a>
-            </div>
+        <div class="aui-text-center">
+            <a class="aui-text-info"
+               href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
+                <img src="{{ URL::asset('/img/tip2.png') }}" style="width: 80%;margin: auto;">
+            </a>
         </div>
         <div style="margin-top: 20px;" onclick="click_hide_yqm();">
             <img src="{{ URL::asset('/img/close_btn.png') }}"
