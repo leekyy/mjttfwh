@@ -87,7 +87,7 @@
         <div class="aui-text-center">
             <a class="aui-text-info"
                href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
-                <img src="{{ URL::asset('/img/tip2.png') }}" style="width: 70%;margin: auto;">
+                <img src="{{ URL::asset('/img/tip1.png') }}" style="width: 70%;margin: auto;">
             </a>
         </div>
         <div style="margin-top: 20px;" onclick="click_hide_yqm();">
