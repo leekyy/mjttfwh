@@ -204,8 +204,10 @@ class LuckUserController
         }
         $param = array();
         $result = Utils::curl(Utils::SERVER_URL . 'rest/user/public_number_pay/invi_code/', $param, false);   //访问接口
+        Log::info("resut:" . json_encode($result));
         $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
         $inviCode = $result['data']['inviCode'];    //邀请码
+        Log::info("inviCode:" . json_encode($inviCode));
         //发送邀请码
         $app = app('wechat.official_account');
         $text0 = "您已经购买价值78元的邀请码";
