@@ -101,11 +101,11 @@
     <!--遮罩层-->
     <div class="mask_div"></div>
     <!--邀请码部分-->
-    <div style="position: absolute;top: 80px;width: 100%;">
+    <div style="position: absolute;top: 60px;width: 100%;">
         <div class="aui-text-center">
             <a class="aui-text-info"
                href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
-                <img src="{{ URL::asset('/img/tip2.png') }}" style="width: 80%;margin: auto;">
+                <img src="{{ URL::asset('/img/tip2.png') }}" style="width: 70%;margin: auto;">
             </a>
         </div>
         <div style="margin-top: 20px;" onclick="click_hide_yqm();">
@@ -213,6 +213,9 @@
                     switch (ret.code) {
                         case 109:
                             $("#already_has_inviteCode_div").removeClass('aui-hide');
+                            break;
+                        case 108:
+                            $("#gz_ex_div").removeClass('aui-hide');
                             break;
                         default:
                             alert("服务报错，美景听听正在抢修");
