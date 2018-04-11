@@ -128,8 +128,11 @@ class WechatController extends Controller
                             Log::info("key_val:" . $key_val);
                             $tj_user = UserManager::getByFWHOpenid($key_val);    //找到推荐用户
                             Log::info("user->id:" . $user->id . "  tj_user->id:" . $tj_user->id);
-                            //存在推荐关系
-                            if (UserTJManager::isUserHasBennTJ($tj_user->id, $user->id)) {
+                            //如果该用户被推荐过
+                            $con_arr = array(
+                                "user_id" => $user->id
+                            );
+                            if (UserTJManager::getListByCon($con_arr, false)->count() > 0) {
                                 $text = Utils::TEXT_ALREADY_ZHULI;
                                 $app->customer_service->message($text)
                                     ->to($user->fwh_openid)
