@@ -73,17 +73,7 @@ class LuckUserController
    */
     public function testPay(Request $request)
     {
-        //获取支付配置
-        $param = array(
-            'openid' => 'oIUk2w6SjIvnUq2_FPQtroK9ovy0',       //测试账号openid
-        );
-        $postUrl = 'https://testapi.gowithtommy.com/rest/pay/js_pre_order/';
-        $postData = array(
-            'openid' => 'oIUk2wwZMTe0FggPf_cp0yV1Y6W8',       //测试账号openid
-        );
-        $wxPay_result = Utils::curl($postUrl, $param, true);   //访问接口
-        $wxPay_result = json_decode($wxPay_result, true);
-//        dd($wxPay_result['data']);
+//        dd($request->all());
 
         $param = array(
             'url' => 'http://mjttfwh.isart.me/testPay'
@@ -94,6 +84,18 @@ class LuckUserController
         $wxConfig_result = json_decode($wxConfig_result, true);
         $wxConfig_result['data']['jsApiList'] = ['chooseWXPay'];
 //        dd($wxConfig_result['data']);
+
+        //获取支付配置
+        //测试用openid oIUk2w6SjIvnUq2_FPQtroK9ovy0
+        //TerryQi openid oIUk2wwZMTe0FggPf_cp0yV1Y6W8
+        $param = array(
+            'openid' => 'oIUk2wwZMTe0FggPf_cp0yV1Y6W8',       //测试账号openid
+        );
+        $postUrl = 'http://testapi.gowithtommy.com/rest/pay/js_pre_order/';
+        $wxPay_result = Utils::curl($postUrl, $param, true);   //访问接口
+        $wxPay_result = json_decode($wxPay_result, true);
+//        dd($wxPay_result['data']);
+
 
         return view('html5.activity.testPay', ['wxPay' => $wxPay_result['data'], 'wxConfig' => $wxConfig_result['data']]);
     }

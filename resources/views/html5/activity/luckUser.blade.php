@@ -46,7 +46,7 @@
     <img src="{{ URL::asset('/img/page_img4.png') }}">
 </div>
 <div style="height: 80px;"></div>
-<div class="aui-row aui-margin-t-20" style="position: fixed;bottom: 0px;width: 100%">
+<div class="aui-row" style="position: fixed;bottom: 0px;width: 100%">
     <div class="aui-col-xs-6" onclick="click_create_haibao({{$user->is_subscribe}});"><img
                 src="{{ URL::asset('/img/left_btn.png') }}">
     </div>
