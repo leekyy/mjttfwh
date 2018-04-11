@@ -99,7 +99,7 @@ class LuckUserController
         //生成分享配置
         $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
 
-        return view('html5.activity.richbuy', ['user' => $user, 'wx_config' => $wx_config]);
+        return view('html5.activity.richBuy', ['user' => $user, 'wx_config' => $wx_config]);
     }
 
 
