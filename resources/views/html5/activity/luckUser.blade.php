@@ -47,10 +47,12 @@
 </div>
 <div style="height: 80px;"></div>
 <div class="aui-row" style="position: fixed;bottom: 0px;width: 100%">
-    <div class="aui-col-xs-6" onclick="click_create_haibao({{$user->is_subscribe}});"><img
-                src="{{ URL::asset('/img/left_btn.png') }}">
+    <div class="aui-col-xs-6 aui-text-center" onclick="click_create_haibao();" style="background: #FB7571;">
+        <div class="aui-text-white aui-font-size-18 aui-margin-t-15 aui-margin-b-15">0元获取邀请码</div>
     </div>
-    <div class="aui-col-xs-6" onclick="click_buy_now();"><img src="{{ URL::asset('/img/right_btn.png') }}"></div>
+    <div class="aui-col-xs-6 aui-text-center" onclick="click_buy_now();" style="background: #E31C17;">
+        <div class="aui-text-white aui-font-size-18 aui-margin-t-15 aui-margin-b-15">78元立即购买</div>
+    </div>
 </div>
 
 <!--邀请二维码弹出层-->
