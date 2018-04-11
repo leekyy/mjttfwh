@@ -83,7 +83,7 @@
     <!--遮罩层-->
     <div class="mask_div"></div>
     <!--邀请码部分-->
-    <div style="position: absolute;top: 60px;width: 100%;">
+    <div style="position: absolute;top: 80px;width: 100%;">
         <div class="aui-text-center">
             <a class="aui-text-info"
                href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
