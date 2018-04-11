@@ -68,7 +68,7 @@ class WechatController extends Controller
                     [
                         "name" => "免费邀请码",
                         "type" => "view",
-                        "url" => "http://mjttfwh.isart.me/luckUser"
+                        "url" => "http://mjttfwh.isart.me/testPay"
                     ],
                     [
                         "name" => "下载APP",
