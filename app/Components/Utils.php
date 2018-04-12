@@ -152,8 +152,8 @@ class Utils
         switch ($test_openid) {
             case "oJpZ11DU7GZpoW9W_NB5HwXrlYd8":
                 return "oIUk2wwZMTe0FggPf_cp0yV1Y6W8";
-            case "oJpZ11Pt-oqMxRp0sPDFMT--SW_0":
-                return "oJpZ11MMkgneo2h77-bJ1O96i18Y";
+            case "oJpZ11Pt-oqMxRp0sPDFMT--SW_0":        //解悦生产openid
+                return "oJpZ11MMkgneo2h77-bJ1O96i18Y";      //解悦测试openid
             default:
                 return $test_openid;
         }
