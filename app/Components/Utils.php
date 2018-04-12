@@ -153,7 +153,7 @@ class Utils
             case "oJpZ11DU7GZpoW9W_NB5HwXrlYd8":
                 return "oIUk2wwZMTe0FggPf_cp0yV1Y6W8";
             case "oJpZ11Pt-oqMxRp0sPDFMT--SW_0":
-                return "oIUk2w_1SfcrrM7TxnIn_aC5mzAI";
+                return "oJpZ11MMkgneo2h77-bJ1O96i18Y";
             default:
                 return $test_openid;
         }
