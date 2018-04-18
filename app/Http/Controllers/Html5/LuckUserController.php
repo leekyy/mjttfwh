@@ -49,10 +49,9 @@ class LuckUserController
         //生成app信息
 //        $app = app('wechat.official_account');
         //以上已经完成用户注册，为每个用户申请小程序邀请码
-        $filename = WeChatManager::createUserYQCode($user->id);
+//        $filename = WeChatManager::createUserYQCode($user->id);
         //生成分享配置
 //        $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
-
 
         ///////此处用于调测微信支付//////////////////////////
         $param = array(
@@ -212,8 +211,10 @@ class LuckUserController
             'openid' => Utils::convertOpenid($user->fwh_openid),       //测试账号openid转生产的openid
         );
         $postUrl = Utils::SERVER_URL . '/rest/pay/js_pre_order/';
-        $wxPay_result = Utils::curl($postUrl, $param, true);   //访问接口
+        $wxPay_result = Utils::curl($postUrl, $param, true);   //获取支付配置信息
+        dd($wxPay_result);
         $wxPay_result = json_decode($wxPay_result, true);
+
 
         return ApiResponse::makeResponse(true, $wxPay_result['data'], ApiResponse::SUCCESS_CODE);
     }

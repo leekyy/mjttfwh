@@ -72,6 +72,28 @@
                     </ul>
                 </dd>
             </dl>
+            <dl>
+                <dt><i class="Hui-iconfont">&#xe681;</i>用户邀请记录<i class="Hui-iconfont menu_dropdown-arrow">
+                        &#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a data-href="{{ URL::asset('/admin/inviteCodeRecord/index') }}" data-title="用户邀请记录"
+                               href="javascript:void(0)">用户邀请记录</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt><i class="Hui-iconfont">&#xe681;</i>系统配置<i class="Hui-iconfont menu_dropdown-arrow">
+                        &#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a data-href="{{ URL::asset('/admin/inviteNum/index') }}" data-title="用户邀请达标数配置"
+                               href="javascript:void(0)">用户邀请达标数配置</a></li>
+                    </ul>
+                </dd>
+            </dl>
         </div>
     </aside>
     <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>

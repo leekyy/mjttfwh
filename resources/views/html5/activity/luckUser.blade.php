@@ -213,7 +213,7 @@
         $(".yq_div").addClass('aui-hide');
     }
 
-    //点击78元立柯购买
+    //点击78元立即购买
     function click_buy_now(is_subscribe) {
         console.log("click_create_haibao");
         //如果已经关注

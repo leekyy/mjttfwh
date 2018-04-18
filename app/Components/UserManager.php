@@ -166,6 +166,9 @@ class UserManager
         if (array_key_exists('yq_num', $data)) {
             $info->yq_num = array_get($data, 'yq_num');
         }
+        if (array_key_exists('target_yq_num', $data)) {
+            $info->target_yq_num = array_get($data, 'target_yq_num');
+        }
         return $info;
     }
 
