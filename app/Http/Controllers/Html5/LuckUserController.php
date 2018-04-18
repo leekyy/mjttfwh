@@ -243,7 +243,7 @@ class LuckUserController
         //发送78元邀请码
         $param = array(
             'out_trade_no' => $out_trade_no,
-            'sign' => md5(base64_encode($out_trade_no))
+            'sign' => md5(base64_encode("out_trade_no|" . $out_trade_no . "|pay|order"))
         );
         $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number_pay/invi_code/', $param, true);   //访问接口
         Log::info("resut:" . json_encode($result));
