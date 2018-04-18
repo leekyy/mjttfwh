@@ -34,9 +34,12 @@ class TestController extends Controller
 
     public function testYQM(Request $request)
     {
-        //此处封装参数，参数应该来自请求，此处仅为示例
-        $param = array();
-        $result = Utils::curl('http://testapi.gowithtommy.com/rest/user/public_number/invi_code/', $param, false);   //访问接口
+        $param = array(
+            'openId' => "o51su5VKEsk7O2nqXrilFPcTe55k",
+            'sign' => md5(base64_encode("openId|" . "o51su5VKEsk7O2nqXrilFPcTe55k" . "|Free|Edition"))
+        );
+//        dd(Utils::SERVER_URL);
+        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
         $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
         return ApiResponse::makeResponse(true, $result, ApiResponse::SUCCESS_CODE);
     }

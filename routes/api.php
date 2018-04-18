@@ -24,6 +24,7 @@ Route::group(['prefix' => '', 'middleware' => ['BeforeRequest']], function () {
     Route::get('test', 'API\TestController@test');
     Route::get('testYQM', 'API\TestController@testYQM');
     Route::get('testMergePic', 'API\TestController@testMergePic');
+    Route::get('testYQM', 'API\TestController@testYQM');
 
 
 });

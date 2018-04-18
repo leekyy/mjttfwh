@@ -20,7 +20,9 @@ class Utils
     const ORDER_REFUNDSUCCESS = "4";    //退款成功
     const ORDER_REFUNDFAILED = "5";    //退款失败
 
-    const SERVER_URL = (false == true) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
+    const  DEBUG_FLAG = false;        //debug标识
+
+    const SERVER_URL = (self::DEBUG_FLAG == false) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
 
     //关注+扫描进入回复内容
     const TEXT_SCAN_SUB = "hey，欢迎关注美景听听：全球景点语音讲解\r\n<a href=\"http://mjttfwh.isart.me/luckUser\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听App";
@@ -155,6 +157,11 @@ class Utils
      */
     public static function convertOpenid($test_openid)
     {
+        //非测试环境，不需要进行openid的映射
+        if (self::DEBUG_FLAG == false) {
+            return $test_openid;
+        }
+
         switch ($test_openid) {
             case "oJpZ11DU7GZpoW9W_NB5HwXrlYd8":        //TerryQi测试openid
                 return "oIUk2wwZMTe0FggPf_cp0yV1Y6W8";          //TerryQi生产openid
