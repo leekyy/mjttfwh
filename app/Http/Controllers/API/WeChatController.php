@@ -105,6 +105,13 @@ class WechatController extends Controller
                                     $app->customer_service->message($text2)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
+
+                                    //记录邀请码发送信息
+                                    $inviteCodeRecord = new InviteCodeRecord();
+                                    $inviteCodeRecord->user_id = $tj_user->id;
+                                    $inviteCodeRecord->invite_code = $inviCode;
+                                    $inviteCodeRecord->type = '0';
+                                    $inviteCodeRecord->save();
                                 }
                                 //发送被邀请者消息
                                 $text = "您已帮好友" . $tj_user->nick_name . "助力";
