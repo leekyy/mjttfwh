@@ -160,6 +160,8 @@ class Utils
                 return "oIUk2w_1SfcrrM7TxnIn_aC5mzAI";      //解悦生产openid
             case "oJpZ11Pt-oqMxRp0sPDFMT--SW_0":        //Tommy测试openid
                 return "oIUk2w7G1b3r_Rbuh3F-cjLScax4";      //Tommy生产openid
+            case "oJpZ11IIT0fKncFdoNj89oxXIUss":        //GUoErPi测试openid
+                return "oIUk2w6SjIvnUq2_FPQtroK9ovy0";  //GUoErPi生产openid
             default:
                 return $test_openid;
         }
