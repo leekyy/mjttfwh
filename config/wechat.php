@@ -9,6 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
+
 return [
     /*
      * 默认配置，将会合并到各模块中
@@ -66,9 +67,9 @@ return [
      */
     'official_account' => [
         'default' => [
-            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wx3ad09993e9ded37d'),         // AppID
-            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '20fb916079e32b6a1fcb1ab60a97b0a9'),    // AppSecret
-            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', '7IFq8tCdZuyPrlqgkAJA3D4DG6Zao8cI'),           // Token
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', (\App\Components\Utils::DEBUG_FLAG == false) ? 'wx3ad09993e9ded37d' : 'wx3ad09993e9ded37d'),         // AppID 生产-测试
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', (\App\Components\Utils::DEBUG_FLAG == false) ? '20fb916079e32b6a1fcb1ab60a97b0a9' : '20fb916079e32b6a1fcb1ab60a97b0a9'),    // AppSecret
+            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', (\App\Components\Utils::DEBUG_FLAG == false) ? '7IFq8tCdZuyPrlqgkAJA3D4DG6Zao8cI' : '7IFq8tCdZuyPrlqgkAJA3D4DG6Zao8cI'),           // Token
             'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', ''),                 // EncodingAESKey
 
             /*
