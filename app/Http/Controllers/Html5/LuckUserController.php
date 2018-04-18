@@ -13,6 +13,7 @@ use App\Components\AdminManager;
 use App\Components\UserManager;
 use App\Components\WeChatManager;
 use App\Libs\CommonUtils;
+use App\Models\InviteCodeRecord;
 use Illuminate\Http\Request;
 use App\Components\RequestValidator;
 use App\Models\Admin;
@@ -212,9 +213,8 @@ class LuckUserController
         );
         $postUrl = Utils::SERVER_URL . '/rest/pay/js_pre_order/';
         $wxPay_result = Utils::curl($postUrl, $param, true);   //获取支付配置信息
-        dd($wxPay_result);
+//        dd($wxPay_result);
         $wxPay_result = json_decode($wxPay_result, true);
-
 
         return ApiResponse::makeResponse(true, $wxPay_result['data'], ApiResponse::SUCCESS_CODE);
     }
@@ -228,6 +228,9 @@ class LuckUserController
      */
     public function send78InviteCode(Request $request)
     {
+        $data = $request->all();
+        //获取传入的out_trade_no
+        $out_trade_no = $data['out_trade_no'];
         $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
         //获取用户相关信息
         $user_val = $session_val['default']->toArray();
@@ -237,7 +240,11 @@ class LuckUserController
         if (!$user) {
             return ApiResponse::makeResponse(false, "用户不存在", ApiResponse::NO_USER);
         }
-        $param = array();
+        //发送78元邀请码
+        $param = array(
+            'out_trade_no' => $out_trade_no,
+            'sign' => md5(base64_encode($out_trade_no))
+        );
         $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number_pay/invi_code/', $param, false);   //访问接口
         Log::info("resut:" . json_encode($result));
         $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
@@ -257,6 +264,15 @@ class LuckUserController
         $app->customer_service->message($text2)
             ->to($user->fwh_openid)
             ->send();
+
+        //记录邀请码发送信息
+        $inviteCodeRecord = new InviteCodeRecord();
+        $inviteCodeRecord->user_id = $user->id;
+        $inviteCodeRecord->invite_code = $inviCode;
+        $inviteCodeRecord->type = '1';
+        $inviteCodeRecord->out_trade_no = $out_trade_no;
+        $inviteCodeRecord->save();
+
         return ApiResponse::makeResponse(true, $inviCode, ApiResponse::SUCCESS_CODE);
     }
 }
