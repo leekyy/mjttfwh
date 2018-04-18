@@ -219,6 +219,7 @@ class LuckUserController
         );
         $postUrl = Utils::SERVER_URL . '/rest/pay/js_pre_order/';
         $wxPay_result = Utils::curl($postUrl, $param, true);   //获取支付配置信息
+        Log::info("buy78 wxPay_result:" . $wxPay_result);
 //        dd($wxPay_result);
         $wxPay_result = json_decode($wxPay_result, true);
 
