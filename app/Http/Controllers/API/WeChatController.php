@@ -78,13 +78,13 @@ class WechatController extends Controller
                                 UserManager::addYQNum($tj_user->id);
                                 //同时发送邀请者消息
                                 $tj_user = UserManager::getById($tj_user->id);
-                                if ($tj_user->yq_num < 3) {     //小于3个
+                                if ($tj_user->yq_num < $tj_user->target_yq_num) {     //小于3个
                                     //发送消息
-                                    $text = "你的好友" . $user->nick_name . "帮你扫码了，还差" . (3 - $tj_user->yq_num) . "个好友助力，即可获得邀请码";
+                                    $text = "你的好友" . $user->nick_name . "帮你扫码了，还差" . ($tj_user->target_yq_num - $tj_user->yq_num) . "个好友助力，即可获得邀请码";
                                     $app->customer_service->message($text)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
-                                } elseif ($tj_user->yq_num == 3) {    //等于3个
+                                } elseif ($tj_user->yq_num == $tj_user->target_yq_num) {    //等于3个
                                     //获取邀请码并发送 三条文字信息 text0、text1、text2
                                     $param = array();
                                     $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, false);   //访问接口

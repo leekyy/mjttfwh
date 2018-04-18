@@ -10,6 +10,7 @@
 namespace App\Http\Controllers\Html5;
 
 use App\Components\AdminManager;
+use App\Components\InviteNumManager;
 use App\Components\UserManager;
 use App\Components\WeChatManager;
 use App\Libs\CommonUtils;
@@ -160,8 +161,13 @@ class LuckUserController
         if ($user->is_subscribe == "0") {
             return ApiResponse::makeResponse(false, "用户未关注公众号", ApiResponse::NOT_SUBSCRIBE);
         }
+        //如果没有生成目标邀请数
+        if ($user->target_yq_num == 0) {
+            $user->target_yq_num = InviteNumManager::getCurrYQNum();
+            $user->save();
+        }
         //如果用户已经获得邀请码
-        if ($user->yq_num >= 3) {
+        if ($user->yq_num >= $user->target_yq_num) {
             return ApiResponse::makeResponse(false, "已经为用户生成邀请码", ApiResponse::ALREADY_CREATE_INVITECODE);
         }
         //发送文字，生成图片素材
