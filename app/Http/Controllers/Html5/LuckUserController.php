@@ -57,7 +57,7 @@ class LuckUserController
 
         ///////此处用于调测微信支付//////////////////////////
         $param = array(
-            'url' => 'http://mjttfwh.isart.me/testPay'
+            'url' => 'http://mjttfwh.isart.me/luckUser'
         );
         $postUrl = Utils::SERVER_URL . '/rest/wechat/config/';
         $wxConfig_result = Utils::curl($postUrl, $param, true);   //访问接口
@@ -94,13 +94,15 @@ class LuckUserController
             $user = UserManager::registerFWH($data);
         }
         //生成app信息
-        $app = app('wechat.official_account');
-        //以上已经完成用户注册，为每个用户申请小程序邀请码
-        $filename = WeChatManager::createUserYQCode($user->id);
-        //生成分享配置
-        $wx_config = $app->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false);
+        $param = array(
+            'url' => 'http://mjttfwh.isart.me/richBuy'
+        );
+        $postUrl = Utils::SERVER_URL . '/rest/wechat/config/';
+        $wxConfig_result = Utils::curl($postUrl, $param, true);   //访问接口
+        $wxConfig_result = json_decode($wxConfig_result, true);
+        $wxConfig_result['data']['jsApiList'] = ['chooseWXPay'];
 
-        return view('html5.activity.richBuy', ['user' => $user, 'wx_config' => $wx_config]);
+        return view('html5.activity.richBuy', ['user' => $user, 'wxConfig' => $wxConfig_result['data']]);
     }
 
 

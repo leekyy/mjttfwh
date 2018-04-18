@@ -28,12 +28,12 @@ class InviteNumController
     //首页
     public function index(Request $request)
     {
-        $inviteNum = $request->session()->get('admin');
+        $admin = $request->session()->get('admin');
         $inviteNums = InviteNumManager::getListByCon([], true);
         foreach ($inviteNums as $inviteNum) {
             $inviteNum = InviteNumManager::getInfoByLevel($inviteNum, '');
         }
-        return view('admin.inviteNum.index', ['admin' => $inviteNum, 'datas' => $inviteNums]);
+        return view('admin.inviteNum.index', ['admin' => $admin, 'datas' => $inviteNums]);
     }
 
 

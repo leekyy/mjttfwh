@@ -64,7 +64,14 @@
 <script type="text/javascript" charset="utf-8">
 
     //微信配置文件
-    wx.config({!! $wx_config !!});
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '{{$wxConfig['app_id']}}', // 必填，公众号的唯一标识
+        timestamp: '{{$wxConfig['timestamp']}}', // 必填，生成签名的时间戳
+        nonceStr: '{{$wxConfig['nonceStr']}}', // 必填，生成签名的随机串
+        signature: '{{$wxConfig['signature']}}',// 必填，签名
+        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表
+    });
 
     //微信配置成功后
     wx.ready(function () {
@@ -105,7 +112,45 @@
 
     //点击78元立柯购买
     function click_buy_now() {
+        console.log("click_create_haibao");
+        //如果已经关注
+        var param = {};
+        buy78('{{URL::asset('')}}', param, function (ret) {
+            console.log("buy78 ret:" + JSON.stringify(ret));
+            if (ret.result == true) {
+                var msgObj = ret.ret;
+                wx.chooseWXPay({
+                    timestamp: msgObj.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                    nonceStr: msgObj.nonceStr, // 支付签名随机串，不长于 32 位
+                    package: msgObj.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                    signType: msgObj.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                    paySign: msgObj.paySign, // 支付签名// 支付成功后的回调函数
+                    success: function (res) {
+                        if (res.errMsg == "chooseWXPay:ok") {
+                            var param = {out_trade_no: msgObj.out_trade_no}; //上送订单号
+                            send78InviteCode('{{URL::asset('')}}', param, function (ret) {
+                                if (ret.result == true) {
+                                    //关闭当前窗口
+                                    wx.closeWindow();
+                                } else {
+                                    alert("服务报错，美景听听正在抢修");
+                                }
+                            })
+                        } else {
 
+                        }
+                    }
+                });
+            } else {
+                switch (ret.code) {
+                    case 108:
+                        $("#gz_ex_div").removeClass('aui-hide');
+                        break;
+                    default:
+                        alert("服务报错，美景听听正在抢修");
+                }
+            }
+        })
     }
 
 </script>

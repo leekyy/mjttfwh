@@ -52,12 +52,23 @@
     <aside class="Hui-aside">
         <div class="menu_dropdown bk_2">
             <dl id="menu-product">
-                <dt><i class="Hui-iconfont">&#xe62d;</i>管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                <dt><i class="Hui-iconfont">&#xe653;</i>管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
                     <ul>
                         <li><a data-href="{{ URL::asset('/admin/admin/index') }}" data-title="管理员管理"
                                href="javascript:void(0)">管理员管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt><i class="Hui-iconfont">&#xe62c;</i>用户管理<i class="Hui-iconfont menu_dropdown-arrow">
+                        &#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a data-href="{{ URL::asset('/admin/user/index') }}" data-title="用户管理"
+                               href="javascript:void(0)">用户管理</a></li>
                     </ul>
                 </dd>
             </dl>

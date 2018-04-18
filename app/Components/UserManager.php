@@ -29,6 +29,31 @@ class UserManager
         return $user;
     }
 
+
+    /*
+     * 根据条件检索用户列表
+     *
+     * By TerryQi
+     *
+     * 2018-04-18
+     */
+    public static function getListByCon($con_arr, $is_paginate)
+    {
+        $users = new User();
+        //相关条件
+        if (array_key_exists('nick_name', $con_arr) && !Utils::isObjNull($con_arr['nick_name'])) {
+            $users = $users->where('nick_name', 'like', "%" . $con_arr['nick_name'] . "%");
+        }
+        $users = $users->orderby('id', 'desc');
+        //配置规则
+        if ($is_paginate) {
+            $users = $users->paginate(Utils::PAGE_SIZE);
+        } else {
+            $users = $users->get();
+        }
+        return $users;
+    }
+
     /*
      * 根据id获取用户信息
      *
