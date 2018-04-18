@@ -217,11 +217,11 @@
     function click_buy_now(is_subscribe) {
         console.log("click_create_haibao");
         //如果已经关注
+        var param = {};
         buy78('{{URL::asset('')}}', param, function (ret) {
             console.log("buy78 ret:" + JSON.stringify(ret));
             if (ret.result == true) {
                 var msgObj = ret.ret;
-
                 wx.chooseWXPay({
                     timestamp: msgObj.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
                     nonceStr: msgObj.nonceStr, // 支付签名随机串，不长于 32 位
