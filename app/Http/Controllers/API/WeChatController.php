@@ -86,8 +86,11 @@ class WechatController extends Controller
                                         ->send();
                                 } elseif ($tj_user->yq_num == $tj_user->target_yq_num) {    //等于3个
                                     //获取邀请码并发送 三条文字信息 text0、text1、text2
-                                    $param = array();
-                                    $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, false);   //访问接口
+                                    $param = array(
+                                        'openId' => $tj_user->fwh_openid,
+                                        'sign' => md5(base64_encode("openId|" . $tj_user->fwh_openid . "|Free|Edition"))
+                                    );
+                                    $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
                                     $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
                                     $inviCode = $result['data']['inviCode'];    //邀请码
                                     $text0 = "你的好友" . $user->nick_name . "帮你扫码啦，恭喜您获得价值78元的邀请码";
