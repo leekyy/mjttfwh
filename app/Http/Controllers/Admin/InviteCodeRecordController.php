@@ -35,6 +35,7 @@ class InviteCodeRecordController
         foreach ($inviteCodeRecords as $inviteCodeRecord) {
             $inviteCodeRecord = InviteCodeRecordManager::getInfoByLevel($inviteCodeRecord, '');
         }
+//        dd($inviteCodeRecords);
         return view('admin.inviteCodeRecord.index', ['datas' => $inviteCodeRecords]);
     }
 }

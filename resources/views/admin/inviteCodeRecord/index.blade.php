@@ -22,7 +22,6 @@
                 <th width="100">类型</th>
                 <th width="150">邀请码</th>
                 <th width="150">订单号</th>
-                <th width="150">订单状态</th>
                 <th width="150">用户名</th>
                 <th width="100">发送时间</th>
             </tr>
@@ -34,7 +33,7 @@
                     <td>{{$data->type == 0?'免费':'78元购买'}}</td>
                     <td>{{$data->invite_code}}</td>
                     <td>{{$data->out_trade_no == null?'--':$data->out_trade_no}}</td>
-                    <td>{{$data->user->name}}({{$data->user->id}})</td>
+                    <td>{{$data->user->nick_name}}</td>
                     <td>{{$data->created_at}}</td>
                 </tr>
             @endforeach
