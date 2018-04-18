@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
 
     //用户管理
     Route::get('/user/index', 'Admin\UserController@index');  //用户管理首页
+    Route::get('/user/info', 'Admin\UserController@info');  //用户详情页面
 
     //菜单管理
     Route::get('/menu/index', 'Admin\WechatController@editMenu');  //菜单管理首页

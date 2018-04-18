@@ -72,17 +72,17 @@
                     </ul>
                 </dd>
             </dl>
-            <dl>
-                <dt><i class="Hui-iconfont">&#xe681;</i>菜单管理<i class="Hui-iconfont menu_dropdown-arrow">
-                        &#xe6d5;</i>
-                </dt>
-                <dd>
-                    <ul>
-                        <li><a data-href="{{ URL::asset('/admin/menu/index') }}" data-title="编辑菜单"
-                               href="javascript:void(0)">编辑菜单</a></li>
-                    </ul>
-                </dd>
-            </dl>
+            {{--<dl>--}}
+                {{--<dt><i class="Hui-iconfont">&#xe681;</i>菜单管理<i class="Hui-iconfont menu_dropdown-arrow">--}}
+                        {{--&#xe6d5;</i>--}}
+                {{--</dt>--}}
+                {{--<dd>--}}
+                    {{--<ul>--}}
+                        {{--<li><a data-href="{{ URL::asset('/admin/menu/index') }}" data-title="编辑菜单"--}}
+                               {{--href="javascript:void(0)">编辑菜单</a></li>--}}
+                    {{--</ul>--}}
+                {{--</dd>--}}
+            {{--</dl>--}}
             <dl>
                 <dt><i class="Hui-iconfont">&#xe623;</i>邀请码记录<i class="Hui-iconfont menu_dropdown-arrow">
                         &#xe6d5;</i>

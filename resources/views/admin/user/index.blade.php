@@ -35,7 +35,14 @@
                         <img src="{{ $data->avatar ? $data->avatar.'?imageView2/1/w/200/h/200/interlace/1/q/75|imageslim' : URL::asset('/img/default_headicon.png')}}"
                              class="img-rect-30 radius-5">
                     </td>
-                    <td>{{$data->nick_name}}</td>
+                    <td>
+                        <a style="text-decoration:none"
+                           onClick="show_user('用户详情','{{URL::asset('/admin/user/info')}}?user_id={{$data->id}})',{{$data->id}})"
+                           href="javascript:;"
+                           title="用户详情">
+                            {{$data->nick_name}}
+                        </a>
+                    </td>
                     <td>{{$data->is_subscribe=="1"?"已经关注":"已经取消"}}</td>
                     <td>{{$data->yq_num}}</td>
                     <td>{{$data->target_yq_num}}</td>
@@ -57,6 +64,17 @@
         $(function () {
 
         });
+
+        //展示用户详情
+        function show_user(title, url, id) {
+            console.log("show_user url:" + url);
+            var index = layer.open({
+                type: 2,
+                title: title,
+                content: url
+            });
+            layer.full(index);
+        }
 
 
     </script>
