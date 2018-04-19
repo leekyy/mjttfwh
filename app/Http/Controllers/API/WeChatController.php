@@ -32,9 +32,10 @@ class WechatController extends Controller
         Log::info('request arrived.'); # 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
         $app = app('wechat.official_account');
         $app->server->push(function ($message) {
-            Log::info(json_encode($message));
+            Log::info("server receive:" . json_encode($message));
             $app = app('wechat.official_account');
             $fwh_openid = $message['FromUserName'];  //服务号openid
+            Log::info('fwh_openid:' . $fwh_openid);
             /*
              * 如果该用户不存在，说明没有关注过，需要
              * 1）注册该用户

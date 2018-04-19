@@ -14,6 +14,7 @@ use App\Components\Utils;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiResponse;
+use Illuminate\Support\Facades\Log;
 
 
 class WechatController extends Controller
