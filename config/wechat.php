@@ -67,9 +67,9 @@ return [
      */
     'official_account' => [
         'default' => [
-            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', (\App\Components\Utils::DEBUG_FLAG == false) ? 'wx3ad09993e9ded37d' : 'wx3ad09993e9ded37d'),         // AppID 生产-测试
-            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', (\App\Components\Utils::DEBUG_FLAG == false) ? '20fb916079e32b6a1fcb1ab60a97b0a9' : '20fb916079e32b6a1fcb1ab60a97b0a9'),    // AppSecret
-            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', (\App\Components\Utils::DEBUG_FLAG == false) ? '7IFq8tCdZuyPrlqgkAJA3D4DG6Zao8cI' : '7IFq8tCdZuyPrlqgkAJA3D4DG6Zao8cI'),           // Token
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', (\App\Components\Utils::DEBUG_FLAG == false) ? 'wxdc59e871888819d2' : 'wx3ad09993e9ded37d'),         // AppID 生产-测试
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', (\App\Components\Utils::DEBUG_FLAG == false) ? '33e4aa838ab6dfa882093b2b720e02e5' : '20fb916079e32b6a1fcb1ab60a97b0a9'),    // AppSecret
+            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', (\App\Components\Utils::DEBUG_FLAG == false) ? '93a9ee86281eacc2452af754fcad9157' : '7IFq8tCdZuyPrlqgkAJA3D4DG6Zao8cI'),           // Token
             'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', ''),                 // EncodingAESKey
 
             /*
