@@ -81,7 +81,8 @@ class WechatController extends Controller
         ];
         $app = app('wechat.official_account');
         $app->menu->delete(); // 全部
-        $app->menu->create($buttons);       //创建搜索项目
+        $result = $app->menu->create($buttons);       //创建搜索项目
+        Log::info("result:" . json_encode($result));
         return ApiResponse::makeResponse(true, "设置成功", ApiResponse::SUCCESS_CODE);
     }
 
