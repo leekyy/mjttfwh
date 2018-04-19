@@ -57,7 +57,7 @@ class LuckUserController
 
         ///////此处用于调测微信支付//////////////////////////
         $param = array(
-            'url' => 'http://mjttfwh.isart.me/luckUser'
+            'url' => Utils::LUCKUSER_URL         //http://mjttfwh.isart.me/luckUser
         );
         $postUrl = Utils::SERVER_URL . '/rest/wechat/config/';
         $wxConfig_result = Utils::curl($postUrl, $param, true);   //访问接口
@@ -95,7 +95,7 @@ class LuckUserController
         }
         //生成app信息
         $param = array(
-            'url' => 'http://mjttfwh.isart.me/richBuy'
+            'url' => Utils::RICHBUY_URL
         );
         $postUrl = Utils::SERVER_URL . '/rest/wechat/config/';
         $wxConfig_result = Utils::curl($postUrl, $param, true);   //访问接口

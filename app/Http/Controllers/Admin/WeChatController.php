@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Components\UserManager;
+use App\Components\Utils;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiResponse;
@@ -68,7 +69,7 @@ class WechatController extends Controller
                     [
                         "name" => "免费邀请码",
                         "type" => "view",
-                        "url" => "http://mjttfwh.isart.me/testPay"
+                        "url" => Utils::LUCKUSER_URL         //http://mjttfwh.isart.me/luckUser
                     ],
                     [
                         "name" => "下载APP",
