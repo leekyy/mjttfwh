@@ -47,7 +47,7 @@
                     <td>{{$data->fwh_openid}}</td>
                     <td>{{$data->is_subscribe=="1"?"已经关注":"已经取消"}}</td>
                     <td>{{$data->yq_num}}</td>
-                    <td>{{$data->target_yq_num}}</td>
+                    <td>{{$data->target_yq_num==0?'暂未生成海报':$data->target_yq_num}}</td>
                     <td>{{$data->created_at}}</td>
                 </tr>
             @endforeach
