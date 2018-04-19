@@ -37,8 +37,10 @@ class LuckUserController
         $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
         //获取用户相关信息
         $user_val = $session_val['default']->toArray();
+        Log::info("user_val:" . json_encode($user_val));
         //在数据库中检索用户信息
         $user = UserManager::getByFWHOpenid($user_val['id']);
+        Log::info("user:" . json_encode($user));
         //如果无值，则需要注册
         if (!$user) {
             $data = array(
