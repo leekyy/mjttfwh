@@ -48,8 +48,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
     Route::get('/user/info', 'Admin\UserController@info');  //用户详情页面
 
     //菜单管理
-    Route::get('/menu/index', 'Admin\WechatController@editMenu');  //菜单管理首页
-    Route::get('/menu/set', 'Admin\WechatController@setMenu');  //设置菜单
+    Route::get('/menu/index', 'Admin\WeChatController@editMenu');  //菜单管理首页
+    Route::get('/menu/set', 'Admin\WeChatController@setMenu');  //设置菜单
 
     // 用户邀请码达标设置
     Route::get('/inviteNum/index', 'Admin\InviteNumController@index');  //用户邀请码达标管理首页
