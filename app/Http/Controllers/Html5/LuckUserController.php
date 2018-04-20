@@ -50,6 +50,10 @@ class LuckUserController
             );
             $user = UserManager::registerFWH($data);
         }
+
+        $user_fwh = WeChatManager::getByFWHOpenId($user->fwh_openid);
+        dd($user_fwh);
+
         //生成app信息
 //        $app = app('wechat.official_account');
         //以上已经完成用户注册，为每个用户申请小程序邀请码
