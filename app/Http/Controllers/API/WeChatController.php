@@ -87,7 +87,7 @@ class WechatController extends Controller
                                     $app->customer_service->message($text)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
-                                } elseif ($tj_user->yq_num == $tj_user->target_yq_num) {    //等于3个
+                                } elseif ($tj_user->yq_num == $tj_user->target_yq_num && $tj_user->target_yq_num != 0) {    //等于target_yq_num
                                     //获取邀请码并发送 三条文字信息 text0、text1、text2
                                     $param = array(
                                         'openId' => $tj_user->fwh_openid,
