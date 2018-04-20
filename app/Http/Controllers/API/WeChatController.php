@@ -42,7 +42,7 @@ class WechatController extends Controller
              * 1）注册该用户
              * 2）判断是否为扫描进入的用户，如果为扫描进入的用户，则需要处理邀请逻辑
              */
-            $new_user_flag = WeChatManager::isUserSubscribe($fwh_openid);
+            $new_user_flag = !WeChatManager::isUserSubscribe($fwh_openid);      //如果关注为假
             $user = UserManager::getByFWHOpenid($fwh_openid);
             if (!$user) {
                 $user = WeChatManager::register($fwh_openid);
