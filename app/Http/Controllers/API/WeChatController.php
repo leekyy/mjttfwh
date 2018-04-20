@@ -43,7 +43,7 @@ class WechatController extends Controller
              * 2）判断是否为扫描进入的用户，如果为扫描进入的用户，则需要处理邀请逻辑
              */
             $new_user_flag = false;
-            $is_subscribe = WeChatManager::isUserSubscribe($fwh_openid);
+//            $is_subscribe = WeChatManager::isUserSubscribe($fwh_openid);      此处逻辑不正确，因为关注进来的一定是已关注
             $user = UserManager::getByFWHOpenid($fwh_openid);
             if (!$user) {
                 $user = WeChatManager::register($fwh_openid);
@@ -64,7 +64,7 @@ class WechatController extends Controller
                         $user->is_subscribe = '1';
                         $user->save();
                         //如果有EventKey-代表，关注分享的二维码过来的消息，并且为新注册的用户
-                        if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && $new_user_flag && !$is_subscribe) {
+                        if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && $new_user_flag) {
                             Log::info("message EventKey:" . $message['EventKey']);
                             $key_val = str_replace('qrscene_', '', $message['EventKey']);       //key_val为键值信息，这里为用户openid
                             Log::info("key_val:" . $key_val);
