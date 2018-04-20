@@ -23,6 +23,15 @@ class WeChatManager
         return $userInfo;
     }
 
+    //判断用户是否关注公众号
+    public static function isUserSubscribe($fwh_openid)
+    {
+        $app = app('wechat.official_account');
+        $userInfo = $app->user->get($fwh_openid);
+
+        return $userInfo['subscribe'] == 1 ? true : false;
+    }
+
     //根据服务号获取的用户信息进行用户注册
     /*
      * By TerryQi

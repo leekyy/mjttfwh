@@ -37,8 +37,10 @@ class LuckUserController
         $session_val = session('wechat.oauth_user'); // 拿到授权用户资料
         //获取用户相关信息
         $user_val = $session_val['default']->toArray();
+        Log::info("user_val:" . json_encode($user_val));
         //在数据库中检索用户信息
         $user = UserManager::getByFWHOpenid($user_val['id']);
+        Log::info("user:" . json_encode($user));
         //如果无值，则需要注册
         if (!$user) {
             $data = array(
@@ -159,8 +161,9 @@ class LuckUserController
         if (!$user) {
             return ApiResponse::makeResponse(false, "用户不存在", ApiResponse::NO_USER);
         }
+        $is_subscribe = WeChatManager::isUserSubscribe($user->fwh_openid);
         //如果用户没有关注公众号
-        if ($user->is_subscribe == "0") {
+        if ($is_subscribe == false) {
             return ApiResponse::makeResponse(false, "用户未关注公众号", ApiResponse::NOT_SUBSCRIBE);
         }
         //如果没有生成目标邀请数
@@ -212,8 +215,9 @@ class LuckUserController
         if (!$user) {
             return ApiResponse::makeResponse(false, "用户不存在", ApiResponse::NO_USER);
         }
+        $is_subscribe = WeChatManager::isUserSubscribe($user->fwh_openid);
         //如果用户没有关注公众号
-        if ($user->is_subscribe == "0") {
+        if ($is_subscribe == false) {
             return ApiResponse::makeResponse(false, "用户未关注公众号", ApiResponse::NOT_SUBSCRIBE);
         }
 
