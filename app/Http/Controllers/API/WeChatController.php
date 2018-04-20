@@ -143,6 +143,7 @@ class WechatController extends Controller
                             $con_arr = array(
                                 "user_id" => $user->id
                             );
+                            Log::info("con_arr:" . json_encode($con_arr));
                             if (UserTJManager::getListByCon($con_arr, false)->count() > 0) {
                                 $text = Utils::TEXT_ALREADY_ZHULI;
                                 $app->customer_service->message($text)
@@ -150,8 +151,8 @@ class WechatController extends Controller
                                     ->send();
                             }
                         }
-//                        $text = Utils::TEXT_SCAN_SUB;
-                        return '';
+                        $text = Utils::TEXT_SCAN_SUB;
+                        return $text;
                     }
                     break;
                 case 'text':
@@ -203,7 +204,7 @@ class WechatController extends Controller
                     break;
                 // ... 其它消息
                 default:
-                    return '';
+//                    return '';
                     break;
             }
         });
