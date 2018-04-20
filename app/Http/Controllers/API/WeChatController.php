@@ -152,9 +152,10 @@ class WechatController extends Controller
                                     ->to($user->fwh_openid)
                                     ->send();
                             }
+                        } else {
+                            $text = Utils::TEXT_SCAN_SUB;
+                            return $text;
                         }
-                        $text = Utils::TEXT_SCAN_SUB;
-                        return $text;
                     }
                     break;
                 case 'text':
