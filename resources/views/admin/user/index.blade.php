@@ -22,7 +22,7 @@
                 <th width="80">头像</th>
                 <th width="100">昵称</th>
                 <th width="100">openid</th>
-                <th width="100">是否关注</th>
+                {{--<th width="100">是否关注</th>--}}
                 <th width="80">当前邀请数</th>
                 <th width="80">目标邀请数</th>
                 <th width="120">注册时间</th>
@@ -45,7 +45,7 @@
                         </a>
                     </td>
                     <td>{{$data->fwh_openid}}</td>
-                    <td>{{$data->is_subscribe=="1"?"已经关注":"已经取消"}}</td>
+                    {{--<td>{{$data->is_subscribe=="1"?"已经关注":"已经取消"}}</td>--}}
                     <td>{{$data->yq_num}}</td>
                     <td>{{$data->target_yq_num==0?'暂未生成海报':$data->target_yq_num}}</td>
                     <td>{{$data->created_at}}</td>

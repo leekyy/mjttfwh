@@ -50,10 +50,6 @@ class LuckUserController
             );
             $user = UserManager::registerFWH($data);
         }
-
-        $user_fwh = WeChatManager::getByFWHOpenId($user->fwh_openid);
-        dd($user_fwh);
-
         //生成app信息
 //        $app = app('wechat.official_account');
         //以上已经完成用户注册，为每个用户申请小程序邀请码
@@ -165,8 +161,9 @@ class LuckUserController
         if (!$user) {
             return ApiResponse::makeResponse(false, "用户不存在", ApiResponse::NO_USER);
         }
+        $is_subscribe = WeChatManager::isUserSubscribe($user->fwh_openid);
         //如果用户没有关注公众号
-        if ($user->is_subscribe == "0") {
+        if ($is_subscribe == false) {
             return ApiResponse::makeResponse(false, "用户未关注公众号", ApiResponse::NOT_SUBSCRIBE);
         }
         //如果没有生成目标邀请数
