@@ -53,6 +53,46 @@
 </div>
 
 
+<!--已经发送邀请码，提示已经获取了邀请码-->
+<div id="already_has_inviteCode_div" class="yq_div aui-hide">
+    <!--遮罩层-->
+    <div class="mask_div"></div>
+    <!--邀请码部分-->
+    <div style="position: absolute;top: 80px;width: 100%;">
+        <div class="aui-text-center">
+            <a class="aui-text-info"
+               href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
+                <img src="{{ URL::asset('/img/tip1.png') }}" style="width: 70%;margin: auto;">
+            </a>
+        </div>
+        <div style="margin-top: 20px;" onclick="click_hide_yqm();">
+            <img src="{{ URL::asset('/img/close_btn.png') }}"
+                 style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
+        </div>
+    </div>
+</div>
+
+
+<!--未关注情况下，展示美景听听服务号二维码说明-->
+<div id="gz_ex_div" class="yq_div aui-hide">
+    <!--遮罩层-->
+    <div class="mask_div"></div>
+    <!--邀请码部分-->
+    <div style="position: absolute;top: 60px;width: 100%;">
+        <div class="aui-text-center">
+            <a class="aui-text-info"
+               href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTExNDc4NQ==&scene=110#wechat_redirect">
+                <img src="{{ URL::asset('/img/tip2.png') }}" style="width: 70%;margin: auto;">
+            </a>
+        </div>
+        <div style="margin-top: 20px;" onclick="click_hide_yqm();">
+            <img src="{{ URL::asset('/img/close_btn.png') }}"
+                 style="width: 40px;height: 40px;border-radius: 50%;margin: auto;">
+        </div>
+    </div>
+</div>
+
+
 </body>
 <script type="text/javascript" src="{{ URL::asset('dist/lib/jquery/1.9.1/jquery.min.js') }}"></script>
 {{--common.js--}}
