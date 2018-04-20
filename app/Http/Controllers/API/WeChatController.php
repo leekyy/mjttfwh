@@ -42,11 +42,10 @@ class WechatController extends Controller
              * 1）注册该用户
              * 2）判断是否为扫描进入的用户，如果为扫描进入的用户，则需要处理邀请逻辑
              */
-            $new_user_flag = false;
+            $new_user_flag = WeChatManager::isUserSubscribe($fwh_openid);
             $user = UserManager::getByFWHOpenid($fwh_openid);
             if (!$user) {
                 $user = WeChatManager::register($fwh_openid);
-                $new_user_flag = true;
             }
             Log::info("new_user_flag:" . $new_user_flag);
             //根据消息类型分别进行处理
@@ -152,7 +151,7 @@ class WechatController extends Controller
                             }
                         }
 //                        $text = Utils::TEXT_SCAN_SUB;
-                        return "";
+                        return '';
                     }
                     break;
                 case 'text':
