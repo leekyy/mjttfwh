@@ -114,7 +114,7 @@
             <div class="Hui-tabNav-wp">
                 <ul id="min_title_list" class="acrossTab cl">
                     <li class="active">
-                        <span title="业务概览" data-href="welcome.html">业务概览</span>
+                        <span title="业务概览" data-href="{{URL::asset('/admin/stmt/index')}}">业务概览</span>
                         <em></em></li>
                 </ul>
             </div>
@@ -127,7 +127,7 @@
         <div id="iframe_box" class="Hui-article">
             <div class="show_iframe">
                 <div style="display:none" class="loading"></div>
-                <iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
+                <iframe scrolling="yes" frameborder="0" src="{{URL::asset('/admin/stmt/index')}}"></iframe>
             </div>
         </div>
     </section>

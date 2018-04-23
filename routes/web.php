@@ -59,6 +59,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
     // 用户邀请码记录列表
     Route::get('/inviteCodeRecord/index', 'Admin\InviteCodeRecordController@index');  //用户邀请码记录列表
 
+    // 综合统计
+    Route::get('/stmt/index', 'Admin\StmtController@index');  //综合统计
+
 });
 
 

@@ -51,6 +51,7 @@
 <script type="text/javascript" src="{{ URL::asset('/js/qiniu.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/js/plupload/plupload.full.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/js/plupload/moxie.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('/js/echarts.common.min.js') }}"></script>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="{{ URL::asset('dist/lib/jquery.validation/1.14.0/jquery.validate.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('dist/lib/jquery.validation/1.14.0/validate-methods.js') }}"></script>

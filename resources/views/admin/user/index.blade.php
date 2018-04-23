@@ -11,8 +11,20 @@
                     class="Hui-iconfont">&#xe68f;</i></a></nav>
     {{--/{{$datas->type_id}}--}}
     <div class="page-container">
+        <div class="text-c">
+            <form action="{{URL::asset('/admin/user/index')}}" method="get" class="form-horizontal">
+                {{csrf_field()}}
+                <div class="Huiform text-r">
+                    <input id="search_word" name="search_word" type="text" class="input-text" style="width:250px"
+                           value="{{$con_arr['search_word']==null?'':$con_arr['search_word']}}"
+                           placeholder="请输入用户昵称或者openid">
+                    <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont"></i> 搜索
+                    </button>
+                </div>
+            </form>
+        </div>
 
-        <table class="table table-border table-bordered table-bg table-sort">
+        <table class="table table-border table-bordered table-bg table-sort mt-20">
             <thead>
             <tr>
                 <th scope="col" colspan="11">用户列表</th>

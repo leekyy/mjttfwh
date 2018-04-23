@@ -30,13 +30,29 @@ class InviteCodeRecordController
     //首页
     public function index(Request $request)
     {
-        $inviteCodeRecord = $request->session()->get('admin');
-        $inviteCodeRecords = InviteCodeRecordManager::getListByCon([], true);
+        $data = $request->all();
+        $admin = $request->session()->get('admin');
+
+        //相关搜素条件
+        $search_word = null;    //搜索条件
+        $type = null;
+        if (array_key_exists('search_word', $data) && !Utils::isObjNull($data['search_word'])) {
+            $search_word = $data['search_word'];
+        }
+        if (array_key_exists('type', $data) && !Utils::isObjNull($data['type'])) {
+            $type = $data['type'];
+        }
+        $con_arr = array(
+            'search_word' => $search_word,
+            'type' => $type
+        );
+
+        $inviteCodeRecords = InviteCodeRecordManager::getListByCon($con_arr, true);
         foreach ($inviteCodeRecords as $inviteCodeRecord) {
             $inviteCodeRecord = InviteCodeRecordManager::getInfoByLevel($inviteCodeRecord, '');
         }
 //        dd($inviteCodeRecords);
-        return view('admin.inviteCodeRecord.index', ['datas' => $inviteCodeRecords]);
+        return view('admin.inviteCodeRecord.index', ['datas' => $inviteCodeRecords, 'con_arr' => $con_arr]);
     }
 }
 

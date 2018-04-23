@@ -29,9 +29,18 @@ class UserController
     //首页
     public function index(Request $request)
     {
+        $data = $request->all();
         $admin = $request->session()->get('admin');
-        $users = UserManager::getListByCon([], true);
-        return view('admin.user.index', ['admin' => $admin, 'datas' => $users]);
+        //相关搜素条件
+        $search_word = null;    //搜索条件
+        if (array_key_exists('search_word', $data) && !Utils::isObjNull($data['search_word'])) {
+            $search_word = $data['search_word'];
+        }
+        $con_arr = array(
+            'search_word' => $search_word,
+        );
+        $users = UserManager::getListByCon($con_arr, true);
+        return view('admin.user.index', ['admin' => $admin, 'datas' => $users, 'con_arr' => $con_arr]);
     }
 
     /*

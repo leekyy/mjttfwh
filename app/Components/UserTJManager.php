@@ -12,6 +12,7 @@ namespace App\Components;
 use App\Models\AD;
 use App\Models\Admin;
 use App\Models\UserTJ;
+use Illuminate\Support\Facades\DB;
 use Qiniu\Auth;
 
 class UserTJManager
@@ -57,6 +58,13 @@ class UserTJManager
         if (array_key_exists('tj_user_id', $con_arr) && !Utils::isObjNull($con_arr['tj_user_id'])) {
             $userTJs = $userTJs->where('tj_user_id', '=', $con_arr['tj_user_id']);
         }
+        if (array_key_exists('start_time', $con_arr) && !Utils::isObjNull($con_arr['start_time'])) {
+            $userTJs = $userTJs->where('created_at', '>=', $con_arr['start_time']);
+        }
+        if (array_key_exists('end_time', $con_arr) && !Utils::isObjNull($con_arr['end_time'])) {
+            $userTJs = $userTJs->where('created_at', '<=', $con_arr['end_time']);
+        }
+
         if ($is_paginate) {
             $userTJs = $userTJs->paginate(Utils::PAGE_SIZE);
         } else {
@@ -64,6 +72,45 @@ class UserTJManager
         }
         return $userTJs;
     }
+
+
+    /*
+     * 根据条件获取趋势
+     *
+     * By TerryQi
+     *
+     * 2018-04-23
+     */
+    public static function getTrendByCon($con_arr)
+    {
+        //基本sql
+        $sql_str = "SELECT DATE_FORMAT(date_list.date, '%Y-%m-%d') as tjdate , COUNT(source_table.id) as nums FROM mjttfwhdb.t_date_list date_list left join mjttfwhdb.t_user_tj source_table on DATE_FORMAT(date_list.date,'%Y-%m-%d') = DATE_FORMAT(source_table.created_at,'%Y-%m-%d')";
+        //条件sql
+        $con_sql_arr = [];
+        foreach ($con_arr as $key => $value) {
+            //封装条件
+            if ($key == 'start_time' && !Utils::isObjNull($con_arr['start_time'])) {
+                array_push($con_sql_arr, 'date_list.date >= ' . '"' . $con_arr['start_time'] . '"');
+            }
+            if ($key == 'end_time' && !Utils::isObjNull($con_arr['end_time'])) {
+                array_push($con_sql_arr, 'date_list.date <= ' . '"' . $con_arr['end_time'] . '"');
+            }
+        }
+        //组装sql
+        for ($i = 0; $i < sizeof($con_sql_arr); $i++) {
+            if ($i == 0) {
+                $sql_str = $sql_str . ' where ' . $con_sql_arr[$i];
+            } else {
+                $sql_str = $sql_str . ' and ' . $con_sql_arr[$i];
+            }
+        }
+        //最后的group_by
+        $sql_str = $sql_str . " GROUP BY tjdate";
+//        dd($sql_str);
+        $data = DB::select($sql_str);
+        return $data;
+    }
+
 
     /*
      * 根据级别获取信息
