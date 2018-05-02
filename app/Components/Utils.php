@@ -41,7 +41,10 @@ class Utils
     const DEFAULT_YQ_NUM = 3;
     //土豪购买的说明
     const RICH_BUY_TEXT = "只需完成以下2步，即可获得邀请码，免费解锁全部景点！\r\n\r\n1.长按保存以下图片分享给好友/朋友圈\r\n2.邀请yq_num_txt位好友扫码并关注美景听听旅行\r\n\r\n（请24小时内完成此任务，逾期活动作废）\r\n\r\n<a href=\"" . Utils::RICHBUY_URL . "\">土豪请戳此购买</a>";
-
+    //扫描自己分享的二维码，返回空串
+    const TEXT_SCAN_SELF = "";
+    //空串
+    const TEXT_NULL_STR = "";
 
     /*
      * 判断一个对象是不是空

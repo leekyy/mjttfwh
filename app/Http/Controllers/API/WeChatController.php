@@ -141,6 +141,11 @@ class WechatController extends Controller
                             Log::info("key_val:" . $key_val);
                             $tj_user = UserManager::getByFWHOpenid($key_val);    //找到推荐用户
                             Log::info("user->id:" . $user->id . "  tj_user->id:" . $tj_user->id);
+                            //如果为自己扫描自己
+                            if ($user->id == $tj_user->id) {
+                                $text = Utils::TEXT_SCAN_SELF;
+                                return $text;
+                            }
                             //如果该用户被推荐过
                             $con_arr = array(
                                 "user_id" => $user->id
@@ -157,6 +162,7 @@ class WechatController extends Controller
                             return $text;
                         }
                     }
+                    return Utils::TEXT_NULL_STR;
                     break;
                 case 'text':
                     $fwh_openid = $message['FromUserName'];  //服务号openid
