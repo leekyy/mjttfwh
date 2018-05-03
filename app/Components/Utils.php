@@ -25,8 +25,8 @@ class Utils
     const SERVER_URL = (self::DEBUG_FLAG == false) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
 
     //幸运用户的URL
-    const LUCKUSER_URL = (self::DEBUG_FLAG == false) ? "http://mjttfwh.isart.me/luckUser" : "http://mjttfwhtest.isart.me/luckUser";
-    const RICHBUY_URL = (self::DEBUG_FLAG == false) ? "http://mjttfwh.isart.me/richBuy" : "http://mjttfwhtest.isart.me/richBuy";
+    const LUCKUSER_URL = (self::DEBUG_FLAG == false) ? "http://wg.gowithtommy.com/luckUser" : "http://mjttfwhtest.isart.me/luckUser";
+    const RICHBUY_URL = (self::DEBUG_FLAG == false) ? "http://wg.gowithtommy.com/richBuy" : "http://mjttfwhtest.isart.me/richBuy";
 
     //关注+扫描进入回复内容
     const TEXT_SCAN_SUB = "hey，欢迎关注美景听听：全球景点语音讲解\r\n<a href=\"" . Utils::LUCKUSER_URL . "\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听App";
