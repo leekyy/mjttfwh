@@ -20,7 +20,7 @@ class Utils
     const ORDER_REFUNDSUCCESS = "4";    //退款成功
     const ORDER_REFUNDFAILED = "5";    //退款失败
 
-    const  DEBUG_FLAG = false;        //debug标识
+    const  DEBUG_FLAG = true;        //debug标识
 
     const SERVER_URL = (self::DEBUG_FLAG == false) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
 
@@ -45,6 +45,8 @@ class Utils
     const TEXT_SCAN_SELF = "";
     //空串
     const TEXT_NULL_STR = "";
+    //关键字回复话术
+    const KEYWORD_REPLY_TEXT = "<a href=\"" . Utils::LUCKUSER_URL . "\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听App";
 
     /*
      * 判断一个对象是不是空

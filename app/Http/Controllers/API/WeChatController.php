@@ -178,8 +178,7 @@ class WechatController extends Controller
                     switch (WeChatManager::matchKeyWords($message['Content'])) {
                         case 'group1':
                             //发送文字，生成图片素材
-                            $text = Utils::RICH_BUY_TEXT;
-                            $text = str_replace("yq_num_txt", InviteNumManager::getCurrYQNum(), $text);
+                            $text = Utils::KEYWORD_REPLY_TEXT;
                             $app->customer_service->message($text)
                                 ->to($user->fwh_openid)
                                 ->send();
