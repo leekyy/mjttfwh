@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\API;
 
 
+use App\Components\InviteNumManager;
 use App\Components\UserManager;
 use App\Components\UserTJManager;
 use App\Components\Utils;
@@ -178,6 +179,7 @@ class WechatController extends Controller
                         case 'group1':
                             //发送文字，生成图片素材
                             $text = Utils::RICH_BUY_TEXT;
+                            $text = str_replace("yq_num_txt", InviteNumManager::getCurrYQNum(), $text);
                             $app->customer_service->message($text)
                                 ->to($user->fwh_openid)
                                 ->send();
