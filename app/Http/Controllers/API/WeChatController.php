@@ -183,17 +183,21 @@ class WechatController extends Controller
                                 ->to($user->fwh_openid)
                                 ->send();
                             //生成微信图片素材并发送
-                            if (Utils::isObjNull($user->yq_hb_media_id)) {
-                                $filename = WeChatManager::createUserYQHB($user->id);
-                                $media_id = WeChatManager::createMediaId($filename);
-                                $user = UserManager::getByIdWithToken($user->id);
-                                $user->yq_hb_media_id = $media_id;
-                                $user->save();
-                            }
-                            $image = new Image($user->yq_hb_media_id);
-                            $app->customer_service->message($image)
-                                ->to($user->fwh_openid)
-                                ->send();
+                            /*
+                             * 2018-05-03 根据解悦意见进行优化，去掉返回海报的逻辑
+                             *
+                             */
+//                            if (Utils::isObjNull($user->yq_hb_media_id)) {
+//                                $filename = WeChatManager::createUserYQHB($user->id);
+//                                $media_id = WeChatManager::createMediaId($filename);
+//                                $user = UserManager::getByIdWithToken($user->id);
+//                                $user->yq_hb_media_id = $media_id;
+//                                $user->save();
+//                            }
+//                            $image = new Image($user->yq_hb_media_id);
+//                            $app->customer_service->message($image)
+//                                ->to($user->fwh_openid)
+//                                ->send();
                             break;
                     }
                     break;
