@@ -186,7 +186,7 @@ class WeChatManager
     public static function createMediaId($filename)
     {
         $app = app('wechat.official_account');
-        $result = $app->material->uploadImage(public_path('img/') . $filename);
+        $result = $app->media->uploadImage(public_path('img/') . $filename);
         Log::info("app->material->uploadImage file exists result:" . json_encode($result));
         return $result['media_id'];
     }
