@@ -21,6 +21,7 @@ Route::get('/admin/login', 'Admin\LoginController@login');        //登录
 Route::post('/admin/login', 'Admin\LoginController@loginPost');   //post登录请求
 Route::get('/admin/loginout', 'Admin\LoginController@loginout');  //注销
 
+//Route::get('/admin/menu/index', 'Admin\WeChatController@editMenu');  //菜单管理首页
 Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function () {
 
     //首页
@@ -48,7 +49,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
     Route::get('/user/info', 'Admin\UserController@info');  //用户详情页面
 
     //菜单管理
-    Route::get('/menu/index', 'Admin\WeChatController@editMenu');  //菜单管理首页
+    Route::get('/menu/index', 'Admin\WeChatController@index');  //菜单管理首页
+    Route::get('/menu/del/{id}', 'Admin\WeChatController@del');  //删除菜单
+    Route::get('/menu/edit', 'Admin\WeChatController@edit');  //编辑菜单
+    Route::post('/menu/edit', 'Admin\WeChatController@editDo');  //编辑菜单
     Route::get('/menu/set', 'Admin\WeChatController@setMenu');  //设置菜单
 
     // 用户邀请码达标设置

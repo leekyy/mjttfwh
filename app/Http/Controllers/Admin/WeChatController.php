@@ -9,9 +9,11 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Components\MenuManager;
 use App\Components\UserManager;
 use App\Components\Utils;
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiResponse;
 use Illuminate\Support\Facades\Log;
@@ -19,19 +21,88 @@ use Illuminate\Support\Facades\Log;
 
 class WechatController extends Controller
 {
-
-
     /*
-     * 编辑菜单-页面
+     * 菜单列表
      *
-     * By TerryQi
+     * By Amy
      *
-     * 2018-03-30
+     * 2018-05-10
      */
-    public function editMenu(Request $request)
+    public function index(Request $request)
     {
         $admin = $request->session()->get('admin');
-        return view('admin.menu.index', ['admin' => $admin]);
+        $datas=MenuManager::getListByCon();
+        return view('admin.menu.index', ['admin' => $admin,'datas'=>$datas]);
+    }
+
+    /*
+     * 删除菜单
+     *
+     * By Amy
+     *
+     * 2018-05-10
+     */
+    public function del(Request $request, $id)
+    {
+        if (is_numeric($id) !== true) {
+            return redirect()->action('\App\Http\Controllers\Admin\IndexController@error', ['msg' => '合规校验失败，请检查参数管理员id$id']);
+        }
+        $menu = MenuManager::getById($id);
+        $result=$menu->delete();
+        if ($result) {
+            self::setMenu();
+            return ApiResponse::makeResponse(true, "删除成功", ApiResponse::SUCCESS_CODE);
+        } else {
+            return ApiResponse::makeResponse(false, "删除失败", ApiResponse::UNKNOW_ERROR);
+        }
+    }
+
+    /*
+     * 新建或编辑菜单-get
+     *
+     * By Amy
+     *
+     * 2018-05-10
+     */
+    public function edit(Request $request)
+    {
+        $data = $request->all();
+//        dd($data);
+        $menu = new Menu();
+        if (array_key_exists('id', $data)) {
+            $menu = MenuManager::getById($data['id']);
+        }
+        $menu_f=MenuManager::getListByCon();
+        return view('admin.menu.edit', [ 'data' => $menu,'menus'=>$menu_f]);
+    }
+
+    /*
+     * 新建或编辑菜单-post
+     *
+     * By Amy
+     *
+     * 2018-05-10
+     */
+    public function editDo(Request $request)
+    {
+        $data = $request->all();
+        $admin = $request->session()->get('admin');
+        if (array_key_exists("id", $data) && !Utils::isObjNull($data["id"])) {
+            $menu = MenuManager::getById($data['id']);
+        }
+        else{
+            $menu = new Menu();
+        }
+        $data['type']='view';
+        $menu = MenuManager::setInfo($menu, $data);
+        $result=$menu->save();
+        if($result){
+            self::setMenu();
+            return ApiResponse::makeResponse(true, "保存成功", ApiResponse::SUCCESS_CODE);
+        }
+        else{
+            return ApiResponse::makeResponse(true, "保存失败", ApiResponse::UNKNOW_ERROR);
+        }
     }
 
     /*
@@ -43,48 +114,28 @@ class WechatController extends Controller
      */
     public function setMenu(Request $request)
     {
-        $buttons = [
-            [
-                "name" => "美景",
-                "type" => "view",
-                "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MzI3NTExNDc4NQ==&hid=1&sn=d1ec8e05d887e0d09b7dbb216750417b&scene=18#wechat_redirect"
-            ],
-            [
-                "name" => "听听",
-                "sub_button" => [
-                    [
-                        "name" => "喜马拉雅",
-                        "type" => "view",
-                        "url" => "http://www.ximalaya.com/zhubo/25616166/"
-                    ],
-                    [
-                        "name" => "美景小程序",
-                        "type" => "view",
-                        "url" => "http://mp.weixin.qq.com/s/KRW8l2wZ3jsVc74muI9FUA"
-                    ]
-                ]
-            ],
-            [
-                "name" => "APP",
-                "sub_button" => [
-                    [
-                        "name" => "免费邀请码",
-                        "type" => "view",
-                        "url" => Utils::LUCKUSER_URL         //http://mjttfwh.isart.me/luckUser
-                    ],
-                    [
-                        "name" => "下载APP",
-                        "type" => "view",
-                        "url" => "http://app.gowithtommy.com/"
-                    ]
-                ]
-            ]
-        ];
+        $menus=MenuManager::getListByCon();
+        $buttons=array();
+        foreach ($menus as $menu){
+            $button['name']=$menu['name'];
+            if($menu->level==0){
+                $button['type']=$menu['type'];
+                $button['url']=$menu['url'];
+            }
+            else{
+                foreach ($menu['childrem'] as $child){
+                    $sub_button['name']=$child['name'];
+                    $sub_button['type']=$child['type'];
+                    $sub_button['url']=$child['url'];
+                    array_push($button['sub_button'],$sub_button);
+                }
+            }
+            array_push($buttons,$button);
+        }
         $app = app('wechat.official_account');
         $app->menu->delete(); // 全部
         $result = $app->menu->create($buttons);       //创建搜索项目
         Log::info("result:" . json_encode($result));
-        return ApiResponse::makeResponse(true, "设置成功", ApiResponse::SUCCESS_CODE);
     }
 
 }

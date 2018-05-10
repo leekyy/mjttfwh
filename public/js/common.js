@@ -28,6 +28,10 @@ function setAdminStatus(url, param, callBack) {
 function delAdmin(url, param, callBack) {
     ajaxRequest(url + "admin/admin/del/" + param.id, param, "GET", callBack);
 }
+//删除菜单
+function delMenu(url, param, callBack) {
+    ajaxRequest(url + "admin/menu/del/" + param.id, param, "GET", callBack);
+}
 //设置菜单
 function setMenu(url, param, callBack) {
     ajaxRequest(url + "admin/menu/set", param, "GET", callBack);
