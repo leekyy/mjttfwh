@@ -114,28 +114,64 @@ class WechatController extends Controller
      */
     public function setMenu()
     {
-        Log::info("setMenu:" . '123');
         $menus=MenuManager::getListByCon();
-        $buttons=array();
-        foreach ($menus as $menu){
-            $button['name']=$menu['name'];
-            if($menu['level']==0){
-                $button['type']=$menu['type'];
-                $button['url']=$menu['url'];
-            }
-            else{
-                unset($button['type']);
-                unset($button['url']);
-                $button['sub_button']=array();
-                foreach ($menu['children'] as $child){
-                    $sub_button['name']=$child['name'];
-                    $sub_button['type']=$child['type'];
-                    $sub_button['url']=$child['url'];
-                    array_push($button['sub_button'],$sub_button);
-                }
-            }
-            array_push($buttons,$button);
-        }
+//        $buttons=array();
+//        foreach ($menus as $menu){
+//            $button['name']=$menu['name'];
+//            if($menu['level']==0){
+//                $button['type']=$menu['type'];
+//                $button['url']=$menu['url'];
+//            }
+//            else{
+//                unset($button['type']);
+//                unset($button['url']);
+//                $button['sub_button']=array();
+//                foreach ($menu['children'] as $child){
+//                    $sub_button['name']=$child['name'];
+//                    $sub_button['type']=$child['type'];
+//                    $sub_button['url']=$child['url'];
+//                    array_push($button['sub_button'],$sub_button);
+//                }
+//            }
+//            array_push($buttons,$button);
+//        }
+        $buttons = [
+            [
+                "name" => "美景",
+                "type" => "view",
+                "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MzI3NTExNDc4NQ==&hid=1&sn=d1ec8e05d887e0d09b7dbb216750417b&scene=18#wechat_redirect"
+            ],
+            [
+                "name" => "听听",
+                "sub_button" => [
+                    [
+                        "name" => "喜马拉雅",
+                        "type" => "view",
+                        "url" => "http://www.ximalaya.com/zhubo/25616166/"
+                    ],
+                    [
+                        "name" => "美景小程序",
+                        "type" => "view",
+                        "url" => "http://mp.weixin.qq.com/s/KRW8l2wZ3jsVc74muI9FUA"
+                    ]
+                ]
+            ],
+            [
+                "name" => "APP",
+                "sub_button" => [
+                    [
+                        "name" => "免费邀请码",
+                        "type" => "view",
+                        "url" => Utils::LUCKUSER_URL         //http://mjttfwh.isart.me/luckUser
+                    ],
+                    [
+                        "name" => "下载APP2",
+                        "type" => "view",
+                        "url" => "http://app.gowithtommy.com/"
+                    ]
+                ]
+            ]
+        ];
         Log::info("buttons:" . json_encode($buttons));
         $app = app('wechat.official_account');
         $app->menu->delete(); // 全部
