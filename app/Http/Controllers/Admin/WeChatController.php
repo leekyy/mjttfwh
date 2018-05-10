@@ -97,7 +97,7 @@ class WechatController extends Controller
         $menu = MenuManager::setInfo($menu, $data);
         $result=$menu->save();
         if($result){
-            self::setMenu();
+            $reuslt=self::setMenu();
             return ApiResponse::makeResponse(true, "保存成功", ApiResponse::SUCCESS_CODE);
         }
         else{
@@ -112,10 +112,9 @@ class WechatController extends Controller
      *
      * 2018-03-30
      */
-    public function setMenu(Request $request)
+    public function setMenu()
     {
-        $menus=MenuManager::getListByCon();
-        $buttons=array();
+        Log::info("setMenu:" . '123');
         $menus=MenuManager::getListByCon();
         $buttons=array();
         foreach ($menus as $menu){
