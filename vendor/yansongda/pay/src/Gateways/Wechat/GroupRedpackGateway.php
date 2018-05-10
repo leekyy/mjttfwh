@@ -2,6 +2,7 @@
 
 namespace Yansongda\Pay\Gateways\Wechat;
 
+use Yansongda\Pay\Gateways\Wechat;
 use Yansongda\Pay\Log;
 use Yansongda\Supports\Collection;
 
@@ -22,6 +23,8 @@ class GroupRedpackGateway extends Gateway
         $payload['wxappid'] = $payload['appid'];
         $payload['amt_type'] = 'ALL_RAND';
 
+        $this->mode !== Wechat::MODE_SERVICE ?: $payload['msgappid'] = $payload['appid'];
+
         unset($payload['appid'], $payload['trade_type'], $payload['notify_url'], $payload['spbill_create_ip']);
 
         $payload['sign'] = Support::generateSign($payload, $this->config->get('key'));
@@ -32,8 +35,7 @@ class GroupRedpackGateway extends Gateway
             'mmpaymkttransfers/sendgroupredpack',
             $payload,
             $this->config->get('key'),
-            $this->config->get('cert_client'),
-            $this->config->get('cert_key')
+            ['cert' => $this->config->get('cert_client'), 'ssl_key' => $this->config->get('cert_key')]
         );
     }
 

@@ -5,6 +5,7 @@ namespace Yansongda\Pay\Gateways\Wechat;
 use Yansongda\Pay\Exceptions\GatewayException;
 use Yansongda\Pay\Exceptions\InvalidArgumentException;
 use Yansongda\Pay\Exceptions\InvalidSignException;
+use Yansongda\Pay\Gateways\Wechat;
 use Yansongda\Pay\Log;
 use Yansongda\Supports\Collection;
 use Yansongda\Supports\Traits\HasHttpRequest;
@@ -51,19 +52,18 @@ class Support
      * @param string      $endpoint
      * @param array       $data
      * @param string|null $key
-     * @param string      $certClient
-     * @param string      $certKey
+     * @param array       $cert
      *
      * @return Collection
      */
-    public static function requestApi($endpoint, $data, $key = null, $certClient = null, $certKey = null): Collection
+    public static function requestApi($endpoint, $data, $key = null, $cert = []): Collection
     {
         Log::debug('Request To Wechat Api', [self::baseUri().$endpoint, $data]);
 
         $result = self::getInstance()->post(
             $endpoint,
             self::toXml($data),
-            ($certClient !== null && $certKey !== null) ? ['cert' => $certClient, 'ssl_key' => $certKey] : []
+            $cert
         );
         $result = is_array($result) ? $result : self::fromXml($result);
 
@@ -89,9 +89,9 @@ class Support
      *
      * @author yansongda <me@yansongda.cn>
      *
-     * @param array                     $payload
-     * @param array|string              $order
-     * @param Yansongda\Supports\Config $config
+     * @param array                      $payload
+     * @param array|string               $order
+     * @param \Yansongda\Supports\Config $config
      *
      * @return array
      */
@@ -99,9 +99,13 @@ class Support
     {
         $payload = array_merge($payload, is_array($order) ? $order : ['out_trade_no' => $order]);
 
-        $type = isset($order['type']) ? ($order['type'].($order['type'] == 'app' ?: '_').'id') : 'app_id';
+        $type = isset($order['type']) ? $order['type'].($order['type'] == 'app' ? '' : '_').'id' : 'app_id';
 
         $payload['appid'] = $config->get($type, '');
+        $mode = $config->get('mode', Wechat::MODE_NORMAL);
+        if ($mode === Wechat::MODE_SERVICE) {
+            $payload['sub_appid'] = $config->get('sub_'.$type, '');
+        }
 
         unset($payload['notify_url'], $payload['trade_type'], $payload['type']);
 
@@ -209,11 +213,11 @@ class Support
     public static function baseUri($mode = null): string
     {
         switch ($mode) {
-            case 'dev':
+            case Wechat::MODE_DEV:
                 self::getInstance()->baseUri = 'https://api.mch.weixin.qq.com/sandboxnew/';
                 break;
 
-            case 'hk':
+            case Wechat::MODE_HK:
                 self::getInstance()->baseUri = 'https://apihk.mch.weixin.qq.com/';
                 break;
 

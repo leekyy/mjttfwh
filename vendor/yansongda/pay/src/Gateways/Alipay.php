@@ -14,6 +14,14 @@ use Yansongda\Supports\Collection;
 use Yansongda\Supports\Config;
 use Yansongda\Supports\Str;
 
+/**
+ * @method \Yansongda\Pay\Gateways\Alipay\AppGateway app(array $config) APP 支付
+ * @method \Yansongda\Pay\Gateways\Alipay\PosGateway pos(array $config) 刷卡支付
+ * @method \Yansongda\Pay\Gateways\Alipay\ScanGateway scan(array $config) 扫码支付
+ * @method \Yansongda\Pay\Gateways\Alipay\TransferGateway transfer(array $config) 帐户转账
+ * @method \Yansongda\Pay\Gateways\Alipay\WapGateway wap(array $config) 手机网站支付
+ * @method \Yansongda\Pay\Gateways\Alipay\WebGateway web(array $config) 电脑支付
+ */
 class Alipay implements GatewayApplicationInterface
 {
     /**
@@ -190,6 +198,28 @@ class Alipay implements GatewayApplicationInterface
         Log::debug('Close An Order:', [$this->gateway, $this->payload]);
 
         return Support::requestApi($this->payload, $this->config->get('ali_public_key'));
+    }
+
+    /**
+     * Download bill.
+     *
+     * @author yansongda <me@yansongda.cn>
+     *
+     * @param string|array $bill
+     *
+     * @return string
+     */
+    public function download($bill): string
+    {
+        $this->payload['method'] = 'alipay.data.dataservice.bill.downloadurl.query';
+        $this->payload['biz_content'] = json_encode(is_array($bill) ? $bill : ['bill_type' => 'trade', 'bill_date' => $bill]);
+        $this->payload['sign'] = Support::generateSign($this->payload, $this->config->get('private_key'));
+
+        Log::debug('Download Bill:', [$this->gateway, $this->payload]);
+
+        $result = Support::requestApi($this->payload, $this->config->get('ali_public_key'));
+
+        return ($result instanceof Collection) ? $result->bill_download_url : '';
     }
 
     /**

@@ -13,6 +13,7 @@
   * [查询](docs/alipay/find.md)
   * [取消](docs/alipay/cancel.md)
   * [关闭](docs/alipay/close.md)
+  * [对账单](docs/alipay/download.md)
   * [验证服务器数据](docs/alipay/verify.md)
   * [向支付宝服务器确认收到异步通知](docs/alipay/success.md)
 * [微信](docs/wechat/README.md)
@@ -32,5 +33,7 @@
   * [关闭](docs/wechat/close.md)
   * [验证服务器数据](docs/wechat/verify.md)
   * [向微信服务器确认收到异步通知](docs/wechat/success.md)
-* [其它功能](docs/OTHERS.md)
+* [其它]()
+  * [其他功能](docs/others/others.md)
+  * [FAQ](docs/others/faq.md)
 

@@ -11,6 +11,7 @@
 ```php
 $order = [
     'out_trade_no' => '1514027114',
+    'bill_type' => 'trade'
 ];
 
 // $order = '1514027114';

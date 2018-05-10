@@ -16,6 +16,7 @@ use App\Components\Utils;
 use App\Components\WeChatManager;
 use App\Http\Controllers\Controller;
 use App\Models\InviteCodeRecord;
+use App\Models\Menu;
 use App\Models\UserTJ;
 use EasyWeChat\Kernel\Messages\Image;
 use Illuminate\Support\Facades\Log;

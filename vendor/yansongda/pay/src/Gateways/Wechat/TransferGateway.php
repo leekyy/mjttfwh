@@ -3,6 +3,7 @@
 namespace Yansongda\Pay\Gateways\Wechat;
 
 use Symfony\Component\HttpFoundation\Request;
+use Yansongda\Pay\Gateways\Wechat;
 use Yansongda\Pay\Log;
 use Yansongda\Supports\Collection;
 
@@ -20,11 +21,17 @@ class TransferGateway extends Gateway
      */
     public function pay($endpoint, array $payload): Collection
     {
-        $payload['mch_appid'] = $payload['appid'];
-        $payload['mchid'] = $payload['mch_id'];
-        $payload['spbill_create_ip'] = Request::createFromGlobals()->server->get('SERVER_ADDR');
+        if ($this->mode === Wechat::MODE_SERVICE) {
+            unset($payload['sub_mch_id'], $payload['sub_appid']);
+        }
+        $type = isset($payload['type']) ? ($payload['type'].($payload['type'] == 'app' ?: '_').'id') : 'app_id';
 
-        unset($payload['appid'], $payload['mch_id'], $payload['trade_type'], $payload['notify_url']);
+        $payload['mch_appid'] = $this->config->get($type, '');
+        $payload['mchid'] = $payload['mch_id'];
+        php_sapi_name() === 'cli' ?: $payload['spbill_create_ip'] = Request::createFromGlobals()->server->get('SERVER_ADDR');
+
+        unset($payload['appid'], $payload['mch_id'], $payload['trade_type'],
+            $payload['notify_url'], $payload['type']);
 
         $payload['sign'] = Support::generateSign($payload, $this->config->get('key'));
 
@@ -34,8 +41,7 @@ class TransferGateway extends Gateway
             'mmpaymkttransfers/promotion/transfers',
             $payload,
             $this->config->get('key'),
-            $this->config->get('cert_client'),
-            $this->config->get('cert_key')
+            ['cert' => $this->config->get('cert_client'), 'ssl_key' => $this->config->get('cert_key')]
         );
     }
 

@@ -79,7 +79,7 @@ $user->getProviderName(); // GitHub
 
 Now we support the following sites:
 
-`facebook`, `github`, `google`, `linkedin`, `weibo`, `qq`, `wechat`, `wechat_open`, and `douban`.
+`facebook`, `github`, `google`, `linkedin`, `outlook`, `weibo`, `qq`, `wechat`, `wechat_open`, and `douban`.
 
 Each drive uses the same configuration keys: `client_id`, `client_secret`, `redirect`.
 
@@ -92,15 +92,6 @@ Example:
     'redirect'      => 'http://localhost/socialite/callback.php',
   ],
 ...
-```
-
-Special configuration options for [WeChat Open Platform](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419318590&token=&lang=zh_CN)
-```
-'wechat_open' => [
-    'client_id'     => 'your-app-id',
-    'client_secret' => ['your-component-appid', 'your-component-access-token'],
-    'redirect'      => 'http://localhost/socialite/callback.php',
-]
 ```
 
 ### Scope

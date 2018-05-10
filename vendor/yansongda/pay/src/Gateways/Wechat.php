@@ -14,14 +14,37 @@ use Yansongda\Supports\Collection;
 use Yansongda\Supports\Config;
 use Yansongda\Supports\Str;
 
+/**
+ * @method \Yansongda\Pay\Gateways\Wechat\AppGateway app(array $config) APP 支付
+ * @method \Yansongda\Pay\Gateways\Wechat\GroupRedpackGateway groupRedpack(array $config) 分裂红包
+ * @method \Yansongda\Pay\Gateways\Wechat\MiniappGateway miniapp(array $config) 小程序支付
+ * @method \Yansongda\Pay\Gateways\Wechat\MpGateway mp(array $config) 公众号支付
+ * @method \Yansongda\Pay\Gateways\Wechat\PosGateway pos(array $config) 刷卡支付
+ * @method \Yansongda\Pay\Gateways\Wechat\RedpackGateway redpack(array $config) 普通红包
+ * @method \Yansongda\Pay\Gateways\Wechat\ScanGateway scan(array $config) 扫码支付
+ * @method \Yansongda\Pay\Gateways\Wechat\TransferGateway transfer(array $config) 企业付款
+ * @method \Yansongda\Pay\Gateways\Wechat\WapGateway wap(array $config) H5 支付
+ */
 class Wechat implements GatewayApplicationInterface
 {
+    const MODE_NORMAL = 'normal'; // 普通模式
+    const MODE_DEV = 'dev'; // 沙箱模式
+    const MODE_HK = 'hk'; // 香港钱包
+    const MODE_SERVICE = 'service'; // 服务商
+
     /**
      * Config.
      *
      * @var Config
      */
     protected $config;
+
+    /**
+     * Mode.
+     *
+     * @var string
+     */
+    protected $mode;
 
     /**
      * Wechat payload.
@@ -47,7 +70,8 @@ class Wechat implements GatewayApplicationInterface
     public function __construct(Config $config)
     {
         $this->config = $config;
-        $this->gateway = Support::baseUri($this->config->get('mode', 'normal'));
+        $this->mode = $this->config->get('mode', self::MODE_NORMAL);
+        $this->gateway = Support::baseUri($this->mode);
         $this->payload = [
             'appid'            => $this->config->get('app_id', ''),
             'mch_id'           => $this->config->get('mch_id', ''),
@@ -57,6 +81,13 @@ class Wechat implements GatewayApplicationInterface
             'trade_type'       => '',
             'spbill_create_ip' => Request::createFromGlobals()->getClientIp(),
         ];
+
+        if ($this->mode === static::MODE_SERVICE) {
+            $this->payload = array_merge($this->payload, [
+                'sub_mch_id' => $this->config->get('sub_mch_id'),
+                'sub_appid'  => $this->config->get('sub_app_id', ''),
+            ]);
+        }
     }
 
     /**
@@ -87,13 +118,13 @@ class Wechat implements GatewayApplicationInterface
      *
      * @author yansongda <me@yansongda.cn>
      *
+     * @param string|null $content
+     *
      * @return Collection
      */
-    public function verify(): Collection
+    public function verify($content = null): Collection
     {
-        $request = Request::createFromGlobals();
-
-        $data = Support::fromXml($request->getContent());
+        $data = Support::fromXml($content ?? Request::createFromGlobals()->getContent());
 
         Log::debug('Receive Wechat Request:', $data);
 
@@ -139,8 +170,7 @@ class Wechat implements GatewayApplicationInterface
             'secapi/pay/refund',
             $this->payload,
             $this->config->get('key'),
-            $this->config->get('cert_client'),
-            $this->config->get('cert_key')
+            ['cert' => $this->config->get('cert_client'), 'ssl_key' => $this->config->get('cert_key')]
         );
     }
 
