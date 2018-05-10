@@ -116,14 +116,19 @@ class WechatController extends Controller
     {
         $menus=MenuManager::getListByCon();
         $buttons=array();
+        $menus=MenuManager::getListByCon();
+        $buttons=array();
         foreach ($menus as $menu){
             $button['name']=$menu['name'];
-            if($menu->level==0){
+            if($menu['level']==0){
                 $button['type']=$menu['type'];
                 $button['url']=$menu['url'];
             }
             else{
-                foreach ($menu['childrem'] as $child){
+                unset($button['type']);
+                unset($button['url']);
+                $button['sub_button']=array();
+                foreach ($menu['children'] as $child){
                     $sub_button['name']=$child['name'];
                     $sub_button['type']=$child['type'];
                     $sub_button['url']=$child['url'];
