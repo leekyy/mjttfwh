@@ -132,6 +132,7 @@ class WechatController extends Controller
             }
             array_push($buttons,$button);
         }
+        Log::info("buttons:" . json_encode($buttons));
         $app = app('wechat.official_account');
         $app->menu->delete(); // 全部
         $result = $app->menu->create($buttons);       //创建搜索项目
