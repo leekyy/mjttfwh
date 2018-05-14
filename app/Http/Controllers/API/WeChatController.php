@@ -125,6 +125,13 @@ class WechatController extends Controller
                                     ->send();
                             }
                         }
+                        //如果有EventKey-代表，关注分享的二维码过来的消息，并且非新注册的用户
+                        if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && !$new_user_flag) {
+                            $text = Utils::TEXT_CANNOT_ZHULI;
+                            $app->customer_service->message($text)
+                                ->to($user->fwh_openid)
+                                ->send();
+                        }
                         $text = Utils::TEXT_SCAN_SUB;
                         return $text;
                     }
