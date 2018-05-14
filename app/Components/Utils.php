@@ -20,7 +20,7 @@ class Utils
     const ORDER_REFUNDSUCCESS = "4";    //退款成功
     const ORDER_REFUNDFAILED = "5";    //退款失败
 
-    const  DEBUG_FLAG = false;        //debug标识
+    const  DEBUG_FLAG = true;        //debug标识
 
     const SERVER_URL = (self::DEBUG_FLAG == false) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
 
@@ -43,6 +43,9 @@ class Utils
     const RICH_BUY_TEXT = "只需完成以下2步，即可获得邀请码，免费解锁全部景点！\r\n\r\n1.长按保存以下图片分享给好友/朋友圈\r\n2.邀请yq_num_txt位好友扫码并关注美景听听旅行\r\n\r\n（请24小时内完成此任务，逾期活动作废）\r\n\r\n<a href=\"" . Utils::RICHBUY_URL . "\">土豪请戳此购买</a>";
     //扫描自己分享的二维码，返回空串
     const TEXT_SCAN_SELF = "";
+    //邀请扫描的用户已经关注过服务号
+    const TEXT_CANNOT_ZHULI = "抱歉您不是新用户，无法助力好友";
+
     //空串
     const TEXT_NULL_STR = "";
     //关键字回复话术
