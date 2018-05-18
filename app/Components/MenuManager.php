@@ -13,7 +13,6 @@ use App\Models\Menu;
 
 class MenuManager
 {
-
     /*
      * 根据id获取信息
      *

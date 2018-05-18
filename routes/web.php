@@ -55,6 +55,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
     Route::post('/menu/edit', 'Admin\WeChatController@editDo');  //编辑菜单
     Route::get('/menu/set', 'Admin\WeChatController@setMenu');  //设置菜单
 
+    //自动回复管理
+    Route::get('/reply/index', 'Admin\ReplyController@index');  //菜单管理首页
+    Route::get('/reply/del/{id}', 'Admin\ReplyController@del');  //删除菜单
+    Route::get('/reply/edit', 'Admin\ReplyController@edit');  //编辑菜单
+    Route::post('/reply/edit', 'Admin\ReplyController@editDo');  //编辑菜单
+
     // 用户邀请码达标设置
     Route::get('/inviteNum/index', 'Admin\InviteNumController@index');  //用户邀请码达标管理首页
     Route::get('/inviteNum/edit', 'Admin\InviteNumController@edit');  //新建或编辑用户邀请码达标get

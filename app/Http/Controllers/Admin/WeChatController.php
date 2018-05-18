@@ -137,43 +137,6 @@ class WechatController extends Controller
         else{
             $buttons=array();
         }
-//        $buttons = [
-//            [
-//                "name" => "美景",
-//                "type" => "view",
-//                "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MzI3NTExNDc4NQ==&hid=1&sn=d1ec8e05d887e0d09b7dbb216750417b&scene=18#wechat_redirect"
-//            ],
-//            [
-//                "name" => "听听",
-//                "sub_button" => [
-//                    [
-//                        "name" => "喜马拉雅",
-//                        "type" => "view",
-//                        "url" => "http://www.ximalaya.com/zhubo/25616166/"
-//                    ],
-//                    [
-//                        "name" => "美景小程序",
-//                        "type" => "view",
-//                        "url" => "http://mp.weixin.qq.com/s/KRW8l2wZ3jsVc74muI9FUA"
-//                    ]
-//                ]
-//            ],
-//            [
-//                "name" => "APP",
-//                "sub_button" => [
-//                    [
-//                        "name" => "免费邀请码",
-//                        "type" => "view",
-//                        "url" => Utils::LUCKUSER_URL         //http://mjttfwh.isart.me/luckUser
-//                    ],
-//                    [
-//                        "name" => "下载APP2",
-//                        "type" => "view",
-//                        "url" => "http://app.gowithtommy.com/"
-//                    ]
-//                ]
-//            ]
-//        ];
         Log::info("buttons:" . json_encode($buttons));
         $app = app('wechat.official_account');
         $app->menu->delete(); // 全部

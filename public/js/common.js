@@ -36,6 +36,10 @@ function delMenu(url, param, callBack) {
 function setMenu(url, param, callBack) {
     ajaxRequest(url + "admin/menu/set", param, "GET", callBack);
 }
+//删除自动回复
+function delReply(url, param, callBack) {
+    ajaxRequest(url + "admin/reply/del/" + param.id, param, "GET", callBack);
+}
 
 
 //生成海报

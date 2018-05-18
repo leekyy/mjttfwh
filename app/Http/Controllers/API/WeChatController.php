@@ -170,31 +170,35 @@ class WechatController extends Controller
                     if (!UserManager::getByFWHOpenid($fwh_openid)) {
                         $user = WeChatManager::register($fwh_openid);
                     }
-                    switch (WeChatManager::matchKeyWords($message['Content'])) {
-                        case 'group1':
-                            //发送文字，生成图片素材
-                            $text = Utils::KEYWORD_REPLY_TEXT;
-                            $app->customer_service->message($text)
-                                ->to($user->fwh_openid)
-                                ->send();
-                            //生成微信图片素材并发送
-                            /*
-                             * 2018-05-03 根据解悦意见进行优化，去掉返回海报的逻辑
-                             *
-                             */
-//                            if (Utils::isObjNull($user->yq_hb_media_id)) {
-//                                $filename = WeChatManager::createUserYQHB($user->id);
-//                                $media_id = WeChatManager::createMediaId($filename);
-//                                $user = UserManager::getByIdWithToken($user->id);
-//                                $user->yq_hb_media_id = $media_id;
-//                                $user->save();
-//                            }
-//                            $image = new Image($user->yq_hb_media_id);
-//                            $app->customer_service->message($image)
+                    $reply_content=WeChatManager::matchKeyWords($message['Content']);
+                    $app->customer_service->message($reply_content)
+                        ->to($user->fwh_openid)
+                        ->send();
+//                    switch (WeChatManager::matchKeyWords($message['Content'])) {
+//                        case 'group1':
+//                            //发送文字，生成图片素材
+//                            $text = Utils::KEYWORD_REPLY_TEXT;
+//                            $app->customer_service->message($text)
 //                                ->to($user->fwh_openid)
 //                                ->send();
-                            break;
-                    }
+//                            //生成微信图片素材并发送
+//                            /*
+//                             * 2018-05-03 根据解悦意见进行优化，去掉返回海报的逻辑
+//                             *
+//                             */
+////                            if (Utils::isObjNull($user->yq_hb_media_id)) {
+////                                $filename = WeChatManager::createUserYQHB($user->id);
+////                                $media_id = WeChatManager::createMediaId($filename);
+////                                $user = UserManager::getByIdWithToken($user->id);
+////                                $user->yq_hb_media_id = $media_id;
+////                                $user->save();
+////                            }
+////                            $image = new Image($user->yq_hb_media_id);
+////                            $app->customer_service->message($image)
+////                                ->to($user->fwh_openid)
+////                                ->send();
+//                            break;
+//                    }
                     break;
                 case 'image':
 

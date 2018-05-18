@@ -94,11 +94,20 @@ class WeChatManager
      */
     public static function matchKeyWords($key_word)
     {
-        //基本关键字组
-        $group1 = ['邀请码', '幸运用户', '申请幸运用户', '免费'];
-        //如果在组1里面
-        if (in_array($key_word, $group1)) {
-            return "group1";
+//        //基本关键字组
+//        $group1 = ['邀请码', '幸运用户', '申请幸运用户', '免费'];
+//        //如果在组1里面
+//        if (in_array($key_word, $group1)) {
+//            return "group1";
+//        }
+//        return null;
+
+        $replies=ReplyManager::getListByCon(false,false);
+        foreach ($replies as $reply){
+            $keywords=explode('_', $reply['keyword']);
+            if(in_array($key_word, $keywords)){
+                return $reply['content'];
+            }
         }
         return null;
     }

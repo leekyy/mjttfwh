@@ -84,6 +84,17 @@
                 </dd>
             </dl>
             <dl>
+                <dt><i class="Hui-iconfont">&#xe622;</i>自动回复管理<i class="Hui-iconfont menu_dropdown-arrow">
+                        &#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a data-href="{{ URL::asset('/admin/reply/index') }}" data-title="编辑自动回复"
+                               href="javascript:void(0)">编辑自动回复</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
                 <dt><i class="Hui-iconfont">&#xe623;</i>邀请码记录<i class="Hui-iconfont menu_dropdown-arrow">
                         &#xe6d5;</i>
                 </dt>
