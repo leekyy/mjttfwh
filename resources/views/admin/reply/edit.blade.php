@@ -28,7 +28,8 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>回复内容：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <textarea  id="content" name="content" wrap="\n" class="textarea" style="resize:vertical;" placeholder="请填写回复内容" dragonfly="true" nullmsg="回复内容！">{{ isset($data['content']) ? $data['content'] : '' }}</textarea>
+                    <textarea  id="content" name="content" wrap="\r\n" class="textarea" style="resize:vertical;width: 400px;height:300px;" placeholder="请填写回复内容" dragonfly="true" nullmsg="回复内容！">{{ isset($data['content']) ? $data['content'] : '' }}</textarea>
+                    换行的时候直接按“回车键”就可以
                 </div>
             </div>
             <div class="row cl mt-20">

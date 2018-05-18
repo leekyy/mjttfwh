@@ -38,7 +38,7 @@
                 <tr class="text-c">
                     <td>{{$data->id}}</td>
                     <td>{{$data->keyword}}</td>
-                    <td>{{$data->content}}</td>
+                    <td>{!! $data->content !!}</td>
                     <td>
                         <a title="编辑" href="javascript:;"
                            onclick="reply_edit('自动回复编辑','{{URL::asset('/admin/reply/edit')}}?id={{$data->id}})',{{$data->id}})" class="ml-5" style="text-decoration:none">
