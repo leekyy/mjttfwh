@@ -35,7 +35,7 @@ class BusiWordManager
     public static function getByTemplateID($template_id)
     {
         $busiWord = BusiWord::where('template_id', '=', $template_id)->first();
-        return $busiWord;
+        return $busiWord->content;
     }
 
 
