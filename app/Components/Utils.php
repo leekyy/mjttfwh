@@ -20,14 +20,22 @@ class Utils
     const ORDER_REFUNDSUCCESS = "4";    //退款成功
     const ORDER_REFUNDFAILED = "5";    //退款失败
 
-    const  DEBUG_FLAG = false;        //debug标识
+    const  DEBUG_FLAG = true;        //debug标识
 
     const SERVER_URL = (self::DEBUG_FLAG == false) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
-
     //幸运用户的URL
     const LUCKUSER_URL = (self::DEBUG_FLAG == false) ? "http://wg.gowithtommy.com/luckUser" : "http://mjttfwhtest.isart.me/luckUser";
     const RICHBUY_URL = (self::DEBUG_FLAG == false) ? "http://wg.gowithtommy.com/richBuy" : "http://mjttfwhtest.isart.me/richBuy";
+    //默认的邀请数配置
+    const DEFAULT_YQ_NUM = 3;
 
+    /*
+     * 以下业务话术配置作废，通过数据库业务话术表来统一管理业务话术
+     *
+     * By TerryQi
+     *
+     * 2018-05-19
+     */
     //关注+扫描进入回复内容
     const TEXT_SCAN_SUB = "hey，欢迎关注美景听听：全球景点语音讲解\r\n<a href=\"" . Utils::LUCKUSER_URL . "\">点击此处</a>可以获得免费邀请码\r\n\r\n点击“美景”可以看到历史主题原创漫画\r\n点击“听听”可以通过喜马拉雅和小程序听景点讲解\r\n点击“App”可以下载美景听听App";
     //邀请码话术
@@ -36,16 +44,12 @@ class Utils
     const TEXT_ALREADY_ZHULI = "抱歉，您已经参与过此次活动啦，每人只有一次机会哦";
     //购买78元邀请码话术
     const TEXT_BUY78_CODE = "上述为您的邀请码，自使用之日起有效期1年\r\n\r\n使用流程如下：\r\n1、下载并登录美景听听\r\n2、在【我的】页面，点击【邀请码】，输入上方的【邀请码】后，您的会员等级即可变成【高级会员】。（*如遇到未能解锁的情况，请下拉刷新或重新登录）\r\n4、【高级会员】可以解锁美景听听全部付费音频，畅听100多个国家5万多个景点。\r\n5、会员有效期1年，如有问题，请联系客服";
-
-    //默认的邀请数配置
-    const DEFAULT_YQ_NUM = 3;
     //土豪购买的说明
     const RICH_BUY_TEXT = "只需完成以下2步，即可获得邀请码，免费解锁全部景点！\r\n\r\n1.长按保存以下图片分享给好友/朋友圈\r\n2.邀请yq_num_txt位好友扫码并关注美景听听旅行\r\n\r\n（请24小时内完成此任务，逾期活动作废）\r\n\r\n<a href=\"" . Utils::RICHBUY_URL . "\">土豪请戳此购买</a>";
     //扫描自己分享的二维码，返回空串
     const TEXT_SCAN_SELF = "";
     //邀请扫描的用户已经关注过服务号
     const TEXT_CANNOT_ZHULI = "抱歉您不是新用户，无法助力好友";
-
     //空串
     const TEXT_NULL_STR = "";
     //关键字回复话术

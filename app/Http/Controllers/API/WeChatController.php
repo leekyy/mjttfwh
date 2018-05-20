@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\API;
 
 
+use App\Components\BusiWordManager;
 use App\Components\InviteNumManager;
 use App\Components\UserManager;
 use App\Components\UserTJManager;
@@ -85,7 +86,9 @@ class WechatController extends Controller
                                 $tj_user = UserManager::getById($tj_user->id);
                                 if ($tj_user->yq_num < $tj_user->target_yq_num) {     //小于3个
                                     //发送消息
-                                    $text = "你的好友" . $user->nick_name . "帮你扫码了，还差" . ($tj_user->target_yq_num - $tj_user->yq_num) . "个好友助力，即可获得邀请码";
+                                    $text = BusiWordManager::getByTemplateID("TEMPLATE_ZHULI_PROCESS_FOR_TJUSER");
+                                    $text = str_replace("{friend_name}", $user->nick_name, $text);
+                                    $text = str_replace("{rest_num}", ($tj_user->target_yq_num - $tj_user->yq_num), $text);
                                     $app->customer_service->message($text)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
@@ -98,7 +101,9 @@ class WechatController extends Controller
                                     $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
                                     $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
                                     $inviCode = $result['data']['inviCode'];    //邀请码
-                                    $text0 = "你的好友" . $user->nick_name . "帮你扫码啦，恭喜您获得价值78元的邀请码";
+
+                                    $text0 = BusiWordManager::getByTemplateID("TEMPLATE_ZHULI_SUCCESS_FOR_TJUSER");
+                                    $text0 = str_replace("{friend_name}", $user->nick_name, $text0);
                                     $app->customer_service->message($text0)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
@@ -106,7 +111,7 @@ class WechatController extends Controller
                                     $app->customer_service->message($text1)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
-                                    $text2 = Utils::TEXT_INVITE_CODE;
+                                    $text2 = BusiWordManager::getByTemplateID("TEMPLATED_FREE_INVITECODE");
                                     $app->customer_service->message($text2)
                                         ->to($tj_user->fwh_openid)
                                         ->send();
@@ -119,7 +124,8 @@ class WechatController extends Controller
                                     $inviteCodeRecord->save();
                                 }
                                 //发送被邀请者消息
-                                $text = "您已帮好友" . $tj_user->nick_name . "助力";
+                                $text = BusiWordManager::getByTemplateID("TEMPLATE_ZHULI_SUCCESS_FOR_USER");
+                                $text = str_replace("{friend_name}", $tj_user->nick_name, $text);
                                 $app->customer_service->message($text)
                                     ->to($user->fwh_openid)
                                     ->send();
@@ -128,12 +134,12 @@ class WechatController extends Controller
                         //如果有EventKey-代表，关注分享的二维码过来的消息，并且非新注册的用户
                         if (array_key_exists('EventKey', $message) && !Utils::isObjNull($message['EventKey']) && !$new_user_flag) {
                             Log::info("message EventKey not new user:" . $message['EventKey']);
-                            $text = Utils::TEXT_CANNOT_ZHULI;
+                            $text = BusiWordManager::getByTemplateID("TEMPLATED_CANNOT_ZHULI");
                             $app->customer_service->message($text)
                                 ->to($user->fwh_openid)
                                 ->send();
                         }
-                        $text = Utils::TEXT_SCAN_SUB;
+                        $text = BusiWordManager::getByTemplateID("TEMPLATE_SCAN_SUB");
                         return $text;
                     }
                     //取消关注事件
@@ -151,10 +157,10 @@ class WechatController extends Controller
                             Log::info("key_val:" . $key_val);
                             $tj_user = UserManager::getByFWHOpenid($key_val);    //找到推荐用户
                             Log::info("user->id:" . $user->id . "  tj_user->id:" . $tj_user->id);
-                            $text = Utils::TEXT_CANNOT_ZHULI;
+                            $text = BusiWordManager::getByTemplateID("TEMPLATED_CANNOT_ZHULI");
                             return $text;
                         } else {
-                            $text = Utils::TEXT_SCAN_SUB;
+                            $text = BusiWordManager::getByTemplateID("TEMPLATE_SCAN_SUB");
                             return $text;
                         }
                     }
@@ -170,35 +176,10 @@ class WechatController extends Controller
                     if (!UserManager::getByFWHOpenid($fwh_openid)) {
                         $user = WeChatManager::register($fwh_openid);
                     }
-                    $reply_content=WeChatManager::matchKeyWords($message['Content']);
+                    $reply_content = WeChatManager::matchKeyWords($message['Content']);
                     $app->customer_service->message($reply_content)
                         ->to($user->fwh_openid)
                         ->send();
-//                    switch (WeChatManager::matchKeyWords($message['Content'])) {
-//                        case 'group1':
-//                            //发送文字，生成图片素材
-//                            $text = Utils::KEYWORD_REPLY_TEXT;
-//                            $app->customer_service->message($text)
-//                                ->to($user->fwh_openid)
-//                                ->send();
-//                            //生成微信图片素材并发送
-//                            /*
-//                             * 2018-05-03 根据解悦意见进行优化，去掉返回海报的逻辑
-//                             *
-//                             */
-////                            if (Utils::isObjNull($user->yq_hb_media_id)) {
-////                                $filename = WeChatManager::createUserYQHB($user->id);
-////                                $media_id = WeChatManager::createMediaId($filename);
-////                                $user = UserManager::getByIdWithToken($user->id);
-////                                $user->yq_hb_media_id = $media_id;
-////                                $user->save();
-////                            }
-////                            $image = new Image($user->yq_hb_media_id);
-////                            $app->customer_service->message($image)
-////                                ->to($user->fwh_openid)
-////                                ->send();
-//                            break;
-//                    }
                     break;
                 case 'image':
 

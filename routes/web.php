@@ -61,6 +61,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
     Route::get('/reply/edit', 'Admin\ReplyController@edit');  //编辑菜单
     Route::post('/reply/edit', 'Admin\ReplyController@editDo');  //编辑菜单
 
+    //业务话术管理
+    Route::get('/busiWord/index', 'Admin\BusiWordController@index');  //业务话术管理首页
+    Route::get('/busiWord/edit', 'Admin\BusiWordController@edit');  //编辑业务话术
+    Route::post('/busiWord/edit', 'Admin\BusiWordController@editDo');  //编辑业务话术
+
     // 用户邀请码达标设置
     Route::get('/inviteNum/index', 'Admin\InviteNumController@index');  //用户邀请码达标管理首页
     Route::get('/inviteNum/edit', 'Admin\InviteNumController@edit');  //新建或编辑用户邀请码达标get

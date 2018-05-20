@@ -95,6 +95,17 @@
                 </dd>
             </dl>
             <dl>
+                <dt><i class="Hui-iconfont">&#xe622;</i>业务话术管理<i class="Hui-iconfont menu_dropdown-arrow">
+                        &#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a data-href="{{ URL::asset('/admin/busiWord/index') }}" data-title="业务话术管理"
+                               href="javascript:void(0)">业务话术管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
                 <dt><i class="Hui-iconfont">&#xe623;</i>邀请码记录<i class="Hui-iconfont menu_dropdown-arrow">
                         &#xe6d5;</i>
                 </dt>

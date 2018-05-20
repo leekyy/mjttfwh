@@ -10,6 +10,7 @@
 namespace App\Http\Controllers\Html5;
 
 use App\Components\AdminManager;
+use App\Components\BusiWordManager;
 use App\Components\InviteNumManager;
 use App\Components\UserManager;
 use App\Components\WeChatManager;
@@ -176,8 +177,8 @@ class LuckUserController
             return ApiResponse::makeResponse(false, "已经为用户生成邀请码", ApiResponse::ALREADY_CREATE_INVITECODE);
         }
         //发送文字，生成图片素材
-        $text = Utils::RICH_BUY_TEXT;
-        $text = str_replace("yq_num_txt", InviteNumManager::getCurrYQNum(), $text);
+        $text = BusiWordManager::getByTemplateID("TEMPLATE_GET_FREE_INVITECODE");
+        $text = str_replace("{yq_num_txt}", InviteNumManager::getCurrYQNum(), $text);
         $app = app('wechat.official_account');
         $app->customer_service->message($text)
             ->to($user->fwh_openid)
@@ -265,7 +266,7 @@ class LuckUserController
         Log::info("inviCode:" . json_encode($inviCode));
         //发送邀请码
         $app = app('wechat.official_account');
-        $text0 = "您已经购买价值78元的邀请码";
+        $text0 = BusiWordManager::getByTemplateID("TEMPLATE_ALREAD_BUY_INVITECODE");
         $app->customer_service->message($text0)
             ->to($user->fwh_openid)
             ->send();
@@ -273,7 +274,7 @@ class LuckUserController
         $app->customer_service->message($text1)
             ->to($user->fwh_openid)
             ->send();
-        $text2 = Utils::TEXT_BUY78_CODE;
+        $text2 = BusiWordManager::getByTemplateID("TEMPLATE_BUY78_INVITECODE");
         $app->customer_service->message($text2)
             ->to($user->fwh_openid)
             ->send();

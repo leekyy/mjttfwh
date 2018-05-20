@@ -7,21 +7,30 @@
             {{csrf_field()}}
             @if($data->id)
                 <div class="row cl">
-                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>自动回复id：</label>
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>业务话术id：</label>
                     <div class="formControls col-xs-8 col-sm-9">
                         <input id="id" name="id" type="text" class="input-text "
-                               value="{{ isset($data->id) ? $data->id : '' }}" placeholder="自动回复id" readonly
+                               value="{{ isset($data->id) ? $data->id : '' }}" placeholder="业务话术id" readonly
                                style="width: 400px;background-color: rgb(235, 235, 228);">
                     </div>
                 </div>
             @endif
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>关键字：</label>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>模板ID：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <input id="keyword" name="keyword" type="text" class="input-text"
-                           value="{{ isset($data->keyword) ? $data->keyword : '' }}" placeholder="请输入关键字"
+                    <input id="template_id" name="template_id" type="text" class="input-text"
+                           value="{{ isset($data->template_id) ? $data->template_id : '' }}" placeholder="模板管理由开发定义"
                            style="width: 400px;">
-                    多个关键字以“_”分割
+                </div>
+
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>业务场景：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input id="name" name="name" type="text" class="input-text"
+                           value="{{ isset($data->name) ? $data->name : '' }}" placeholder="业务场景"
+                           style="width: 400px;">
+                    该字段用于描述话术使用场景
                 </div>
 
             </div>
@@ -30,7 +39,7 @@
                 <div class="formControls col-xs-8 col-sm-9">
                     <textarea id="content" name="content" wrap="\r\n" class="textarea"
                               style="resize:vertical;width: 400px;height:300px;" placeholder="请填写回复内容" dragonfly="true"
-                              nullmsg="回复内容！">{{ isset($data['content']) ? $data['content'] : '' }}</textarea>
+                              nullmsg="业务话术">{{ isset($data['content']) ? $data['content'] : '' }}</textarea>
                     换行的时候直接按“回车键”就可以
                 </div>
             </div>
@@ -71,7 +80,7 @@
                 submitHandler: function (form) {
                     $(form).ajaxSubmit({
                         type: 'POST',
-                        url: "{{ URL::asset('/admin/reply/edit')}}",
+                        url: "{{ URL::asset('/admin/busiWord/edit')}}",
                         success: function (ret) {
                             console.log(JSON.stringify(ret));
                             if (ret.result) {
