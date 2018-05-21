@@ -165,6 +165,7 @@ class WeChatManager
             //二维码图片名称
             $user_yq_code_filename = self::createUserYQCode($user_id);
             $path_1 = public_path('img/haibao/') . 'fxhb_bg.jpg';
+            Log::info("path_1" . $path_1);
             $path_2 = public_path('img/') . $user_yq_code_filename;
             $image_1 = imagecreatefromjpeg($path_1);
             $image_2 = imagecreatefromjpeg($path_2);
