@@ -164,11 +164,7 @@ class WeChatManager
         } else {
             //二维码图片名称
             $user_yq_code_filename = self::createUserYQCode($user_id);
-            $path_1 = public_path('img/') . 'fxhb_bg.jpg';
-            Log::info("storage_path('haibao'):" . storage_path('haibao'));
-            if (file_exists(storage_path('haibao') . 'fxhb_bg.jpg')) {
-                $path_1 = storage_path('haibao') . 'fxhb_bg.jpg';
-            }
+            $path_1 = public_path('img/haibao/') . 'fxhb_bg.jpg';
             $path_2 = public_path('img/') . $user_yq_code_filename;
             $image_1 = imagecreatefromjpeg($path_1);
             $image_2 = imagecreatefromjpeg($path_2);

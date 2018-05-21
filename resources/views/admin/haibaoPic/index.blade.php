@@ -36,6 +36,13 @@
         </form>
     </div>
 
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <img src="{{ URL::asset('/img/haibao/fxhb_bg.jpg') }}" style="width: 600px;">
+        </div>
+    </div>
+
 @endsection
 
 @section('script')
@@ -45,10 +52,7 @@
 
             $("#form-edit").validate({
                 rules: {
-                    keyword: {
-                        required: true,
-                    },
-                    content: {
+                    hb_pic: {
                         required: true,
                     },
                 },
@@ -64,9 +68,7 @@
                             if (ret.result) {
                                 layer.msg('保存成功', {icon: 1, time: 1000});
                                 setTimeout(function () {
-                                    var index = parent.layer.getFrameIndex(window.name);
-                                    parent.$('.btn-refresh').click();
-                                    parent.layer.close(index);
+                                    $('.btn-refresh').click();
                                 }, 500)
                             } else {
                                 layer.msg(ret.message, {icon: 2, time: 1000});

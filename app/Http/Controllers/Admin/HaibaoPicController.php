@@ -39,9 +39,11 @@ class HaibaoPicController
     public function edit(Request $request)
     {
         $data = $request->all();
+        $admin = $request->session()->get('admin');
         $path = $request->file('hb_pic')->storeAs(
             'haibao', 'fxhb_bg.jpg'
         );
+        return ApiResponse::makeResponse(true, "保存成功", ApiResponse::SUCCESS_CODE);
     }
 
 }
