@@ -6,14 +6,14 @@
         <form class="form form-horizontal" id="form-edit">
             {{csrf_field()}}
             @if($data->id)
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>菜单id：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input id="id" name="id" type="text" class="input-text "
-                           value="{{ isset($data->id) ? $data->id : '' }}" placeholder="菜单id"  readonly
-                           style="width: 400px;background-color: rgb(235, 235, 228);">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>菜单id：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input id="id" name="id" type="text" class="input-text "
+                               value="{{ isset($data->id) ? $data->id : '' }}" placeholder="菜单id" readonly
+                               style="width: 400px;background-color: rgb(235, 235, 228);">
+                    </div>
                 </div>
-            </div>
             @endif
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>菜单名称：</label>
@@ -37,7 +37,7 @@
                                 @if(!$data->id||$data->f_id!=0)
                                     @foreach($menus as $menu)
                                         @if($menu->level==1)
-                                            <option value="{{$menu->id}}"  {{$data->f_id==$menu->id?'selected':''}}>{{$menu->name}}</option>
+                                            <option value="{{$menu->id}}" {{$data->f_id==$menu->id?'selected':''}}>{{$menu->name}}</option>
                                         @endif
                                     @endforeach
                                 @endif
@@ -52,8 +52,8 @@
                     @if(!$data->id)
                         <span class="select-box" style="width: 400px;">
                             <select id="level" name="level" class="select" onchange="changeLevel()">
-                                <option value="0" >否</option>
-                                <option value="1" >是</option>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
                             </select>
                         </span>
                     @else
@@ -91,32 +91,48 @@
         </form>
     </div>
 
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <div class="mt-5">
+                <div class="c-red">生产环境相下：幸运用户链接-http://wg.gowithtommy.com/luckUser
+                    土豪购买链接-http://wg.gowithtommy.com/richBuy
+                </div>
+                <div class="mt-5">
+                    <div class="c-red">测试环境相下：幸运用户链接-http://mjttfwhtest.isart.me/luckUser
+                        土豪购买链接-http://mjttfwhtest.isart.me/richBuy
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('script')
     <script type="text/javascript">
         $(function () {
-            var id='{{$data['id']}}'
-            if(id){
-                var f_id='{{$data['f_id']}}'
-                if(f_id==0){
+            var id = '{{$data['id']}}'
+            if (id) {
+                var f_id = '{{$data['f_id']}}'
+                if (f_id == 0) {
                     $('#level_show').show();
-                    var level='{{$data['level']}}'
-                    if(level==0){
+                    var level = '{{$data['level']}}'
+                    if (level == 0) {
                         $('#url_show').show()
                     }
-                    else{
+                    else {
                         $('#url_show').hide()
                         $('#level').val('');
                     }
                 }
-                else{
+                else {
                     $('#level_show').hide();
                     $('#level').val('');
                     $('#url_show').show()
                 }
             }
-            else{
+            else {
                 $('#level_show').show();
                 $('#url_show').show()
             }
@@ -160,24 +176,24 @@
             });
         });
 
-        function changeFId(){
-            var f_id=$('#f_id').val()
-            if(f_id==0){
+        function changeFId() {
+            var f_id = $('#f_id').val()
+            if (f_id == 0) {
                 $('#level_show').show();
             }
-            else{
+            else {
                 $('#level_show').hide();
                 $('#level').val('');
                 $('#url_show').show()
             }
         }
 
-        function changeLevel(){
-            var level=$('#level').val()
-            if(level==0){
+        function changeLevel() {
+            var level = $('#level').val()
+            if (level == 0) {
                 $('#url_show').show()
             }
-            else{
+            else {
                 $('#url_show').hide()
                 $('#url').val('')
             }

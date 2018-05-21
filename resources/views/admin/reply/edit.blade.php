@@ -50,6 +50,22 @@
         </form>
     </div>
 
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <div class="mt-5">
+                <div class="c-red">生产环境相下：幸运用户链接-http://wg.gowithtommy.com/luckUser
+                    土豪购买链接-http://wg.gowithtommy.com/richBuy
+                </div>
+                <div class="mt-5">
+                    <div class="c-red">测试环境相下：幸运用户链接-http://mjttfwhtest.isart.me/luckUser
+                        土豪购买链接-http://mjttfwhtest.isart.me/richBuy
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('script')

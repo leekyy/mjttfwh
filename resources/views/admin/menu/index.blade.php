@@ -4,10 +4,10 @@
 
     <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 菜单管理
         <span class="c-gray en">&gt;</span> 菜单列表 <a class="btn btn-success radius r btn-refresh"
-                                                           style="line-height:1.6em;margin-top:3px"
-                                                           href="javascript:location.replace(location.href);"
-                                                           title="刷新"
-                                                           onclick="location.replace('{{URL::asset('/admin/menu/index')}}');"><i
+                                                    style="line-height:1.6em;margin-top:3px"
+                                                    href="javascript:location.replace(location.href);"
+                                                    title="刷新"
+                                                    onclick="location.replace('{{URL::asset('/admin/menu/index')}}');"><i
                     class="Hui-iconfont">&#xe68f;</i></a></nav>
     {{--/{{$datas->type_id}}--}}
     <div class="page-container">
@@ -45,10 +45,12 @@
                     <td>{{$data->url?$data->url:'-'}}</td>
                     <td>
                         <a title="编辑" href="javascript:;"
-                           onclick="menu_edit('菜单编辑','{{URL::asset('/admin/menu/edit')}}?id={{$data->id}})',{{$data->id}})" class="ml-5" style="text-decoration:none">
+                           onclick="menu_edit('菜单编辑','{{URL::asset('/admin/menu/edit')}}?id={{$data->id}})',{{$data->id}})"
+                           class="ml-5" style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe6df;</i>
                         </a>
-                        <a title="删除" href="javascript:;" onclick="menu_del(this,'{{$data->id}}')" class="ml-5" style="text-decoration:none">
+                        <a title="删除" href="javascript:;" onclick="menu_del(this,'{{$data->id}}')" class="ml-5"
+                           style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe6e2;</i>
                         </a>
                     </td>
@@ -62,10 +64,12 @@
                         <td>{{$child->url?$child->url:'-'}}</td>
                         <td>
                             <a title="编辑" href="javascript:;"
-                               onclick="menu_edit('菜单编辑','{{URL::asset('/admin/menu/edit')}}?id={{$child->id}})',{{$child->id}})" class="ml-5" style="text-decoration:none">
+                               onclick="menu_edit('菜单编辑','{{URL::asset('/admin/menu/edit')}}?id={{$child->id}})',{{$child->id}})"
+                               class="ml-5" style="text-decoration:none">
                                 <i class="Hui-iconfont">&#xe6df;</i>
                             </a>
-                            <a title="删除" href="javascript:;" onclick="menu_del(this,'{{$child->id}}')" class="ml-5" style="text-decoration:none">
+                            <a title="删除" href="javascript:;" onclick="menu_del(this,'{{$child->id}}')" class="ml-5"
+                               style="text-decoration:none">
                                 <i class="Hui-iconfont">&#xe6e2;</i>
                             </a>
                         </td>

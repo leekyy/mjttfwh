@@ -77,6 +77,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
     // 综合统计
     Route::get('/stmt/index', 'Admin\StmtController@index');  //综合统计
 
+    //海报管理首页
+    Route::get('/haibaoPic/index', 'Admin\HaibaoPicController@index');  //综合统计
+    Route::post('/haibaoPic/edit', 'Admin\HaibaoPicController@edit');  //上传海报图
+
 });
 
 
