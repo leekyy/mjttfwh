@@ -24,7 +24,7 @@
             <div class="row cl c-primary">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>特殊说明</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <span>！！一定要上传jpg文件格式，要注意海报图片的尺寸，目前海报尺寸为750*1334，目前二维码放置坐标为（47,1100）</span>
+                    <span><span class="c-danger">一定要上传jpg文件格式</span> 要注意海报图片的尺寸，目前海报尺寸为750*1334，目前二维码放置坐标为（47,1100）</span>
                 </div>
             </div>
             <div class="row cl mt-20">
