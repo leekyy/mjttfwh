@@ -165,9 +165,11 @@ class WeChatManager
             //二维码图片名称
             $user_yq_code_filename = self::createUserYQCode($user_id);
             $path_1 = public_path('img/haibao/') . HaibaoPicManager::getLatestHaibaoPic();
-            Log::info("path_1" . $path_1);
+            Log::info("path_1:" . $path_1);
             $path_2 = public_path('img/') . $user_yq_code_filename;
+            Log::info("path_2:" . $path_2);
             $image_1 = imagecreatefromjpeg($path_1);
+            Log::info("read_file 1 success");
             $image_2 = imagecreatefromjpeg($path_2);
             list($width, $height) = getimagesize($path_2);
             //生成缩略图 二维码 200*200
