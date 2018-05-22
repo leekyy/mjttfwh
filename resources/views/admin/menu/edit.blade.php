@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="row cl" id="image_file_show" hidden>
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>上传图片：</label>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片(jpg)：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <input id="image_file" name="image_file" type="file" class="input-text"
                            value="" placeholder="请上传需要返回的图片"
