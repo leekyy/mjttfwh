@@ -9,9 +9,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Components\BusiWordManager;
+use App\Components\HaibaoPicManager;
 use App\Components\Utils;
 use App\Http\Controllers\ApiResponse;
 use App\Models\BusiWord;
+use App\Models\HaibaoPic;
 use Illuminate\Http\Request;
 
 class HaibaoPicController
@@ -26,8 +28,9 @@ class HaibaoPicController
     {
         $data = $request->all();
         $admin = $request->session()->get('admin');
-
-        return view('admin.haibaoPic.index', ['admin' => $admin]);
+        //最新海报
+        $filename = HaibaoPicManager::getLatestHaibaoPic();
+        return view('admin.haibaoPic.index', ['admin' => $admin, 'haibaoPic' => $filename]);
     }
 
     /*
@@ -40,9 +43,14 @@ class HaibaoPicController
     {
         $data = $request->all();
         $admin = $request->session()->get('admin');
+        $file_name = Utils::generateTradeNo() . ".jpg";
         $path = $request->file('hb_pic')->storeAs(
-            'haibao', 'fxhb_bg.jpg'
+            'haibao', $file_name
         );
+        $haibaoPic = new HaibaoPic();
+        $haibaoPic->admin_id = $admin->id;
+        $haibaoPic->name = $file_name;
+        $haibaoPic->save();
         return ApiResponse::makeResponse(true, "保存成功", ApiResponse::SUCCESS_CODE);
     }
 

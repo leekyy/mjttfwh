@@ -39,7 +39,7 @@
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-2"><span class="c-red"></label>
         <div class="formControls col-xs-8 col-sm-9">
-            <img src="{{ URL::asset('/img/haibao/fxhb_bg.jpg') }}" style="width: 600px;">
+            <img src="{{ URL::asset('/img/haibao/').'/'.$haibaoPic }}" style="width: 600px;">
         </div>
     </div>
 

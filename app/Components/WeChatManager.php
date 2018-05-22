@@ -157,14 +157,14 @@ class WeChatManager
     public static function createUserYQHB($user_id)
     {
         //邀请海报图片名称
-        $filename = 'user' . $user_id . '_yq_hb.jpg';
+        $filename = 'user' . $user_id . '_' . Utils::generateTradeNo() . '_yq_hb.jpg';
 //        if (file_exists(public_path('img/') . $filename)) {       //由于需要更换海报，所以每次都新生成海报
         if (true == false) {
             Log::info($filename . " file exists");
         } else {
             //二维码图片名称
             $user_yq_code_filename = self::createUserYQCode($user_id);
-            $path_1 = public_path('img/haibao/') . 'fxhb_bg.jpg';
+            $path_1 = public_path('img/haibao/') . '/' . HaibaoPicManager::getLatestHaibaoPic();
             Log::info("path_1" . $path_1);
             $path_2 = public_path('img/') . $user_yq_code_filename;
             $image_1 = imagecreatefromjpeg($path_1);
