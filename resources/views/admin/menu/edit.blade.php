@@ -65,11 +65,30 @@
                     @endif
                 </div>
             </div>
+            <div class="row cl" id="type_show">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>菜单类型：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <span class="select-box" style="width: 400px;">
+                        <select id="type" name="type" class="select" onchange="changeType()">
+                            <option value="view" {{$data->type=="view"?'selected':''}}>链接</option>
+                            <option value="media_id" {{$data->type=="media_id"?'selected':''}}>图片</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
             <div class="row cl" id="url_show" hidden>
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <input id="url" name="url" type="text" class="input-text"
                            value="{{ isset($data->url) ? $data->url : '' }}" placeholder="请输入链接"
+                           style="width: 400px;">
+                </div>
+            </div>
+            <div class="row cl" id="image_file_show" hidden>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>上传图片：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input id="image_file" name="image_file" type="file" class="input-text"
+                           value="" placeholder="请上传需要返回的图片"
                            style="width: 400px;">
                 </div>
             </div>
@@ -111,32 +130,44 @@
 
 @section('script')
     <script type="text/javascript">
+
         $(function () {
             var id = '{{$data['id']}}'
+            var type = '{{$data['type']}}'
             if (id) {
                 var f_id = '{{$data['f_id']}}'
                 if (f_id == 0) {
                     $('#level_show').show();
                     var level = '{{$data['level']}}'
                     if (level == 0) {
-                        $('#url_show').show()
+                        if (type == 'view') {
+                            $('#url_show').show()
+                        }
+                        if (type == 'media_id') {
+                            $('#image_file_show').show()
+                        }
                     }
                     else {
                         $('#url_show').hide()
+                        $('#image_file_show').hide()
                         $('#level').val('');
                     }
                 }
                 else {
                     $('#level_show').hide();
                     $('#level').val('');
-                    $('#url_show').show()
+                    if (type == 'view') {
+                        $('#url_show').show()
+                    }
+                    if (type == 'media_id') {
+                        $('#image_file_show').show()
+                    }
                 }
             }
             else {
                 $('#level_show').show();
                 $('#url_show').show()
             }
-
 
             $("#form-edit").validate({
                 rules: {
@@ -196,6 +227,21 @@
             else {
                 $('#url_show').hide()
                 $('#url').val('')
+                $('#image_file_show').hide()
+                $('#image_file').val('')
+            }
+        }
+
+        function changeType() {
+            var type = $("#type").val();
+            console.log("changeType type:" + type);
+            if (type == "media_id") {
+                $("#image_file_show").show();
+                $("#url_show").hide()
+            }
+            if (type == "view") {
+                $("#url_show").show();
+                $("#image_file_show").hide()
             }
         }
 

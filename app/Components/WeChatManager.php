@@ -196,10 +196,27 @@ class WeChatManager
      *
      * 2018-04-06
      */
-    public static function createMediaId($filename)
+    public static function createMediaId($filepath, $filename)
     {
         $app = app('wechat.official_account');
-        $result = $app->media->uploadImage(public_path('img/') . $filename);
+//        $result = $app->media->uploadImage(public_path('img/') . $filename);
+        $result = $app->media->uploadImage(public_path($filepath) . $filename);
+        Log::info("app->material->uploadImage file exists result:" . json_encode($result));
+        return $result['media_id'];
+    }
+
+    /*
+     * 建立永久素材
+     *
+     * By TerryQi
+     *
+     * 2018-05-22
+     */
+    public static function createForeverMediaId($filepath, $filename)
+    {
+        $app = app('wechat.official_account');
+//        $result = $app->media->uploadImage(public_path('img/') . $filename);
+        $result = $app->material->uploadImage(public_path($filepath) . $filename);
         Log::info("app->material->uploadImage file exists result:" . json_encode($result));
         return $result['media_id'];
     }

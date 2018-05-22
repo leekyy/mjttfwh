@@ -45,6 +45,9 @@ class MenuManager
         if (array_key_exists('name', $data)) {
             $info->name = array_get($data, 'name');
         }
+        if (array_key_exists('type', $data)) {
+            $info->type = array_get($data, 'type');
+        }
         if (array_key_exists('style', $data)) {
             $info->style = array_get($data, 'style');
         }

@@ -185,7 +185,7 @@ class LuckUserController
             ->send();
         //生成微信图片素材并发送
         $filename = WeChatManager::createUserYQHB($user->id);
-        $media_id = WeChatManager::createMediaId($filename);
+        $media_id = WeChatManager::createMediaId('img/', $filename);
         $user = UserManager::getByIdWithToken($user->id);
         $user->yq_hb_media_id = $media_id;
         $user->save();
