@@ -14,7 +14,7 @@
         <form class="form form-horizontal" id="form-edit">
             {{csrf_field()}}
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>模板ID：</label>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>海报背景：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <input id="hb_pic" name="hb_pic" type="file" class="input-text"
                            value="" placeholder="请选择海报图片"
