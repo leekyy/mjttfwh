@@ -36,15 +36,20 @@ class InviteCodeRecordController
         //相关搜素条件
         $search_word = null;    //搜索条件
         $type = null;
+        $user_id = null;
         if (array_key_exists('search_word', $data) && !Utils::isObjNull($data['search_word'])) {
             $search_word = $data['search_word'];
         }
         if (array_key_exists('type', $data) && !Utils::isObjNull($data['type'])) {
             $type = $data['type'];
         }
+        if (array_key_exists('user_id', $data) && !Utils::isObjNull($data['user_id'])) {
+            $user_id = $data['user_id'];
+        }
         $con_arr = array(
             'search_word' => $search_word,
-            'type' => $type
+            'type' => $type,
+            'user_id' => $user_id
         );
 
         $inviteCodeRecords = InviteCodeRecordManager::getListByCon($con_arr, true);

@@ -51,6 +51,9 @@ class InviteCodeRecordManager
         if (array_key_exists('type', $con_arr) && !Utils::isObjNull($con_arr['type'])) {
             $inviteNumCodeRecords = $inviteNumCodeRecords->where('type', '=', $con_arr['type']);
         }
+        if (array_key_exists('user_id', $con_arr) && !Utils::isObjNull($con_arr['user_id'])) {
+            $inviteNumCodeRecords = $inviteNumCodeRecords->where('user_id', '=', $con_arr['user_id']);
+        }
         $inviteNumCodeRecords = $inviteNumCodeRecords->orderby('id', 'desc');
         //配置规则
         if ($is_paginate) {

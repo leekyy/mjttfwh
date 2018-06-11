@@ -16,6 +16,9 @@
             <form action="{{URL::asset('/admin/inviteCodeRecord/index')}}" method="get" class="form-horizontal">
                 {{csrf_field()}}
                 <div class="Huiform text-r">
+                    <input id="user_id" name="user_id" type="text" class="input-text" style="width:250px"
+                           placeholder="请输入用户id，例如3122"
+                           value="{{$con_arr['user_id']==null?'':$con_arr['user_id']}}">
                     <input id="search_word" name="search_word" type="text" class="input-text" style="width:250px"
                            placeholder="请输入订单号或邀请码，支持模糊查询"
                            value="{{$con_arr['search_word']==null?'':$con_arr['search_word']}}">
