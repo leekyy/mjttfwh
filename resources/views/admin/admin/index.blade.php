@@ -134,6 +134,7 @@
             });
             layer.full(index);
         }
+
         /*管理员-删除*/
         function admin_del(obj, id) {
             layer.confirm('确认要删除吗？', function (index) {
@@ -163,6 +164,7 @@
             });
             layer.full(index);
         }
+
         /*管理员-停用*/
         function admin_stop(obj, id) {
             console.log("admin_stop id:" + id);

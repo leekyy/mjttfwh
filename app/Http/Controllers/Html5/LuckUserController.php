@@ -64,6 +64,7 @@ class LuckUserController
         );
         $postUrl = Utils::SERVER_URL . '/rest/wechat/config/';
         $wxConfig_result = Utils::curl($postUrl, $param, true);   //访问接口
+        Log::info("get wxConfig_result:" . json_encode($wxConfig_result));
         $wxConfig_result = json_decode($wxConfig_result, true);
         $wxConfig_result['data']['jsApiList'] = ['chooseWXPay'];
 

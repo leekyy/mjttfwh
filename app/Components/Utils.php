@@ -20,7 +20,7 @@ class Utils
     const ORDER_REFUNDSUCCESS = "4";    //退款成功
     const ORDER_REFUNDFAILED = "5";    //退款失败
 
-    const  DEBUG_FLAG = false;        //debug标识
+    const  DEBUG_FLAG = true;        //debug标识
 
     const SERVER_URL = (self::DEBUG_FLAG == false) ? "https://api.gowithtommy.com" : "http://testapi.gowithtommy.com";        //服务器URL
     //幸运用户的URL

@@ -99,6 +99,7 @@ class WechatController extends Controller
                                         'sign' => md5(base64_encode("openId|" . $tj_user->fwh_openid . "|Free|Edition"))
                                     );
                                     $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
+                                    Log::info("invi_code:" . json_encode($result));
                                     $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
                                     $inviCode = $result['data']['inviCode'];    //邀请码
 
