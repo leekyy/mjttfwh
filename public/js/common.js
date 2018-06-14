@@ -24,23 +24,31 @@ function ajaxRequest(url, param, method, callBack) {
 function setAdminStatus(url, param, callBack) {
     ajaxRequest(url + "admin/admin/setStatus/" + param.id, param, "GET", callBack);
 }
+
 //删除管理员
 function delAdmin(url, param, callBack) {
     ajaxRequest(url + "admin/admin/del/" + param.id, param, "GET", callBack);
 }
+
+//为用户创建免费邀请码
+function user_createInviteCode(url, param, callBack) {
+    ajaxRequest(url + "admin/user/createInviteCode", param, "GET", callBack);
+}
+
 //删除菜单
 function delMenu(url, param, callBack) {
     ajaxRequest(url + "admin/menu/del/" + param.id, param, "GET", callBack);
 }
+
 //设置菜单
 function setMenu(url, param, callBack) {
     ajaxRequest(url + "admin/menu/set", param, "GET", callBack);
 }
+
 //删除自动回复
 function delReply(url, param, callBack) {
     ajaxRequest(url + "admin/reply/del/" + param.id, param, "GET", callBack);
 }
-
 
 //生成海报
 function createHaibao(url, param, callBack) {

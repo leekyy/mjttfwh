@@ -47,6 +47,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function ()
     //用户管理
     Route::get('/user/index', 'Admin\UserController@index');  //用户管理首页
     Route::get('/user/info', 'Admin\UserController@info');  //用户详情页面
+    Route::get('/user/createInviteCode', 'Admin\UserController@createInviteCode');  //创建邀请码
+
 
     //菜单管理
     Route::get('/menu/index', 'Admin\WeChatController@index');  //菜单管理首页

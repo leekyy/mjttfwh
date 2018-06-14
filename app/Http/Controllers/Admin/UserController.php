@@ -10,16 +10,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Components\AdminManager;
+use App\Components\BusiWordManager;
 use App\Components\InviteNumManager;
 use App\Components\QNManager;
 use App\Components\UserManager;
 use App\Components\UserTJManager;
 use App\Components\Utils;
 use App\Http\Controllers\ApiResponse;
+use App\Models\InviteCodeRecord;
 use App\Models\InviteNum;
 use Illuminate\Http\Request;
 use App\Libs\ServerUtils;
 use App\Components\RequestValidator;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 
@@ -67,6 +70,48 @@ class UserController
             $userTJ = UserTJManager::getInfoByLevel($userTJ, "");
         }
         return view('admin.user.info', ['admin' => $admin, 'user' => $user, 'userTJs' => $userTJs]);
+    }
+
+    /*
+     * 获取用户信息页面
+     *
+     * By TerryQi
+     *
+     * 2018-04-18
+     */
+    public function createInviteCode(Request $request)
+    {
+        $data = $request->all();
+        $user = UserManager::getById($data['user_id']);
+        $param = array(
+            'openId' => $user->fwh_openid,
+            'sign' => md5(base64_encode("openId|" . $user->fwh_openid . "|Free|Edition"))
+        );
+        $result = Utils::curl(Utils::SERVER_URL . '/rest/user/public_number/invi_code/', $param, true);   //访问接口
+        Log::info("invi_code:" . json_encode($result));
+        $result = json_decode($result, true);   //因为返回的已经是json数据，为了适配makeResponse方法，所以进行json转数组操作
+        if ($result['code'] == '0') {
+            $app = app('wechat.official_account');
+            $inviCode = $result['data']['inviCode'];    //邀请码
+            $text1 = $inviCode;
+            $app->customer_service->message($text1)
+                ->to($user->fwh_openid)
+                ->send();
+            $text2 = BusiWordManager::getByTemplateID("TEMPLATED_FREE_INVITECODE");
+            $app->customer_service->message($text2)
+                ->to($user->fwh_openid)
+                ->send();
+            //记录邀请码发送信息
+            $inviteCodeRecord = new InviteCodeRecord();
+            $inviteCodeRecord->user_id = $user->id;
+            $inviteCodeRecord->invite_code = $inviCode;
+            $inviteCodeRecord->type = '0';
+            $inviteCodeRecord->save();
+            return ApiResponse::makeResponse(true, $result, ApiResponse::SUCCESS_CODE);
+        } else {
+            return ApiResponse::makeResponse(false, $result, ApiResponse::INNER_ERROR);
+        }
+
     }
 }
 

@@ -53,7 +53,7 @@
                         <a style="text-decoration:none"
                            onClick="show_user('用户详情','{{URL::asset('/admin/user/info')}}?user_id={{$data->id}})',{{$data->id}})"
                            href="javascript:;"
-                           title="用户详情">
+                           title="用户详情" class="c-primary">
                             {{$data->nick_name}}
                         </a>
                     </td>

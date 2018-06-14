@@ -79,6 +79,17 @@
                 </table>
             </div>
         </div>
+
+        <div class="row cl mt-20">
+            <div class="ml-15">
+                <button class="btn btn-primary radius" onclick="createInviteCode({{$user->id}});"><i
+                            class="Hui-iconfont"
+                    >&#xe632;</i>
+                    发送免费邀请码
+                </button>
+                <span class="ml-10 c-danger">*注意该功能将再次调用验证码下发接口，向用户发送免费邀请码，发送前请在邀请码管理中确认用户的确未接收到邀请码</span>
+            </div>
+        </div>
     </div>
 
 
@@ -90,6 +101,34 @@
         $(function () {
 
         });
+
+        /*
+         * 创建邀请码
+         *
+         * By TerryQi
+         *
+         * 2018-06-14
+         */
+        function createInviteCode(user_id) {
+            console.log("createInviteCode user_id:" + user_id);
+            layer.confirm('确认要补发免费邀请码？', function (index) {
+                //此处请求后台程序，下方是成功后的前台处理
+                var param = {
+                    user_id: user_id,
+                    _token: "{{ csrf_token() }}"
+                }
+                //从后台设置管理员状态
+                user_createInviteCode('{{URL::asset('')}}', param, function (ret) {
+                    console.log("user_createInviteCode ret:" + JSON.stringify(ret));
+                    if (ret.result == true) {
+                        layer.msg('补发成功', {icon: 1, time: 1000});
+                    } else {
+                        layer.msg('补发失败', {icon: 5, time: 1000});
+                    }
+                })
+            });
+
+        }
 
 
     </script>
